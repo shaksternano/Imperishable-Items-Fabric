@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "imperishableitems",
+  "version": "${version}",
+
+  "name": "Imperishable Items",
+  "description": "Adds an enchantment that prevents items from despawning or being destroyed",
+  "authors": [
+    "ShaksterNano"
+  ],
+  "contact": {
+    "sources": "https://github.com/ShakterNano/Imperishable-Items-Fabric",
+    "issues": "https://github.com/ShakterNano/Imperishable-Items-Fabric/issues"
+  },
+
+  "license": "MIT",
+  "icon": "assets/imperishableitems/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.shaksternano.imperishableitems.ImperishableItems"
+    ]
+  },
+  "mixins": [
+    "imperishableitems.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.7.4",
+    "minecraft": "1.16.x"
+  }
+}
