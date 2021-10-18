@@ -4,8 +4,15 @@
   "package": "com.shaksternano.imperishableitems.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "AbstractBlockStateMixin",
+    "EntityMixin",
+    "FlintAndSteelFallibleItemDispenserBehaviorMixin",
     "ItemEntityMixin",
-    "ItemStackMixin"
+    "ItemStackMixin",
+    "MobEntityMixin",
+    "ShearsDispenserBehaviorMixin",
+    "TridentEntityMixin",
+    "TripwireBlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1
