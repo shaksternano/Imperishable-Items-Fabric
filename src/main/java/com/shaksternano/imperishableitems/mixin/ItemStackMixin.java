@@ -5,6 +5,7 @@ import com.google.common.collect.Multimap;
 import com.shaksternano.imperishableitems.ImperishableItems;
 import com.shaksternano.imperishableitems.registry.ModEnchantments;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -14,7 +15,11 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
@@ -23,9 +28,11 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Slice;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
+import java.util.List;
 import java.util.Random;
 
 @Mixin(ItemStack.class)
@@ -170,6 +177,38 @@ public abstract class ItemStackMixin {
                         if (stack.getDamage() >= stack.getMaxDamage()) {
                             cir.setReturnValue(ActionResult.PASS);
                         }
+                    }
+                }
+            }
+        }
+    }
+
+    @Inject(method = "getTooltip",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/client/item/TooltipContext;isAdvanced()Z"
+            ),
+            slice = @Slice(
+                    from = @At(
+                            value = "INVOKE",
+                            target = "Ljava/util/List;addAll(Ljava/util/Collection;)Z"
+                    ),
+                    to = @At(
+                            value = "INVOKE",
+                            target = "Lnet/minecraft/item/ItemStack;isDamaged()Z"
+                    )
+            ),
+            locals = LocalCapture.CAPTURE_FAILSOFT
+    )
+    private void imperishableTooltip(@Nullable PlayerEntity player, TooltipContext context, CallbackInfoReturnable<List<Text>> cir, List<Text> list) {
+        if (ImperishableItems.config.imperishablePreventsBreaking) {
+            if (isDamageable()) {
+                ItemStack stack = (ItemStack) (Object) this;
+
+                if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, stack) > 0) {
+                    if (stack.getDamage() >= stack.getMaxDamage()) {
+                        list.add(LiteralText.EMPTY);
+                        list.add(new TranslatableText("tooltip." + ImperishableItems.MOD_ID + ".imperishableBroken").formatted(Formatting.RED));
                     }
                 }
             }
