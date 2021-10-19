@@ -6,7 +6,8 @@
 
   "text.autoconfig.imperishableitems.option.imperishableIsTreasure": "Is a treasure enchantment",
   "text.autoconfig.imperishableitems.option.imperishableSoldByVillagers": "Villagers sell Imperishable enchanted books",
-  "text.autoconfig.imperishableitems.option.imperishableMinPower": "Minimum XP level required for enchanting table",
+  "text.autoconfig.imperishableitems.option.imperishableMinLevel": "Minimum XP level required for enchanting table",
+  "text.autoconfig.imperishableitems.option.imperishableMaxLevelsAboveMin": "Maximum number of XP levels above minimum",
 
   "text.autoconfig.imperishableitems.option.imperishablePreventsDespawn": "Prevents items from despawning",
   "text.autoconfig.imperishableitems.option.imperishableProtectsFromDamage": "Prevents items from being destroyed",
