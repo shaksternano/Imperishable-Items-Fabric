@@ -1,5 +1,6 @@
 package com.shaksternano.imperishableitems.mixin;
 
+import com.shaksternano.imperishableitems.ImperishableItems;
 import com.shaksternano.imperishableitems.registry.ModEnchantments;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -28,13 +29,15 @@ public abstract class TripwireBlockMixin extends Block {
 
     @Inject(method = "onBreak", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;setBlockState(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;I)Z", shift = At.Shift.AFTER))
     private void imperishableDisarmTripwire(World world, BlockPos pos, BlockState state, PlayerEntity player, CallbackInfo ci) {
-        if (!player.isCreative()) {
-            ItemStack stack = player.getMainHandStack();
+        if (ImperishableItems.config.imperishablePreventsBreaking) {
+            if (!player.isCreative()) {
+                ItemStack stack = player.getMainHandStack();
 
-            if (stack.isDamageable()) {
-                if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, stack) > 0) {
-                    if (stack.getDamage() >= stack.getMaxDamage()) {
-                        world.setBlockState(pos, state.with(DISARMED, false), 4);
+                if (stack.isDamageable()) {
+                    if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, stack) > 0) {
+                        if (stack.getDamage() >= stack.getMaxDamage()) {
+                            world.setBlockState(pos, state.with(DISARMED, false), 4);
+                        }
                     }
                 }
             }

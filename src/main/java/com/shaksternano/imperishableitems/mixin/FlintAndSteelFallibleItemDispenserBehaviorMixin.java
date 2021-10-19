@@ -1,5 +1,6 @@
 package com.shaksternano.imperishableitems.mixin;
 
+import com.shaksternano.imperishableitems.ImperishableItems;
 import com.shaksternano.imperishableitems.registry.ModEnchantments;
 import net.minecraft.block.dispenser.FallibleItemDispenserBehavior;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -17,11 +18,13 @@ public abstract class FlintAndSteelFallibleItemDispenserBehaviorMixin extends Fa
 
     @Inject(method = "dispenseSilently", at = @At("HEAD"), cancellable = true)
     private void imperishableDispenserFlintAndSteel(BlockPointer pointer, ItemStack stack, CallbackInfoReturnable<ItemStack> cir) {
-        if (stack.isDamageable()) {
-            if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, stack) > 0) {
-                if (stack.getDamage() >= stack.getMaxDamage()) {
-                    setSuccess(false);
-                    cir.setReturnValue(stack);
+        if (ImperishableItems.config.imperishablePreventsBreaking) {
+            if (stack.isDamageable()) {
+                if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, stack) > 0) {
+                    if (stack.getDamage() >= stack.getMaxDamage()) {
+                        setSuccess(false);
+                        cir.setReturnValue(stack);
+                    }
                 }
             }
         }

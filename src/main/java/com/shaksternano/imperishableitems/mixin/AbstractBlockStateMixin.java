@@ -1,5 +1,6 @@
 package com.shaksternano.imperishableitems.mixin;
 
+import com.shaksternano.imperishableitems.ImperishableItems;
 import com.shaksternano.imperishableitems.registry.ModEnchantments;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BeehiveBlock;
@@ -28,15 +29,17 @@ public abstract class AbstractBlockStateMixin {
 
     @Inject(method = "onUse", at = @At("HEAD"), cancellable = true)
     private void imperishableShearsUseOnBlock(World world, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
-        if (!player.isCreative()) {
-            ItemStack stack = player.getStackInHand(hand);
+        if (ImperishableItems.config.imperishablePreventsBreaking) {
+            if (!player.isCreative()) {
+                ItemStack stack = player.getStackInHand(hand);
 
-            if (stack.getItem() instanceof ShearsItem) {
-                if (getBlock() instanceof BeehiveBlock || getBlock() instanceof PumpkinBlock) {
-                    if (stack.isDamageable()) {
-                        if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, stack) > 0) {
-                            if (stack.getDamage() >= stack.getMaxDamage()) {
-                                cir.setReturnValue(ActionResult.PASS);
+                if (stack.getItem() instanceof ShearsItem) {
+                    if (getBlock() instanceof BeehiveBlock || getBlock() instanceof PumpkinBlock) {
+                        if (stack.isDamageable()) {
+                            if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, stack) > 0) {
+                                if (stack.getDamage() >= stack.getMaxDamage()) {
+                                    cir.setReturnValue(ActionResult.PASS);
+                                }
                             }
                         }
                     }

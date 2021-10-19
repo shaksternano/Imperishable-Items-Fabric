@@ -1,5 +1,6 @@
 package com.shaksternano.imperishableitems.enchantments;
 
+import com.shaksternano.imperishableitems.ImperishableItems;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
@@ -23,11 +24,21 @@ public class ImperishableEnchantment extends Enchantment {
 
     @Override
     public int getMinPower(int level) {
-        return 15;
+        return Math.max(ImperishableItems.config.imperishableMinPower, 0);
     }
 
     @Override
     public int getMaxPower(int level) {
         return getMinPower(level) + 50;
+    }
+
+    @Override
+    public boolean isTreasure() {
+        return ImperishableItems.config.imperishableIsTreasure;
+    }
+
+    @Override
+    public boolean isAvailableForEnchantedBookOffer() {
+        return ImperishableItems.config.imperishableSoldByVillagers;
     }
 }

@@ -2,6 +2,7 @@ package com.shaksternano.imperishableitems.mixin;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import com.shaksternano.imperishableitems.ImperishableItems;
 import com.shaksternano.imperishableitems.registry.ModEnchantments;
 import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -44,24 +45,26 @@ public abstract class ItemStackMixin {
 
     @Inject(method = "damage(ILjava/util/Random;Lnet/minecraft/server/network/ServerPlayerEntity;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;setDamage(I)V"), locals = LocalCapture.CAPTURE_FAILSOFT, cancellable = true)
     private void imperishableDurability(int amount, Random random, @Nullable ServerPlayerEntity player, CallbackInfoReturnable<Boolean> cir, int i) {
-        if (!(getItem() instanceof ElytraItem)) {
-            if (isDamageable()) {
-                ItemStack stack = (ItemStack) (Object) this;
+        if (ImperishableItems.config.imperishablePreventsBreaking) {
+            if (!(getItem() instanceof ElytraItem)) {
+                if (isDamageable()) {
+                    ItemStack stack = (ItemStack) (Object) this;
 
-                if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, stack) > 0) {
-                    if (i > getMaxDamage()) {
-                        setDamage(getMaxDamage());
-                    } else {
-                        if (player != null) {
-                            if (getDamage() < getMaxDamage() && i == getMaxDamage()) {
-                                player.world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENTITY_ITEM_BREAK, player.getSoundCategory(), 0.8F, 0.8F + player.world.random.nextFloat() * 0.4F);
+                    if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, stack) > 0) {
+                        if (i > getMaxDamage()) {
+                            setDamage(getMaxDamage());
+                        } else {
+                            if (player != null) {
+                                if (getDamage() < getMaxDamage() && i == getMaxDamage()) {
+                                    player.world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENTITY_ITEM_BREAK, player.getSoundCategory(), 0.8F, 0.8F + player.world.random.nextFloat() * 0.4F);
+                                }
                             }
+
+                            setDamage(i);
                         }
 
-                        setDamage(i);
+                        cir.setReturnValue(false);
                     }
-
-                    cir.setReturnValue(false);
                 }
             }
         }
@@ -69,12 +72,14 @@ public abstract class ItemStackMixin {
 
     @Inject(method = "isSuitableFor", at = @At("HEAD"), cancellable = true)
     private void imperishableSuitableFor(BlockState state, CallbackInfoReturnable<Boolean> cir) {
-        if (isDamageable()) {
-            ItemStack stack = (ItemStack) (Object) this;
+        if (ImperishableItems.config.imperishablePreventsBreaking) {
+            if (isDamageable()) {
+                ItemStack stack = (ItemStack) (Object) this;
 
-            if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, stack) > 0) {
-                if (stack.getDamage() >= stack.getMaxDamage()) {
-                    cir.setReturnValue(false);
+                if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, stack) > 0) {
+                    if (stack.getDamage() >= stack.getMaxDamage()) {
+                        cir.setReturnValue(false);
+                    }
                 }
             }
         }
@@ -82,12 +87,14 @@ public abstract class ItemStackMixin {
 
     @Inject(method = "getMiningSpeedMultiplier", at = @At("HEAD"), cancellable = true)
     private void imperishableNoDurabilitySpeed(BlockState state, CallbackInfoReturnable<Float> cir) {
-        if (isDamageable()) {
-            ItemStack stack = (ItemStack) (Object) this;
+        if (ImperishableItems.config.imperishablePreventsBreaking) {
+            if (isDamageable()) {
+                ItemStack stack = (ItemStack) (Object) this;
 
-            if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, stack) > 0) {
-                if (stack.getDamage() >= stack.getMaxDamage()) {
-                    cir.setReturnValue(1.0F);
+                if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, stack) > 0) {
+                    if (stack.getDamage() >= stack.getMaxDamage()) {
+                        cir.setReturnValue(1.0F);
+                    }
                 }
             }
         }
@@ -95,12 +102,14 @@ public abstract class ItemStackMixin {
 
     @Inject(method = "getAttributeModifiers", at = @At("HEAD"), cancellable = true)
     private void imperishableAttributeModifiers(EquipmentSlot equipmentSlot, CallbackInfoReturnable<Multimap<EntityAttribute, EntityAttributeModifier>> cir) {
-        if (isDamageable()) {
-            ItemStack stack = (ItemStack) (Object) this;
+        if (ImperishableItems.config.imperishablePreventsBreaking) {
+            if (isDamageable()) {
+                ItemStack stack = (ItemStack) (Object) this;
 
-            if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, stack) > 0) {
-                if (stack.getDamage() >= stack.getMaxDamage()) {
-                    cir.setReturnValue(ImmutableMultimap.of());
+                if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, stack) > 0) {
+                    if (stack.getDamage() >= stack.getMaxDamage()) {
+                        cir.setReturnValue(ImmutableMultimap.of());
+                    }
                 }
             }
         }
@@ -108,14 +117,16 @@ public abstract class ItemStackMixin {
 
     @Inject(method = "use", at = @At("HEAD"), cancellable = true)
     private void imperishableUse(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
-        if (!user.isCreative()) {
-            if (!(getItem() instanceof Wearable)) {
-                if (isDamageable()) {
-                    ItemStack stack = (ItemStack) (Object) this;
+        if (ImperishableItems.config.imperishablePreventsBreaking) {
+            if (!user.isCreative()) {
+                if (!(getItem() instanceof Wearable)) {
+                    if (isDamageable()) {
+                        ItemStack stack = (ItemStack) (Object) this;
 
-                    if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, stack) > 0) {
-                        if (stack.getDamage() >= stack.getMaxDamage()) {
-                            cir.setReturnValue(TypedActionResult.pass(user.getStackInHand(hand)));
+                        if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, stack) > 0) {
+                            if (stack.getDamage() >= stack.getMaxDamage()) {
+                                cir.setReturnValue(TypedActionResult.pass(user.getStackInHand(hand)));
+                            }
                         }
                     }
                 }
@@ -125,21 +136,23 @@ public abstract class ItemStackMixin {
 
     @Inject(method = "useOnBlock", at = @At("HEAD"), cancellable = true)
     private void imperishableUseOnBlock(ItemUsageContext context, CallbackInfoReturnable<ActionResult> cir) {
-        PlayerEntity player = context.getPlayer();
-        boolean userIsCreative = false;
-        if (player != null) {
-            if (player.isCreative()) {
-                userIsCreative = true;
+        if (ImperishableItems.config.imperishablePreventsBreaking) {
+            PlayerEntity player = context.getPlayer();
+            boolean userIsCreative = false;
+            if (player != null) {
+                if (player.isCreative()) {
+                    userIsCreative = true;
+                }
             }
-        }
 
-        if (!userIsCreative) {
-            if (isDamageable()) {
-                ItemStack stack = (ItemStack) (Object) this;
+            if (!userIsCreative) {
+                if (isDamageable()) {
+                    ItemStack stack = (ItemStack) (Object) this;
 
-                if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, stack) > 0) {
-                    if (stack.getDamage() >= stack.getMaxDamage()) {
-                        cir.setReturnValue(ActionResult.PASS);
+                    if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, stack) > 0) {
+                        if (stack.getDamage() >= stack.getMaxDamage()) {
+                            cir.setReturnValue(ActionResult.PASS);
+                        }
                     }
                 }
             }
@@ -148,13 +161,15 @@ public abstract class ItemStackMixin {
 
     @Inject(method = "useOnEntity", at = @At("HEAD"), cancellable = true)
     private void imperishableUseOnEntity(PlayerEntity user, LivingEntity entity, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
-        if (!user.isCreative()) {
-            if (isDamageable()) {
-                ItemStack stack = (ItemStack) (Object) this;
+        if (ImperishableItems.config.imperishablePreventsBreaking) {
+            if (!user.isCreative()) {
+                if (isDamageable()) {
+                    ItemStack stack = (ItemStack) (Object) this;
 
-                if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, stack) > 0) {
-                    if (stack.getDamage() >= stack.getMaxDamage()) {
-                        cir.setReturnValue(ActionResult.PASS);
+                    if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, stack) > 0) {
+                        if (stack.getDamage() >= stack.getMaxDamage()) {
+                            cir.setReturnValue(ActionResult.PASS);
+                        }
                     }
                 }
             }

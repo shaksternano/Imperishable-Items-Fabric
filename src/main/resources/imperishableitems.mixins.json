@@ -10,6 +10,7 @@
     "ItemEntityMixin",
     "ItemStackMixin",
     "MobEntityMixin",
+    "PersistentProjectileEntityMixin",
     "ShearsDispenserBehaviorMixin",
     "TridentEntityMixin",
     "TripwireBlockMixin"

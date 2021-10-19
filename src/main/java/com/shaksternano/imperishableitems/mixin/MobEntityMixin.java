@@ -1,5 +1,6 @@
 package com.shaksternano.imperishableitems.mixin;
 
+import com.shaksternano.imperishableitems.ImperishableItems;
 import com.shaksternano.imperishableitems.registry.ModEnchantments;
 import net.minecraft.block.BeehiveBlock;
 import net.minecraft.block.PumpkinBlock;
@@ -28,15 +29,17 @@ public abstract class MobEntityMixin extends LivingEntity {
 
     @Inject(method = "interact", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/MobEntity;interactMob(Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/util/Hand;)Lnet/minecraft/util/ActionResult;"), cancellable = true)
     private void imperishableShearMob(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
-        if (!player.isCreative()) {
-            ItemStack stack = player.getStackInHand(hand);
+        if (ImperishableItems.config.imperishablePreventsBreaking) {
+            if (!player.isCreative()) {
+                ItemStack stack = player.getStackInHand(hand);
 
-            if (stack.getItem() instanceof ShearsItem) {
-                if (this instanceof Shearable) {
-                    if (stack.isDamageable()) {
-                        if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, stack) > 0) {
-                            if (stack.getDamage() >= stack.getMaxDamage()) {
-                                cir.setReturnValue(ActionResult.PASS);
+                if (stack.getItem() instanceof ShearsItem) {
+                    if (this instanceof Shearable) {
+                        if (stack.isDamageable()) {
+                            if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, stack) > 0) {
+                                if (stack.getDamage() >= stack.getMaxDamage()) {
+                                    cir.setReturnValue(ActionResult.PASS);
+                                }
                             }
                         }
                     }

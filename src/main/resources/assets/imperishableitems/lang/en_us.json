@@ -1,3 +1,14 @@
 {
-  "enchantment.imperishableitems.imperishable": "Imperishable"
+  "enchantment.imperishableitems.imperishable": "Imperishable",
+
+  "text.autoconfig.imperishableitems.title": "Imperishable Enchantment Options",
+
+  "text.autoconfig.imperishableitems.option.imperishableIsTreasure": "Is a treasure enchantment",
+  "text.autoconfig.imperishableitems.option.imperishableSoldByVillagers": "Villagers sell Imperishable enchanted books",
+  "text.autoconfig.imperishableitems.option.imperishableMinPower": "Minimum XP level required for enchanting table",
+
+  "text.autoconfig.imperishableitems.option.imperishablePreventsDespawn": "Prevents items from despawning",
+  "text.autoconfig.imperishableitems.option.imperishableProtectsFromDamage": "Prevents items from being destroyed",
+  "text.autoconfig.imperishableitems.option.imperishableProtectsFromVoid": "Protects items from the void",
+  "text.autoconfig.imperishableitems.option.imperishablePreventsBreaking": "Prevents tools from breaking"
 }
