@@ -24,12 +24,12 @@ public class ImperishableEnchantment extends Enchantment {
 
     @Override
     public int getMinPower(int level) {
-        return Math.max(ImperishableItems.config.imperishableMinPower, 0);
+        return Math.max(ImperishableItems.config.imperishableMinLevel, 0);
     }
 
     @Override
     public int getMaxPower(int level) {
-        return getMinPower(level) + 50;
+        return getMinPower(level) + Math.max(ImperishableItems.config.imperishableMaxLevelsAboveMin, 0);
     }
 
     @Override
