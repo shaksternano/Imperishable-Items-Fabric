@@ -16,7 +16,7 @@ public abstract class FlintAndSteelFallibleItemDispenserBehaviorMixin extends Fa
 
     private FlintAndSteelFallibleItemDispenserBehaviorMixin() {}
 
-    @Inject(method = "dispenseSilently", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "dispenseSilently(Lnet/minecraft/util/math/BlockPointer;Lnet/minecraft/item/ItemStack;)Lnet/minecraft/item/ItemStack;", at = @At("HEAD"), cancellable = true)
     private void imperishableDispenserFlintAndSteel(BlockPointer pointer, ItemStack stack, CallbackInfoReturnable<ItemStack> cir) {
         if (ImperishableItems.config.imperishablePreventsBreaking) {
             if (stack.isDamageable()) {
