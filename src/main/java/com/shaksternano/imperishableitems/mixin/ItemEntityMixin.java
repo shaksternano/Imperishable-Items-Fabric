@@ -23,14 +23,11 @@ public abstract class ItemEntityMixin extends EntityMixin {
 
     @Shadow private int itemAge;
 
-    @Shadow private int health;
-
-    @Inject(method = "damage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/ItemEntity;remove()V", shift = At.Shift.AFTER))
-    private void damageImperishable(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+    @Override
+    protected void damageImperishable(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
         if (ImperishableItems.config.imperishableProtectsFromDamage) {
             if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, getStack()) > 0) {
-                removed = false;
-                health = 5;
+                cir.setReturnValue(true);
             }
         }
     }
