@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "Imperishable Items",
-  "description": "Adds an enchantment that prevents items from despawning or being destroyed",
+  "description": "Adds an enchantment that prevents items from despawning, being destroyed, or breaking",
   "authors": [
     "ShaksterNano"
   ],
