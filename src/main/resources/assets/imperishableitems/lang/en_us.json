@@ -1,5 +1,6 @@
 {
   "enchantment.imperishableitems.imperishable": "Imperishable",
+  "enchantment.imperishableitems.imperishable.desc": "Prevents items from despawning and being destroyed. As well as that, items that reach 0 durability don't get destroyed, but rather lose any special properties, such as increased mining speed on a pickaxe, until they are repaired.",
 
   "text.autoconfig.imperishableitems.title": "Imperishable Enchantment Options",
 
@@ -10,5 +11,7 @@
   "text.autoconfig.imperishableitems.option.imperishablePreventsDespawn": "Prevents items from despawning",
   "text.autoconfig.imperishableitems.option.imperishableProtectsFromDamage": "Prevents items from being destroyed",
   "text.autoconfig.imperishableitems.option.imperishableProtectsFromVoid": "Protects items from the void",
-  "text.autoconfig.imperishableitems.option.imperishablePreventsBreaking": "Prevents tools from breaking"
+  "text.autoconfig.imperishableitems.option.imperishablePreventsBreaking": "Prevents tools from breaking",
+
+  "tooltip.imperishableitems.imperishableBroken": "Tool is broken, repair to use again!"
 }
