@@ -16,6 +16,7 @@ import net.minecraft.item.*;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.LiteralText;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
@@ -183,6 +184,25 @@ public abstract class ItemStackMixin {
         }
     }
 
+    @Inject(method = "getName", at = @At("RETURN"), cancellable = true)
+    private void imperishableBrokenName(CallbackInfoReturnable<Text> cir) {
+        if (ImperishableItems.config.imperishablePreventsBreaking) {
+            if (isDamageable()) {
+                ItemStack stack = (ItemStack) (Object) this;
+
+                if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, stack) > 0) {
+                    if (stack.getDamage() >= stack.getMaxDamage()) {
+                        TranslatableText broken = new TranslatableText("item.name." + ImperishableItems.MOD_ID + ".imperishableBroken");
+                        broken.formatted(Formatting.RED);
+
+                        Text brokenName = ((MutableText) cir.getReturnValue()).append(broken);
+                        cir.setReturnValue(brokenName);
+                    }
+                }
+            }
+        }
+    }
+
     @Inject(method = "getTooltip",
             at = @At(
                     value = "INVOKE",
@@ -200,7 +220,7 @@ public abstract class ItemStackMixin {
             ),
             locals = LocalCapture.CAPTURE_FAILSOFT
     )
-    private void imperishableTooltip(@Nullable PlayerEntity player, TooltipContext context, CallbackInfoReturnable<List<Text>> cir, List<Text> list) {
+    private void imperishableBrokenTooltip(@Nullable PlayerEntity player, TooltipContext context, CallbackInfoReturnable<List<Text>> cir, List<Text> list) {
         if (ImperishableItems.config.imperishablePreventsBreaking) {
             if (isDamageable()) {
                 ItemStack stack = (ItemStack) (Object) this;
@@ -208,7 +228,7 @@ public abstract class ItemStackMixin {
                 if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, stack) > 0) {
                     if (stack.getDamage() >= stack.getMaxDamage()) {
                         list.add(LiteralText.EMPTY);
-                        list.add(new TranslatableText("tooltip." + ImperishableItems.MOD_ID + ".imperishableBroken").formatted(Formatting.RED));
+                        list.add(new TranslatableText("item.tooltip." + ImperishableItems.MOD_ID + ".imperishableBroken").formatted(Formatting.RED));
                     }
                 }
             }
