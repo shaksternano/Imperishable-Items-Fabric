@@ -14,5 +14,6 @@
   "text.autoconfig.imperishableitems.option.imperishableProtectsFromVoid": "Protects items from the void",
   "text.autoconfig.imperishableitems.option.imperishablePreventsBreaking": "Prevents tools from breaking",
 
-  "tooltip.imperishableitems.imperishableBroken": "Tool is broken, repair to use again!"
+  "item.name.imperishableitems.imperishableBroken": " (Broken)",
+  "item.tooltip.imperishableitems.imperishableBroken": "Tool is broken, repair to use again!"
 }

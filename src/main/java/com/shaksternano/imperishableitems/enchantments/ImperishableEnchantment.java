@@ -1,10 +1,14 @@
 package com.shaksternano.imperishableitems.enchantments;
 
 import com.shaksternano.imperishableitems.ImperishableItems;
+import com.shaksternano.imperishableitems.registry.ModEnchantments;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 
 public class ImperishableEnchantment extends Enchantment {
 
@@ -40,5 +44,21 @@ public class ImperishableEnchantment extends Enchantment {
     @Override
     public boolean isAvailableForEnchantedBookOffer() {
         return ImperishableItems.config.imperishableSoldByVillagers;
+    }
+
+    public static String itemNameRemoveBroken(Text textName, ItemStack stack) {
+        String returnName = textName.getString();
+
+        if (stack.isDamageable()) {
+            if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, stack) > 0) {
+                if (stack.getDamage() >= stack.getMaxDamage()) {
+                    TranslatableText broken = new TranslatableText("item.name." + ImperishableItems.MOD_ID + ".imperishableBroken");
+                    int brokenLength = broken.getString().length();
+                    returnName = returnName.substring(0, returnName.length() - brokenLength);
+                }
+            }
+        }
+
+        return returnName;
     }
 }
