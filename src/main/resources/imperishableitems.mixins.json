@@ -6,7 +6,6 @@
   "mixins": [
     "AbstractBlockStateMixin",
     "AnvilScreenHandlerMixin",
-    "AnvilScreenMixin",
     "EntityMixin",
     "FlintAndSteelFallibleItemDispenserBehaviorMixin",
     "ItemEntityMixin",
@@ -16,6 +15,9 @@
     "ShearsDispenserBehaviorMixin",
     "TridentEntityMixin",
     "TripwireBlockMixin"
+  ],
+  "client": [
+    "AnvilScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1
