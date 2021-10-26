@@ -21,6 +21,9 @@
     "main": [
       "com.shaksternano.imperishableitems.ImperishableItems"
     ],
+    "client": [
+      "com.shaksternano.imperishableitems.client.ImperishableItemsClient"
+    ],
     "modmenu": [
       "com.shaksternano.imperishableitems.compat.ModMenuIntegration"
     ]
@@ -28,9 +31,11 @@
   "mixins": [
     "imperishableitems.mixins.json"
   ],
+  "accessWidener": "imperishableitems.accesswidener",
 
   "depends": {
     "fabricloader": ">=0.7.4",
+    "fabric": "*",
     "minecraft": "1.17.x",
     "java": ">=16"
   },

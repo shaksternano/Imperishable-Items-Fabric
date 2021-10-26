@@ -3,7 +3,10 @@ package com.shaksternano.imperishableitems.mixin;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import com.shaksternano.imperishableitems.ImperishableItems;
+import com.shaksternano.imperishableitems.network.ModNetworkHandler;
 import com.shaksternano.imperishableitems.registry.ModEnchantments;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -13,8 +16,8 @@ import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
@@ -64,7 +67,10 @@ public abstract class ItemStackMixin {
                         } else {
                             if (player != null) {
                                 if (getDamage() < getMaxDamage() && i == getMaxDamage()) {
-                                    player.world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENTITY_ITEM_BREAK, player.getSoundCategory(), 0.8F, 0.8F + player.world.random.nextFloat() * 0.4F);
+                                    PacketByteBuf buf = PacketByteBufs.create();
+                                    int itemId = Item.getRawId(getItem());
+                                    buf.writeInt(itemId);
+                                    ServerPlayNetworking.send(player, ModNetworkHandler.EQUIPMENT_BREAK_EFFECTS, buf);
                                 }
                             }
 
