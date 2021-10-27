@@ -2,8 +2,6 @@ package com.shaksternano.imperishableitems.mixin;
 
 import com.shaksternano.imperishableitems.ImperishableItems;
 import com.shaksternano.imperishableitems.registry.ModEnchantments;
-import net.minecraft.block.BeehiveBlock;
-import net.minecraft.block.PumpkinBlock;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
