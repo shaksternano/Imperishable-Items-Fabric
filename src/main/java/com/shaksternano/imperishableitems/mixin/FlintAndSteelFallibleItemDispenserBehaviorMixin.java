@@ -18,7 +18,7 @@ public abstract class FlintAndSteelFallibleItemDispenserBehaviorMixin extends Fa
 
     @Inject(method = "dispenseSilently(Lnet/minecraft/util/math/BlockPointer;Lnet/minecraft/item/ItemStack;)Lnet/minecraft/item/ItemStack;", at = @At("HEAD"), cancellable = true)
     private void imperishableDispenserFlintAndSteel(BlockPointer pointer, ItemStack stack, CallbackInfoReturnable<ItemStack> cir) {
-        if (ImperishableItems.config.imperishablePreventsBreaking) {
+        if (ImperishableItems.getConfig().imperishablePreventsBreaking) {
             if (stack.isDamageable()) {
                 if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, stack) > 0) {
                     if (stack.getDamage() >= stack.getMaxDamage()) {

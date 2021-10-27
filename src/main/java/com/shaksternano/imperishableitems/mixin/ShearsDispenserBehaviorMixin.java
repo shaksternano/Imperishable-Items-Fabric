@@ -19,7 +19,7 @@ public abstract class ShearsDispenserBehaviorMixin extends FallibleItemDispenser
 
     @Inject(method = "dispenseSilently", at = @At("HEAD"), cancellable = true)
     private void imperishableDispenserShear(BlockPointer pointer, ItemStack stack, CallbackInfoReturnable<ItemStack> cir) {
-        if (ImperishableItems.config.imperishablePreventsBreaking) {
+        if (ImperishableItems.getConfig().imperishablePreventsBreaking) {
             if (stack.isDamageable()) {
                 if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, stack) > 0) {
                     if (stack.getDamage() >= stack.getMaxDamage()) {

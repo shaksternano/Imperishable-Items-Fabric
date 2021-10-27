@@ -27,7 +27,7 @@ public abstract class MobEntityMixin extends LivingEntity {
 
     @Inject(method = "interact", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/MobEntity;interactMob(Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/util/Hand;)Lnet/minecraft/util/ActionResult;"), cancellable = true)
     private void imperishableShearMob(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
-        if (ImperishableItems.config.imperishablePreventsBreaking) {
+        if (ImperishableItems.getConfig().imperishablePreventsBreaking) {
             if (!player.isCreative()) {
                 ItemStack stack = player.getStackInHand(hand);
 

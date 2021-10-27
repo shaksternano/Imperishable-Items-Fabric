@@ -29,7 +29,7 @@ public abstract class TripwireBlockMixin extends Block {
 
     @Inject(method = "onBreak", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;setBlockState(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;I)Z", shift = At.Shift.AFTER))
     private void imperishableDisarmTripwire(World world, BlockPos pos, BlockState state, PlayerEntity player, CallbackInfo ci) {
-        if (ImperishableItems.config.imperishablePreventsBreaking) {
+        if (ImperishableItems.getConfig().imperishablePreventsBreaking) {
             if (!player.isCreative()) {
                 ItemStack stack = player.getMainHandStack();
 

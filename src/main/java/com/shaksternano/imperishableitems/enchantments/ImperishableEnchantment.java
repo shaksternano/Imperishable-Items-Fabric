@@ -28,22 +28,22 @@ public class ImperishableEnchantment extends Enchantment {
 
     @Override
     public int getMinPower(int level) {
-        return Math.max(ImperishableItems.config.imperishableMinLevel, 0);
+        return Math.max(ImperishableItems.getConfig().imperishableMinLevel, 0);
     }
 
     @Override
     public int getMaxPower(int level) {
-        return getMinPower(level) + Math.max(ImperishableItems.config.imperishableMaxLevelsAboveMin, 0);
+        return getMinPower(level) + Math.max(ImperishableItems.getConfig().imperishableMaxLevelsAboveMin, 0);
     }
 
     @Override
     public boolean isTreasure() {
-        return ImperishableItems.config.imperishableIsTreasure;
+        return ImperishableItems.getConfig().imperishableIsTreasure;
     }
 
     @Override
     public boolean isAvailableForEnchantedBookOffer() {
-        return ImperishableItems.config.imperishableSoldByVillagers;
+        return ImperishableItems.getConfig().imperishableSoldByVillagers;
     }
 
     public static String itemNameRemoveBroken(Text textName, ItemStack stack) {
