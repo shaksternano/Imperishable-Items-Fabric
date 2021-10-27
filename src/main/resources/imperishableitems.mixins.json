@@ -4,8 +4,11 @@
   "package": "com.shaksternano.imperishableitems.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "AbstractBlockMixin",
     "AbstractBlockStateMixin",
     "AnvilScreenHandlerMixin",
+    "BlockEntityMixin",
+    "BlockItemMixin",
     "EntityMixin",
     "FlintAndSteelFallibleItemDispenserBehaviorMixin",
     "ItemEntityMixin",
@@ -13,6 +16,7 @@
     "MobEntityMixin",
     "PersistentProjectileEntityMixin",
     "ShearsDispenserBehaviorMixin",
+    "ShulkerBoxBlockMixin",
     "TridentEntityMixin",
     "TripwireBlockMixin"
   ],
