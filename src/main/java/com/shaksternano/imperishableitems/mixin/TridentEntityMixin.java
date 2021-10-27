@@ -21,7 +21,7 @@ public abstract class TridentEntityMixin extends PersistentProjectileEntityMixin
 
     @Inject(method = "tick", at = @At("TAIL"))
     private void checkTridentImperishable(CallbackInfo ci) {
-        if (ImperishableItems.config.imperishableProtectsFromVoid) {
+        if (ImperishableItems.getConfig().imperishableProtectsFromVoid) {
             if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, tridentStack) > 0) {
                 if (getPos().y < 0.0D) {
                     setVelocity(Vec3d.ZERO);
@@ -35,7 +35,7 @@ public abstract class TridentEntityMixin extends PersistentProjectileEntityMixin
 
     @Inject(method = "age", at = @At("HEAD"), cancellable = true)
     private void imperishableAge(CallbackInfo ci) {
-        if (ImperishableItems.config.imperishablePreventsDespawn) {
+        if (ImperishableItems.getConfig().imperishablePreventsDespawn) {
             if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, tridentStack) > 0) {
                 ci.cancel();
             }
@@ -44,7 +44,7 @@ public abstract class TridentEntityMixin extends PersistentProjectileEntityMixin
 
     @Override
     protected void imperishableInVoid(CallbackInfo ci) {
-        if (ImperishableItems.config.imperishableProtectsFromVoid) {
+        if (ImperishableItems.getConfig().imperishableProtectsFromVoid) {
             if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, tridentStack) > 0) {
                 ci.cancel();
             }

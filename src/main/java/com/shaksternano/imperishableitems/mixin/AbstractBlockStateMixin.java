@@ -29,7 +29,7 @@ public abstract class AbstractBlockStateMixin {
 
     @Inject(method = "onUse", at = @At("HEAD"), cancellable = true)
     private void imperishableShearsUseOnBlock(World world, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
-        if (ImperishableItems.config.imperishablePreventsBreaking) {
+        if (ImperishableItems.getConfig().imperishablePreventsBreaking) {
             if (!player.isCreative()) {
                 ItemStack stack = player.getStackInHand(hand);
 

@@ -56,7 +56,7 @@ public abstract class ItemStackMixin {
 
     @Inject(method = "damage(ILjava/util/Random;Lnet/minecraft/server/network/ServerPlayerEntity;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;setDamage(I)V"), locals = LocalCapture.CAPTURE_FAILSOFT, cancellable = true)
     private void imperishableDurability(int amount, Random random, @Nullable ServerPlayerEntity player, CallbackInfoReturnable<Boolean> cir, int i) {
-        if (ImperishableItems.config.imperishablePreventsBreaking) {
+        if (ImperishableItems.getConfig().imperishablePreventsBreaking) {
             if (!(getItem() instanceof ElytraItem)) {
                 if (isDamageable()) {
                     ItemStack stack = (ItemStack) (Object) this;
@@ -86,7 +86,7 @@ public abstract class ItemStackMixin {
 
     @Inject(method = "isSuitableFor", at = @At("HEAD"), cancellable = true)
     private void imperishableSuitableFor(BlockState state, CallbackInfoReturnable<Boolean> cir) {
-        if (ImperishableItems.config.imperishablePreventsBreaking) {
+        if (ImperishableItems.getConfig().imperishablePreventsBreaking) {
             if (isDamageable()) {
                 ItemStack stack = (ItemStack) (Object) this;
 
@@ -101,7 +101,7 @@ public abstract class ItemStackMixin {
 
     @Inject(method = "getMiningSpeedMultiplier", at = @At("HEAD"), cancellable = true)
     private void imperishableNoDurabilitySpeed(BlockState state, CallbackInfoReturnable<Float> cir) {
-        if (ImperishableItems.config.imperishablePreventsBreaking) {
+        if (ImperishableItems.getConfig().imperishablePreventsBreaking) {
             if (isDamageable()) {
                 ItemStack stack = (ItemStack) (Object) this;
 
@@ -116,7 +116,7 @@ public abstract class ItemStackMixin {
 
     @Inject(method = "getAttributeModifiers", at = @At("HEAD"), cancellable = true)
     private void imperishableAttributeModifiers(EquipmentSlot equipmentSlot, CallbackInfoReturnable<Multimap<EntityAttribute, EntityAttributeModifier>> cir) {
-        if (ImperishableItems.config.imperishablePreventsBreaking) {
+        if (ImperishableItems.getConfig().imperishablePreventsBreaking) {
             if (isDamageable()) {
                 ItemStack stack = (ItemStack) (Object) this;
 
@@ -131,7 +131,7 @@ public abstract class ItemStackMixin {
 
     @Inject(method = "use", at = @At("HEAD"), cancellable = true)
     private void imperishableUse(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
-        if (ImperishableItems.config.imperishablePreventsBreaking) {
+        if (ImperishableItems.getConfig().imperishablePreventsBreaking) {
             if (!user.isCreative()) {
                 if (!(getItem() instanceof Wearable)) {
                     if (isDamageable()) {
@@ -150,7 +150,7 @@ public abstract class ItemStackMixin {
 
     @Inject(method = "useOnBlock", at = @At("HEAD"), cancellable = true)
     private void imperishableUseOnBlock(ItemUsageContext context, CallbackInfoReturnable<ActionResult> cir) {
-        if (ImperishableItems.config.imperishablePreventsBreaking) {
+        if (ImperishableItems.getConfig().imperishablePreventsBreaking) {
             PlayerEntity player = context.getPlayer();
             boolean userIsCreative = false;
             if (player != null) {
@@ -175,7 +175,7 @@ public abstract class ItemStackMixin {
 
     @Inject(method = "useOnEntity", at = @At("HEAD"), cancellable = true)
     private void imperishableUseOnEntity(PlayerEntity user, LivingEntity entity, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
-        if (ImperishableItems.config.imperishablePreventsBreaking) {
+        if (ImperishableItems.getConfig().imperishablePreventsBreaking) {
             if (!user.isCreative()) {
                 if (isDamageable()) {
                     ItemStack stack = (ItemStack) (Object) this;
@@ -192,7 +192,7 @@ public abstract class ItemStackMixin {
 
     @Inject(method = "getName", at = @At("RETURN"), cancellable = true)
     private void imperishableBrokenName(CallbackInfoReturnable<Text> cir) {
-        if (ImperishableItems.config.imperishablePreventsBreaking) {
+        if (ImperishableItems.getConfig().imperishablePreventsBreaking) {
             if (isDamageable()) {
                 ItemStack stack = (ItemStack) (Object) this;
 
@@ -227,7 +227,7 @@ public abstract class ItemStackMixin {
             locals = LocalCapture.CAPTURE_FAILSOFT
     )
     private void imperishableBrokenTooltip(@Nullable PlayerEntity player, TooltipContext context, CallbackInfoReturnable<List<Text>> cir, List<Text> list) {
-        if (ImperishableItems.config.imperishablePreventsBreaking) {
+        if (ImperishableItems.getConfig().imperishablePreventsBreaking) {
             if (isDamageable()) {
                 ItemStack stack = (ItemStack) (Object) this;
 

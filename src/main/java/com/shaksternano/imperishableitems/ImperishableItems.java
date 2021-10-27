@@ -9,7 +9,7 @@ import net.fabricmc.api.ModInitializer;
 public class ImperishableItems implements ModInitializer {
 
     public static final String MOD_ID = "imperishableitems";
-    public static ModConfig config;
+    private static ModConfig config;
 
     @Override
     public void onInitialize() {
@@ -17,5 +17,9 @@ public class ImperishableItems implements ModInitializer {
         config = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
 
         ModEnchantments.registerEnchantments();
+    }
+
+    public static ModConfig getConfig() {
+        return config;
     }
 }

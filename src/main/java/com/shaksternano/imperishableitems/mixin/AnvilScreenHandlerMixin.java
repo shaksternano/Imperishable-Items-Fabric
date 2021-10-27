@@ -25,7 +25,7 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
     private String imperishableBrokenUpdateResult(Text getName) {
         String returnName = getName.getString();
 
-        if (ImperishableItems.config.imperishablePreventsBreaking) {
+        if (ImperishableItems.getConfig().imperishablePreventsBreaking) {
             ItemStack stack = input.getStack(0);
             returnName = ImperishableEnchantment.itemNameRemoveBroken(getName, stack);
         }
