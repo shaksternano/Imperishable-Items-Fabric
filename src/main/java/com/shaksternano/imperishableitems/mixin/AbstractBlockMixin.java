@@ -23,12 +23,12 @@ public abstract class AbstractBlockMixin {
     @Inject(method = "getDroppedStacks", at = @At("TAIL"))
     private void setDroppedItemStackEnchantments(BlockState state, LootContext.Builder builder, CallbackInfoReturnable<List<ItemStack>> cir) {
         if (state.getBlock() instanceof BlockWithEntity) {
-            List<ItemStack> itemStacks = cir.getReturnValue();
+            List<ItemStack> stacks = cir.getReturnValue();
 
-            for (ItemStack itemStack : itemStacks) {
-                if (itemStack.getItem().equals(state.getBlock().asItem())) {
+            for (ItemStack stack : stacks) {
+                if (stack.getItem().equals(state.getBlock().asItem())) {
                     BlockEntity blockEntity = builder.get(LootContextParameters.BLOCK_ENTITY);
-                    BlockEntityHelper.setDroppedItemStackEnchantments(blockEntity, itemStack);
+                    BlockEntityHelper.setDroppedItemStackEnchantments(blockEntity, stack);
                 }
             }
         }
