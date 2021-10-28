@@ -1,6 +1,6 @@
 package com.shaksternano.imperishableitems.client;
 
-import com.shaksternano.imperishableitems.network.ModNetworkHandler;
+import com.shaksternano.imperishableitems.common.network.ModNetworkHandler;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

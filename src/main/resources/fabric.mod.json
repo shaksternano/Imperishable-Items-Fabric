@@ -19,13 +19,13 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.shaksternano.imperishableitems.ImperishableItems"
+      "com.shaksternano.imperishableitems.common.ImperishableItems"
     ],
     "client": [
       "com.shaksternano.imperishableitems.client.ImperishableItemsClient"
     ],
     "modmenu": [
-      "com.shaksternano.imperishableitems.compat.ModMenuIntegration"
+      "com.shaksternano.imperishableitems.client.compat.ModMenuIntegration"
     ]
   },
   "mixins": [
