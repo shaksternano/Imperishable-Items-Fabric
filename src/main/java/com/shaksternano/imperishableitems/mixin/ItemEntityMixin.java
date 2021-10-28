@@ -43,7 +43,7 @@ public abstract class ItemEntityMixin extends EntityMixin {
                         itemAge = 0;
                     }
                 } else {
-                    // itemAge on the client affects an item entity's visual spin.
+                    // itemAge on the client affects an item entity's visual spin, so reset it infrequently.
                     if (itemAge >= 3000) {
                         itemAge = 0;
                     }
@@ -74,6 +74,7 @@ public abstract class ItemEntityMixin extends EntityMixin {
                     setPosition(x, y, z);
                 }
 
+                // Set the Item Entity's Y position to Y=-64 when below Y=-64
                 if (getPos().y < -64.0D) {
                     setPosition(getX(), -64.0D, getZ());
                 }

@@ -19,7 +19,7 @@ public abstract class TridentEntityMixin extends PersistentProjectileEntityMixin
 
     @Shadow private ItemStack tridentStack;
 
-    // Tridents with Imperishable stop falling when they reach the world's minimum Y.
+    // Tridents with Imperishable stop falling when they reach Y=0.
     @Inject(method = "tick", at = @At("TAIL"))
     private void checkTridentImperishable(CallbackInfo ci) {
         if (ImperishableItems.getConfig().imperishableProtectsFromVoid) {
