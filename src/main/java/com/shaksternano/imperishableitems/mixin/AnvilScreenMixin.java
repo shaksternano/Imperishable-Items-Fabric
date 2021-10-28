@@ -34,6 +34,7 @@ public abstract class AnvilScreenMixin extends ForgingScreen<AnvilScreenHandler>
         return trimmedName;
     }
 
+    // Putting "(Broken)" at the end of the name of a tool with Imperishable at 0 durability will register as a new name.
     @Redirect(method = "onRenamed", at = @At(value = "INVOKE", target = "Lnet/minecraft/text/Text;getString()Ljava/lang/String;"))
     private String imperishableBrokenOnRenamed(Text getName) {
         String trimmedName = getName.getString();

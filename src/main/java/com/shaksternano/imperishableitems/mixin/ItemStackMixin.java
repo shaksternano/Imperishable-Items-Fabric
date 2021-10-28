@@ -54,7 +54,7 @@ public abstract class ItemStackMixin {
 
     @Shadow public abstract boolean isDamageable();
 
-    // When a tool reaches 0 durability, don't break.
+    // Tools don't break when they reach 0 durability.
     @Inject(method = "damage(ILjava/util/Random;Lnet/minecraft/server/network/ServerPlayerEntity;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;setDamage(I)V"), locals = LocalCapture.CAPTURE_FAILSOFT, cancellable = true)
     private void imperishableDurability(int amount, Random random, @Nullable ServerPlayerEntity player, CallbackInfoReturnable<Boolean> cir, int i) {
         if (ImperishableItems.getConfig().imperishablePreventsBreaking) {

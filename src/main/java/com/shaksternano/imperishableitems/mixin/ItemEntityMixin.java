@@ -43,13 +43,14 @@ public abstract class ItemEntityMixin extends EntityMixin {
                         itemAge = 0;
                     }
                 } else {
+                    // itemAge on the client affects an item entity's visual spin, so reset it infrequently.
                     if (itemAge >= 3000) {
                         itemAge = 0;
                     }
                 }
             }
 
-            // Items with Imperishable stop falling when they reach the world's minimum Y, and float up to the world's minimum Y if their y coordinate is below the world's minimum Y.
+            // Items with Imperishable stop falling when they reach the world's minimum Y, and float up to the world's minimum Y if their Y coordinate is below the world's minimum Y.
             if (ImperishableItems.getConfig().imperishableProtectsFromVoid) {
                 if (getPos().y == world.getBottomY()) {
                     setVelocity(Vec3d.ZERO);
@@ -73,6 +74,7 @@ public abstract class ItemEntityMixin extends EntityMixin {
                     setPosition(x, y, z);
                 }
 
+                // Set the Item Entity's Y position to 64 blocks below the world's minimum Y position when below 64 blocks below the world's minimum Y position.
                 if (getPos().y < world.getBottomY() - 64.0D) {
                     setPosition(getX(), world.getBottomY() - 64.0D, getZ());
                 }
