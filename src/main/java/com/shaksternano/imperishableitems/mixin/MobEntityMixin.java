@@ -25,6 +25,7 @@ public abstract class MobEntityMixin extends LivingEntity {
         super(entityType, world);
     }
 
+    // Shears with Imperishable at 0 durability have shear specific right click mob actions cancelled.
     @Inject(method = "interact", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/MobEntity;interactMob(Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/util/Hand;)Lnet/minecraft/util/ActionResult;"), cancellable = true)
     private void imperishableShearMob(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
         if (ImperishableItems.getConfig().imperishablePreventsBreaking) {

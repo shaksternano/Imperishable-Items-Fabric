@@ -16,6 +16,7 @@ public abstract class FlintAndSteelFallibleItemDispenserBehaviorMixin extends Fa
 
     private FlintAndSteelFallibleItemDispenserBehaviorMixin() {}
 
+    // Dispensing flint and steel is cancelled if the flint and steel has Imperishable and is at 0 durability.
     @Inject(method = "dispenseSilently(Lnet/minecraft/util/math/BlockPointer;Lnet/minecraft/item/ItemStack;)Lnet/minecraft/item/ItemStack;", at = @At("HEAD"), cancellable = true)
     private void imperishableDispenserFlintAndSteel(BlockPointer pointer, ItemStack stack, CallbackInfoReturnable<ItemStack> cir) {
         if (ImperishableItems.getConfig().imperishablePreventsBreaking) {

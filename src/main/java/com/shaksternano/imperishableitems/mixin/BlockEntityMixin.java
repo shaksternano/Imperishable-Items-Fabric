@@ -19,6 +19,7 @@ public abstract class BlockEntityMixin implements BlockEntityAccess {
     private NbtElement enchantments;
     private Integer repairCost;
 
+    // Adds enchantments and repair cost to NBT, for example this will allow the enchantments and repair cost to be shown when the /data command is used.
     @Inject(method = "writeNbt", at = @At("TAIL"))
     private void getEnchantmentsForNbt(NbtCompound nbt, CallbackInfoReturnable<NbtCompound> cir) {
         if (enchantments != null) {
@@ -30,6 +31,7 @@ public abstract class BlockEntityMixin implements BlockEntityAccess {
         }
     }
 
+    // Sets the enchantments and repair cost from NBT, for example when the enchantments and repair cost are specified when using the /setblock command.
     @Inject(method = "fromTag", at = @At("TAIL"))
     private void setEnchantmentsFromNbt(BlockState state, NbtCompound tag, CallbackInfo ci) {
         NbtElement enchantments = tag.get("Enchantments");

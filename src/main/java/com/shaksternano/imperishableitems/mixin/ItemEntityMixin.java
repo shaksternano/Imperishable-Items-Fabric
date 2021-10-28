@@ -23,6 +23,7 @@ public abstract class ItemEntityMixin extends EntityMixin {
 
     @Shadow private int itemAge;
 
+    // Items with Imperishable are invulnerable to all damage sources.
     @Override
     protected void damageImperishable(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
         if (ImperishableItems.getConfig().imperishableProtectsFromDamage) {
@@ -36,17 +37,20 @@ public abstract class ItemEntityMixin extends EntityMixin {
     private void checkImperishable(CallbackInfo ci) {
         if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, getStack()) > 0 && !getStack().isEmpty()) {
             if (ImperishableItems.getConfig().imperishablePreventsDespawn) {
+                // Items with Imperishable don't despawn.
                 if (!world.isClient) {
                     if (itemAge >= 1) {
                         itemAge = 0;
                     }
                 } else {
+                    // itemAge on the client affects an item entity's visual spin.
                     if (itemAge >= 3000) {
                         itemAge = 0;
                     }
                 }
             }
 
+            // Items with Imperishable stop falling when they reach Y=0, and float up to Y=0 if their Y coordinate is below Y=0.
             if (ImperishableItems.getConfig().imperishableProtectsFromVoid) {
                 if (getPos().y == 0.0D) {
                     setVelocity(Vec3d.ZERO);
@@ -70,13 +74,14 @@ public abstract class ItemEntityMixin extends EntityMixin {
                     setPosition(x, y, z);
                 }
 
-                if (getPos().y < -256.0D) {
-                    setPosition(getX(), -256.0D, getZ());
+                if (getPos().y < -64.0D) {
+                    setPosition(getX(), -64.0D, getZ());
                 }
             }
         }
     }
 
+    // Items with Imperishable don't appear on fire when in fire or lava.
     @Inject(method = "isFireImmune", at = @At("HEAD"), cancellable = true)
     private void imperishableFireImmune(CallbackInfoReturnable<Boolean> cir) {
         if (ImperishableItems.getConfig().imperishableProtectsFromDamage) {
@@ -86,6 +91,7 @@ public abstract class ItemEntityMixin extends EntityMixin {
         }
     }
 
+    // Items with Imperishable don't get removed when below Y=-64.
     @Override
     protected void imperishableInVoid(CallbackInfo ci) {
         if (ImperishableItems.getConfig().imperishableProtectsFromVoid) {

@@ -7,7 +7,6 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
@@ -15,21 +14,25 @@ public final class BlockEntityHelper {
 
     private BlockEntityHelper() {}
 
+    /**
+     * Copies the enchantments and repair cost of an {@link ItemStack} to a {@link BlockEntity}.
+     */
     @SuppressWarnings("ConstantConditions")
-    public static void setBlockEntityEnchantments(@Nullable BlockEntity blockEntity, ItemStack stack) {
-        if (blockEntity != null) {
-            if (stack.hasEnchantments()) {
-                ((BlockEntityAccess) blockEntity).setEnchantments(stack.getEnchantments());
-            }
+    public static void setBlockEntityEnchantments(BlockEntity blockEntity, ItemStack stack) {
+        if (stack.hasEnchantments()) {
+            ((BlockEntityAccess) blockEntity).setEnchantments(stack.getEnchantments());
+        }
 
-            if (stack.hasTag()) {
-                if (stack.getTag().contains("RepairCost", 3)) {
-                    ((BlockEntityAccess) blockEntity).setRepairCost(stack.getRepairCost());
-                }
+        if (stack.hasTag()) {
+            if (stack.getTag().contains("RepairCost", 3)) {
+                ((BlockEntityAccess) blockEntity).setRepairCost(stack.getRepairCost());
             }
         }
     }
 
+    /**
+     * Copies the enchantments and repair cost of a {@link BlockEntity} to an {@link ItemStack}.
+     */
     public static void setDroppedItemStackEnchantments(BlockEntity blockEntity, ItemStack stack) {
         NbtElement enchantmentsNbt = ((BlockEntityAccess) blockEntity).getEnchantments();
         if (enchantmentsNbt != null) {

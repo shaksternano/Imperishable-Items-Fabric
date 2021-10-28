@@ -17,6 +17,7 @@ public abstract class ShearsDispenserBehaviorMixin extends FallibleItemDispenser
 
     private ShearsDispenserBehaviorMixin() {}
 
+    // Dispensing shears is cancelled if the shears have Imperishable and are at 0 durability.
     @Inject(method = "dispenseSilently", at = @At("HEAD"), cancellable = true)
     private void imperishableDispenserShear(BlockPointer pointer, ItemStack stack, CallbackInfoReturnable<ItemStack> cir) {
         if (ImperishableItems.getConfig().imperishablePreventsBreaking) {
