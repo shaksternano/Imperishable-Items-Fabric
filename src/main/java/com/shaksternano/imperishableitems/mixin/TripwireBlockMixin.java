@@ -27,6 +27,7 @@ public abstract class TripwireBlockMixin extends Block {
 
     @Shadow @Final public static BooleanProperty DISARMED;
 
+    // Shears with Imperishable at 0 durability can't disarm tripwires.
     @Inject(method = "onBreak", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;setBlockState(Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;I)Z", shift = At.Shift.AFTER))
     private void imperishableDisarmTripwire(World world, BlockPos pos, BlockState state, PlayerEntity player, CallbackInfo ci) {
         if (ImperishableItems.getConfig().imperishablePreventsBreaking) {

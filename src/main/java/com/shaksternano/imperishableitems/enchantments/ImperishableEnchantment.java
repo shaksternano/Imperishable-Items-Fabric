@@ -46,6 +46,7 @@ public class ImperishableEnchantment extends Enchantment {
         return ImperishableItems.getConfig().imperishableSoldByVillagers;
     }
 
+    // Removes the "(Broken)" string from the name of tools with Imperishable at 0 durability, so it doesn't mess with anvil renaming.
     public static String itemNameRemoveBroken(Text textName, ItemStack stack) {
         String returnName = textName.getString();
 

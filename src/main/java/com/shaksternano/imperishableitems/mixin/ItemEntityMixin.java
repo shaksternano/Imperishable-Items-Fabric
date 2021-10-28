@@ -23,6 +23,7 @@ public abstract class ItemEntityMixin extends EntityMixin {
 
     @Shadow private int itemAge;
 
+    // Items with Imperishable are invulnerable to all damage sources.
     @Override
     protected void damageImperishable(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
         if (ImperishableItems.getConfig().imperishableProtectsFromDamage) {
@@ -35,6 +36,7 @@ public abstract class ItemEntityMixin extends EntityMixin {
     @Inject(method = "tick", at = @At("TAIL"))
     private void checkImperishable(CallbackInfo ci) {
         if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, getStack()) > 0 && !getStack().isEmpty()) {
+            // Items with Imperishable don't despawn.
             if (ImperishableItems.getConfig().imperishablePreventsDespawn) {
                 if (!world.isClient) {
                     if (itemAge >= 1) {
@@ -47,12 +49,13 @@ public abstract class ItemEntityMixin extends EntityMixin {
                 }
             }
 
+            // Items with Imperishable stop falling when they reach the world's minimum Y, and float up to the world's minimum Y if their y coordinate is below the world's minimum Y.
             if (ImperishableItems.getConfig().imperishableProtectsFromVoid) {
-                if (getPos().y == 0.0D) {
+                if (getPos().y == world.getBottomY()) {
                     setVelocity(Vec3d.ZERO);
-                    setPosition(getX(), 0.0D, getZ());
+                    setPosition(getX(), world.getBottomY(), getZ());
                     onGround = true;
-                } else if (getPos().y < 0.0D) {
+                } else if (getPos().y < world.getBottomY()) {
 
                     Vec3d velocity = getVelocity();
                     this.setVelocity(velocity.x * 0.97D, velocity.y + velocity.y < 0.06D ? 0.5D : 0.0D, velocity.z * 0.97D);
@@ -61,22 +64,23 @@ public abstract class ItemEntityMixin extends EntityMixin {
                     double y = getY() + getVelocity().y;
                     double z = getZ() + getVelocity().z;
 
-                    if (y >= 0.0D) {
+                    if (y >= world.getBottomY()) {
                         setVelocity(Vec3d.ZERO);
-                        y = 0.0D;
+                        y = world.getBottomY();
                         onGround = true;
                     }
 
                     setPosition(x, y, z);
                 }
 
-                if (getPos().y < -256.0D) {
-                    setPosition(getX(), -256.0D, getZ());
+                if (getPos().y < world.getBottomY() - 64.0D) {
+                    setPosition(getX(), world.getBottomY() - 64.0D, getZ());
                 }
             }
         }
     }
 
+    // Items with Imperishable don't appear on fire when in fire or lava.
     @Inject(method = "isFireImmune", at = @At("HEAD"), cancellable = true)
     private void imperishableFireImmune(CallbackInfoReturnable<Boolean> cir) {
         if (ImperishableItems.getConfig().imperishableProtectsFromDamage) {
@@ -86,6 +90,7 @@ public abstract class ItemEntityMixin extends EntityMixin {
         }
     }
 
+    // Items with Imperishable don't get removed when 64 blocks below the world's minimum Y position.
     @Override
     protected void imperishableInVoid(CallbackInfo ci) {
         if (ImperishableItems.getConfig().imperishableProtectsFromVoid) {

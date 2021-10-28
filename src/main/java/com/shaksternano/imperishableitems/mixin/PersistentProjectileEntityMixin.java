@@ -11,5 +11,7 @@ public abstract class PersistentProjectileEntityMixin extends EntityMixin {
 
     @Shadow protected boolean inGround;
 
+    @Shadow public abstract boolean isNoClip();
+
     @Shadow public abstract void setNoClip(boolean noClip);
 }

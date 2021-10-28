@@ -22,31 +22,32 @@ public abstract class AnvilScreenMixin extends ForgingScreen<AnvilScreenHandler>
         super(handler, playerInventory, title, texture);
     }
 
+    // A tool with imperishable at 0 durability in an anvil will not have "(Broken)" at the end if its name.
     @Redirect(method = "onSlotUpdate", at = @At(value = "INVOKE", target = "Lnet/minecraft/text/Text;getString()Ljava/lang/String;"))
     private String imperishableBrokenOnSlotUpdate(Text getName, ScreenHandler handler, int slotId, ItemStack stack) {
-        String returnName = getName.getString();
+        String trimmedName = getName.getString();
 
         if (ImperishableItems.getConfig().imperishablePreventsBreaking) {
-            returnName = ImperishableEnchantment.itemNameRemoveBroken(getName, stack);
+            trimmedName = ImperishableEnchantment.itemNameRemoveBroken(getName, stack);
         }
 
-        return returnName;
+        return trimmedName;
     }
 
     @Redirect(method = "onRenamed", at = @At(value = "INVOKE", target = "Lnet/minecraft/text/Text;getString()Ljava/lang/String;"))
     private String imperishableBrokenOnRenamed(Text getName) {
-        String returnName = getName.getString();
+        String trimmedName = getName.getString();
 
         if (ImperishableItems.getConfig().imperishablePreventsBreaking) {
             Slot slot = handler.getSlot(0);
 
             if (slot != null && slot.hasStack()) {
                 ItemStack stack = slot.getStack();
-                returnName = ImperishableEnchantment.itemNameRemoveBroken(getName, stack);
+                trimmedName = ImperishableEnchantment.itemNameRemoveBroken(getName, stack);
             }
 
         }
 
-        return returnName;
+        return trimmedName;
     }
 }

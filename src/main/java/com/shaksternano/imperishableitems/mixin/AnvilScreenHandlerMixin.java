@@ -21,15 +21,16 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
         super(type, syncId, playerInventory, context);
     }
 
+    // A tool with imperishable at 0 durability in an anvil without "(Broken)" at the end of its name will not register as renamed.
     @Redirect(method = "updateResult", at = @At(value = "INVOKE", target = "Lnet/minecraft/text/Text;getString()Ljava/lang/String;"))
     private String imperishableBrokenUpdateResult(Text getName) {
-        String returnName = getName.getString();
+        String trimmedName = getName.getString();
 
         if (ImperishableItems.getConfig().imperishablePreventsBreaking) {
             ItemStack stack = input.getStack(0);
-            returnName = ImperishableEnchantment.itemNameRemoveBroken(getName, stack);
+            trimmedName = ImperishableEnchantment.itemNameRemoveBroken(getName, stack);
         }
 
-        return returnName;
+        return trimmedName;
     }
 }

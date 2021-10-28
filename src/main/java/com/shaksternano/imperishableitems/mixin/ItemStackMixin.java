@@ -54,6 +54,7 @@ public abstract class ItemStackMixin {
 
     @Shadow public abstract boolean isDamageable();
 
+    // When a tool reaches 0 durability, don't break.
     @Inject(method = "damage(ILjava/util/Random;Lnet/minecraft/server/network/ServerPlayerEntity;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;setDamage(I)V"), locals = LocalCapture.CAPTURE_FAILSOFT, cancellable = true)
     private void imperishableDurability(int amount, Random random, @Nullable ServerPlayerEntity player, CallbackInfoReturnable<Boolean> cir, int i) {
         if (ImperishableItems.getConfig().imperishablePreventsBreaking) {
@@ -84,6 +85,7 @@ public abstract class ItemStackMixin {
         }
     }
 
+    // Tool specific drops such cobblestone do not drop when mined by a Tool with Imperishable at 0 durability.
     @Inject(method = "isSuitableFor", at = @At("HEAD"), cancellable = true)
     private void imperishableSuitableFor(BlockState state, CallbackInfoReturnable<Boolean> cir) {
         if (ImperishableItems.getConfig().imperishablePreventsBreaking) {
@@ -99,6 +101,7 @@ public abstract class ItemStackMixin {
         }
     }
 
+    // Tools with Imperishable do not have increased mining speed when at 0 durability.
     @Inject(method = "getMiningSpeedMultiplier", at = @At("HEAD"), cancellable = true)
     private void imperishableNoDurabilitySpeed(BlockState state, CallbackInfoReturnable<Float> cir) {
         if (ImperishableItems.getConfig().imperishablePreventsBreaking) {
@@ -114,6 +117,7 @@ public abstract class ItemStackMixin {
         }
     }
 
+    // Tools with Imperishable do not give bonus attributes such as attack damage on a sword when at 0 durability.
     @Inject(method = "getAttributeModifiers", at = @At("HEAD"), cancellable = true)
     private void imperishableAttributeModifiers(EquipmentSlot equipmentSlot, CallbackInfoReturnable<Multimap<EntityAttribute, EntityAttributeModifier>> cir) {
         if (ImperishableItems.getConfig().imperishablePreventsBreaking) {
@@ -129,6 +133,7 @@ public abstract class ItemStackMixin {
         }
     }
 
+    // Tool specific right click actions are cancelled if the tool has Imperishable and is at 0 durability.
     @Inject(method = "use", at = @At("HEAD"), cancellable = true)
     private void imperishableUse(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
         if (ImperishableItems.getConfig().imperishablePreventsBreaking) {
@@ -148,6 +153,7 @@ public abstract class ItemStackMixin {
         }
     }
 
+    // Tool specific right click block actions are cancelled if the tool has Imperishable and is at 0 durability.
     @Inject(method = "useOnBlock", at = @At("HEAD"), cancellable = true)
     private void imperishableUseOnBlock(ItemUsageContext context, CallbackInfoReturnable<ActionResult> cir) {
         if (ImperishableItems.getConfig().imperishablePreventsBreaking) {
@@ -173,6 +179,7 @@ public abstract class ItemStackMixin {
         }
     }
 
+    // Tool specific right click entity are cancelled if the tool has Imperishable and is at 0 durability.
     @Inject(method = "useOnEntity", at = @At("HEAD"), cancellable = true)
     private void imperishableUseOnEntity(PlayerEntity user, LivingEntity entity, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
         if (ImperishableItems.getConfig().imperishablePreventsBreaking) {
@@ -190,6 +197,7 @@ public abstract class ItemStackMixin {
         }
     }
 
+    // Adds "(Broken)" to the name of a tool with Imperishable at 0 durability.
     @Inject(method = "getName", at = @At("RETURN"), cancellable = true)
     private void imperishableBrokenName(CallbackInfoReturnable<Text> cir) {
         if (ImperishableItems.getConfig().imperishablePreventsBreaking) {
@@ -209,6 +217,7 @@ public abstract class ItemStackMixin {
         }
     }
 
+    // Adds a message to the tooltip for tools with Imperishable at 0 durability.
     @Inject(method = "getTooltip",
             at = @At(
                     value = "INVOKE",

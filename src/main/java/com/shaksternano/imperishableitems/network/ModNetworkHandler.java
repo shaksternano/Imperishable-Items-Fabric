@@ -16,6 +16,7 @@ public final class ModNetworkHandler {
 
     @Environment(EnvType.CLIENT)
     public static void registerClientGlobalReceivers() {
+        // Plays tool break effects.
         ClientPlayNetworking.registerGlobalReceiver(EQUIPMENT_BREAK_EFFECTS, (client, handler, buf, responseSender) -> {
             if (client.player != null) {
                 int itemId = buf.readInt();
