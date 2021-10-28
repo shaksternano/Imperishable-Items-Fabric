@@ -25,7 +25,7 @@
       "com.shaksternano.imperishableitems.client.ImperishableItemsClient"
     ],
     "modmenu": [
-      "com.shaksternano.imperishableitems.client.compat.ModMenuIntegration"
+      "com.shaksternano.imperishableitems.client.compat.ModMenuCompat"
     ]
   },
   "mixins": [
