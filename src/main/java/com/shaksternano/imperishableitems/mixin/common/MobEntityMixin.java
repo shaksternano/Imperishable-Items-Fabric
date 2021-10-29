@@ -1,8 +1,7 @@
 package com.shaksternano.imperishableitems.mixin.common;
 
 import com.shaksternano.imperishableitems.common.ImperishableItems;
-import com.shaksternano.imperishableitems.common.registry.ModEnchantments;
-import net.minecraft.enchantment.EnchantmentHelper;
+import com.shaksternano.imperishableitems.common.enchantments.ImperishableEnchantment;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.Shearable;
@@ -34,12 +33,8 @@ public abstract class MobEntityMixin extends LivingEntity {
 
                 if (stack.getItem() instanceof ShearsItem) {
                     if (this instanceof Shearable) {
-                        if (stack.isDamageable()) {
-                            if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, stack) > 0) {
-                                if (stack.getDamage() >= stack.getMaxDamage()) {
-                                    cir.setReturnValue(ActionResult.PASS);
-                                }
-                            }
+                        if (ImperishableEnchantment.isBrokenImperishable(stack)) {
+                            cir.setReturnValue(ActionResult.PASS);
                         }
                     }
                 }

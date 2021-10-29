@@ -28,7 +28,7 @@ public abstract class AbstractBlockMixin {
 
             for (ItemStack stack : stacks) {
                 // Checks if the dropped item is the same as the broken block entity, for example an Ender Chest doesn't drop an Ender Chest when broken without silk touch.
-                if (stack.getItem().equals(state.getBlock().asItem())) {
+                if (stack.isOf(state.getBlock().asItem())) {
                     BlockEntity blockEntity = builder.get(LootContextParameters.BLOCK_ENTITY);
                     BlockEntityHelper.setDroppedItemStackEnchantments(blockEntity, stack);
                 }

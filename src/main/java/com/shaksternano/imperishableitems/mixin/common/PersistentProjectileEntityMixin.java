@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Shadow;
 @Mixin(PersistentProjectileEntity.class)
 public abstract class PersistentProjectileEntityMixin extends EntityMixin {
 
-    protected PersistentProjectileEntityMixin() {}
+    PersistentProjectileEntityMixin() {}
 
     @Shadow protected boolean inGround;
 
