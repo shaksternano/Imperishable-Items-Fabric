@@ -12,6 +12,8 @@ import net.minecraft.text.TranslatableText;
 
 public class ImperishableEnchantment extends Enchantment {
 
+    public static final String ENCHANTMENT_ID = "imperishable";
+
     public ImperishableEnchantment() {
         super(Rarity.RARE, EnchantmentTarget.VANISHABLE, EquipmentSlot.values());
     }
@@ -44,6 +46,10 @@ public class ImperishableEnchantment extends Enchantment {
     @Override
     public boolean isAvailableForEnchantedBookOffer() {
         return ImperishableItems.getConfig().imperishableSoldByVillagers;
+    }
+
+    public static String getTranslationId() {
+        return ImperishableItems.MOD_ID + '.' + ENCHANTMENT_ID;
     }
 
     // Returns true if an ItemStack has the Imperishable enchantment. Returns false otherwise.

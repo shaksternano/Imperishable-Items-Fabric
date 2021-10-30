@@ -119,7 +119,7 @@ public abstract class ItemStackMixin {
     private void imperishableUse(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
         if (ImperishableItems.getConfig().imperishablePreventsBreaking) {
             if (!user.isCreative()) {
-                // Still allow wearable items to be equipped.
+                // Still allow a wearable item to be equipped even if the item is broken.
                 if (!(getItem() instanceof Wearable)) {
                     if (ImperishableEnchantment.isBrokenImperishable((ItemStack) (Object) this)) {
                         cir.setReturnValue(TypedActionResult.pass(user.getStackInHand(hand)));
@@ -166,7 +166,7 @@ public abstract class ItemStackMixin {
     private void imperishableBrokenName(CallbackInfoReturnable<Text> cir) {
         if (ImperishableItems.getConfig().imperishablePreventsBreaking) {
             if (ImperishableEnchantment.isBrokenImperishable((ItemStack) (Object) this)) {
-                TranslatableText broken = new TranslatableText("item.name." + ImperishableItems.MOD_ID + ".imperishableBroken");
+                TranslatableText broken = new TranslatableText("item.name." + ImperishableEnchantment.getTranslationId() + ".broken");
                 broken.formatted(Formatting.RED);
 
                 Text brokenName = ((MutableText) cir.getReturnValue()).append(broken);
@@ -205,7 +205,7 @@ public abstract class ItemStackMixin {
             if (!userIsCreative) {
                 if (ImperishableEnchantment.isBrokenImperishable((ItemStack) (Object) this)) {
                     list.add(LiteralText.EMPTY);
-                    list.add(new TranslatableText("item.tooltip." + ImperishableItems.MOD_ID + ".imperishableBroken").formatted(Formatting.RED));
+                    list.add(new TranslatableText("item.tooltip." + ImperishableEnchantment.getTranslationId() + ".broken").formatted(Formatting.RED));
                 }
             }
         }

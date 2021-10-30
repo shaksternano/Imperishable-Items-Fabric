@@ -13,6 +13,6 @@ public class ModEnchantments {
     public static final Enchantment IMPERISHABLE = new ImperishableEnchantment();
 
     public static void registerEnchantments() {
-        Registry.register(Registry.ENCHANTMENT, new Identifier(ImperishableItems.MOD_ID, "imperishable"), IMPERISHABLE);
+        Registry.register(Registry.ENCHANTMENT, new Identifier(ImperishableItems.MOD_ID, ImperishableEnchantment.ENCHANTMENT_ID), IMPERISHABLE);
     }
 }

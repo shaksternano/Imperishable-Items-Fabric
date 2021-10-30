@@ -24,7 +24,7 @@ public abstract class ItemDispenserBehaviorMixin implements DispenserBehavior {
     @Redirect(method = "dispense", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/dispenser/ItemDispenserBehavior;dispenseSilently(Lnet/minecraft/util/math/BlockPointer;Lnet/minecraft/item/ItemStack;)Lnet/minecraft/item/ItemStack;"))
     private ItemStack dispenseBrokenImperishable(ItemDispenserBehavior itemDispenserBehavior, BlockPointer pointer, ItemStack stack) {
         if (ImperishableItems.getConfig().imperishablePreventsBreaking) {
-            // Still allow wearable items to be dispensed.
+            // Still allow a wearable item to be dispensed even if the item is broken.
             if (!(stack.getItem() instanceof Wearable)) {
                 if (ImperishableEnchantment.isBrokenImperishable(stack)) {
                     if (itemDispenserBehavior instanceof FallibleItemDispenserBehavior) {
