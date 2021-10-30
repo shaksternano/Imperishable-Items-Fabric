@@ -67,7 +67,7 @@ public class ImperishableEnchantment extends Enchantment {
         String trimmedName = textName.getString();
 
         if (isBrokenImperishable(stack)) {
-            TranslatableText broken = new TranslatableText("item.name." + ImperishableItems.MOD_ID + ".imperishableBroken");
+            TranslatableText broken = new TranslatableText("item.name." + getTranslationId() + ".broken");
             int brokenLength = broken.getString().length();
             trimmedName = trimmedName.substring(0, trimmedName.length() - brokenLength);
         }
