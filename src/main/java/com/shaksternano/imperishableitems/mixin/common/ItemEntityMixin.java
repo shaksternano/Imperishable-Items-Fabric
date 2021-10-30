@@ -1,8 +1,7 @@
 package com.shaksternano.imperishableitems.mixin.common;
 
 import com.shaksternano.imperishableitems.common.ImperishableItems;
-import com.shaksternano.imperishableitems.common.registry.ModEnchantments;
-import net.minecraft.enchantment.EnchantmentHelper;
+import com.shaksternano.imperishableitems.common.enchantments.ImperishableEnchantment;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.ItemStack;
@@ -27,7 +26,7 @@ public abstract class ItemEntityMixin extends EntityMixin {
     @Override
     protected void damageImperishable(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
         if (ImperishableItems.getConfig().imperishableProtectsFromDamage) {
-            if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, getStack()) > 0) {
+            if (ImperishableEnchantment.hasImperishable(getStack())) {
                 cir.setReturnValue(true);
             }
         }
@@ -35,7 +34,7 @@ public abstract class ItemEntityMixin extends EntityMixin {
 
     @Inject(method = "tick", at = @At("TAIL"))
     private void checkImperishable(CallbackInfo ci) {
-        if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, getStack()) > 0 && !getStack().isEmpty()) {
+        if (ImperishableEnchantment.hasImperishable(getStack())) {
             if (ImperishableItems.getConfig().imperishablePreventsDespawn) {
                 // Items with Imperishable don't despawn.
                 if (!world.isClient) {
@@ -86,7 +85,7 @@ public abstract class ItemEntityMixin extends EntityMixin {
     @Inject(method = "isFireImmune", at = @At("HEAD"), cancellable = true)
     private void imperishableFireImmune(CallbackInfoReturnable<Boolean> cir) {
         if (ImperishableItems.getConfig().imperishableProtectsFromDamage) {
-            if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, getStack()) > 0) {
+            if (ImperishableEnchantment.hasImperishable(getStack())) {
                 cir.setReturnValue(true);
             }
         }
@@ -96,7 +95,7 @@ public abstract class ItemEntityMixin extends EntityMixin {
     @Override
     protected void imperishableInVoid(CallbackInfo ci) {
         if (ImperishableItems.getConfig().imperishableProtectsFromVoid) {
-            if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, getStack()) > 0) {
+            if (ImperishableEnchantment.hasImperishable(getStack())) {
                 ci.cancel();
             }
         }

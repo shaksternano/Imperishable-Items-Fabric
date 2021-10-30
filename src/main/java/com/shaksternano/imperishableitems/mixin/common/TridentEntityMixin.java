@@ -1,8 +1,7 @@
 package com.shaksternano.imperishableitems.mixin.common;
 
 import com.shaksternano.imperishableitems.common.ImperishableItems;
-import com.shaksternano.imperishableitems.common.registry.ModEnchantments;
-import net.minecraft.enchantment.EnchantmentHelper;
+import com.shaksternano.imperishableitems.common.enchantments.ImperishableEnchantment;
 import net.minecraft.entity.projectile.TridentEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.Vec3d;
@@ -23,7 +22,7 @@ public abstract class TridentEntityMixin extends PersistentProjectileEntityMixin
     @Inject(method = "tick", at = @At("TAIL"))
     private void checkTridentImperishable(CallbackInfo ci) {
         if (ImperishableItems.getConfig().imperishableProtectsFromVoid) {
-            if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, tridentStack) > 0) {
+            if (ImperishableEnchantment.hasImperishable(tridentStack)) {
                 if (!isNoClip()) {
                     if (getPos().y < 0.0D) {
                         setVelocity(Vec3d.ZERO);
@@ -40,7 +39,7 @@ public abstract class TridentEntityMixin extends PersistentProjectileEntityMixin
     @Inject(method = "age", at = @At("HEAD"), cancellable = true)
     private void imperishableAge(CallbackInfo ci) {
         if (ImperishableItems.getConfig().imperishablePreventsDespawn) {
-            if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, tridentStack) > 0) {
+            if (ImperishableEnchantment.hasImperishable(tridentStack)) {
                 ci.cancel();
             }
         }
@@ -50,7 +49,7 @@ public abstract class TridentEntityMixin extends PersistentProjectileEntityMixin
     @Override
     protected void imperishableInVoid(CallbackInfo ci) {
         if (ImperishableItems.getConfig().imperishableProtectsFromVoid) {
-            if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, tridentStack) > 0) {
+            if (ImperishableEnchantment.hasImperishable(tridentStack)) {
                 ci.cancel();
             }
         }

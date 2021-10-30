@@ -1,12 +1,11 @@
 package com.shaksternano.imperishableitems.mixin.common;
 
 import com.shaksternano.imperishableitems.common.ImperishableItems;
-import com.shaksternano.imperishableitems.common.registry.ModEnchantments;
+import com.shaksternano.imperishableitems.common.enchantments.ImperishableEnchantment;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BeehiveBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.PumpkinBlock;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShearsItem;
@@ -36,12 +35,8 @@ public abstract class AbstractBlockStateMixin {
 
                 if (stack.getItem() instanceof ShearsItem) {
                     if (getBlock() instanceof BeehiveBlock || getBlock() instanceof PumpkinBlock) {
-                        if (stack.isDamageable()) {
-                            if (EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, stack) > 0) {
-                                if (stack.getDamage() >= stack.getMaxDamage()) {
-                                    cir.setReturnValue(ActionResult.PASS);
-                                }
-                            }
+                        if (ImperishableEnchantment.isBrokenImperishable(stack)) {
+                            cir.setReturnValue(ActionResult.PASS);
                         }
                     }
                 }

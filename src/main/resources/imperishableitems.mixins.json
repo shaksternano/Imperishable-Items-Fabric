@@ -10,12 +10,11 @@
     "common.BlockEntityMixin",
     "common.BlockItemMixin",
     "common.EntityMixin",
-    "common.FlintAndSteelFallibleItemDispenserBehaviorMixin",
+    "common.ItemDispenserBehaviorMixin",
     "common.ItemEntityMixin",
     "common.ItemStackMixin",
     "common.MobEntityMixin",
     "common.PersistentProjectileEntityMixin",
-    "common.ShearsDispenserBehaviorMixin",
     "common.ShulkerBoxBlockMixin",
     "common.TridentEntityMixin",
     "common.TripwireBlockMixin"
