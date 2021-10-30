@@ -9,10 +9,10 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 public class ImperishableEnchantment extends Enchantment {
+
+    public static final String ENCHANTMENT_ID = "imperishable";
 
     public ImperishableEnchantment() {
         super(Rarity.RARE, EnchantmentTarget.VANISHABLE, EquipmentSlot.values());
@@ -49,8 +49,7 @@ public class ImperishableEnchantment extends Enchantment {
     }
 
     public static String getTranslationId() {
-        Identifier id = Registry.ENCHANTMENT.getId(ModEnchantments.IMPERISHABLE);
-        return id == null ? "unregistered_enchantment" : id.getNamespace() + '.' + id.getPath().replace('/', '.');
+        return ImperishableItems.MOD_ID + '.' + ENCHANTMENT_ID;
     }
 
     // Returns true if an ItemStack has the Imperishable enchantment. Returns false otherwise.
