@@ -166,7 +166,7 @@ public abstract class ItemStackMixin {
     private void imperishableBrokenName(CallbackInfoReturnable<Text> cir) {
         if (ImperishableItems.getConfig().imperishablePreventsBreaking) {
             if (ImperishableEnchantment.isBrokenImperishable((ItemStack) (Object) this)) {
-                TranslatableText broken = new TranslatableText("item.name." + ImperishableEnchantment.getTranslationId() + ".broken");
+                TranslatableText broken = new TranslatableText("item.name." + ImperishableEnchantment.TRANSLATION_KEY + ".broken");
                 broken.formatted(Formatting.RED);
 
                 Text brokenName = ((MutableText) cir.getReturnValue()).append(broken);
@@ -205,7 +205,7 @@ public abstract class ItemStackMixin {
             if (!userIsCreative) {
                 if (ImperishableEnchantment.isBrokenImperishable((ItemStack) (Object) this)) {
                     list.add(LiteralText.EMPTY);
-                    list.add(new TranslatableText("item.tooltip." + ImperishableEnchantment.getTranslationId() + ".broken").formatted(Formatting.RED));
+                    list.add(new TranslatableText("item.tooltip." + ImperishableEnchantment.TRANSLATION_KEY + ".broken").formatted(Formatting.RED));
                 }
             }
         }

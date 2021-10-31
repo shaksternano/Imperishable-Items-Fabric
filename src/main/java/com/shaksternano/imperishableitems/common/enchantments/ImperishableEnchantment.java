@@ -13,6 +13,7 @@ import net.minecraft.text.TranslatableText;
 public final class ImperishableEnchantment extends Enchantment {
 
     public static final String ENCHANTMENT_ID = "imperishable";
+    public static final String TRANSLATION_KEY = ImperishableItems.MOD_ID + '.' + ENCHANTMENT_ID;
 
     public ImperishableEnchantment() {
         super(Rarity.RARE, EnchantmentTarget.VANISHABLE, EquipmentSlot.values());
@@ -48,10 +49,6 @@ public final class ImperishableEnchantment extends Enchantment {
         return ImperishableItems.getConfig().imperishableSoldByVillagers;
     }
 
-    public static String getTranslationId() {
-        return ImperishableItems.MOD_ID + '.' + ENCHANTMENT_ID;
-    }
-
     // Returns true if an ItemStack has the Imperishable enchantment. Returns false otherwise.
     public static boolean hasImperishable(ItemStack stack) {
         return EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, stack) > 0;
@@ -67,7 +64,7 @@ public final class ImperishableEnchantment extends Enchantment {
         String trimmedName = textName.getString();
 
         if (isBrokenImperishable(stack)) {
-            TranslatableText broken = new TranslatableText("item.name." + getTranslationId() + ".broken");
+            TranslatableText broken = new TranslatableText("item.name." + TRANSLATION_KEY + ".broken");
             int brokenLength = broken.getString().length();
             trimmedName = trimmedName.substring(0, trimmedName.length() - brokenLength);
         }
