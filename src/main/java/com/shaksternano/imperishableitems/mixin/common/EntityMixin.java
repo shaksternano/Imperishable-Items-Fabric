@@ -17,7 +17,6 @@ public abstract class EntityMixin {
     EntityMixin() {}
 
     @Shadow public World world;
-
     @Shadow protected boolean onGround;
 
     @Shadow public abstract double getX();
