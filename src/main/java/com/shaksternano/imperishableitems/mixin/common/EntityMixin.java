@@ -18,21 +18,19 @@ public abstract class EntityMixin {
 
     @Shadow public World world;
 
-    @Shadow public abstract Vec3d getPos();
+    @Shadow protected boolean onGround;
+
+    @Shadow public abstract double getX();
+
+    @Shadow public abstract double getY();
+
+    @Shadow public abstract double getZ();
+
+    @Shadow public abstract void setPosition(double x, double y, double z);
 
     @Shadow public abstract Vec3d getVelocity();
 
     @Shadow public abstract void setVelocity(Vec3d velocity);
-
-    @Shadow public abstract void setPosition(double x, double y, double z);
-
-    @Shadow public abstract double getX();
-
-    @Shadow public abstract double getZ();
-
-    @Shadow protected boolean onGround;
-
-    @Shadow public abstract double getY();
 
     @Shadow public abstract void setVelocity(double x, double y, double z);
 

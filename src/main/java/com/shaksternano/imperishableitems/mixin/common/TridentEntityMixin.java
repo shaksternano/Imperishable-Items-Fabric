@@ -24,7 +24,7 @@ public abstract class TridentEntityMixin extends PersistentProjectileEntityMixin
         if (ImperishableItems.getConfig().imperishableProtectsFromVoid) {
             if (ImperishableEnchantment.hasImperishable(tridentStack)) {
                 if (!isNoClip()) {
-                    if (getPos().y < 0.0D) {
+                    if (getY() < 0.0D) {
                         setVelocity(Vec3d.ZERO);
                         setPosition(getX(), 0.0D, getZ());
                         inGround = true;
