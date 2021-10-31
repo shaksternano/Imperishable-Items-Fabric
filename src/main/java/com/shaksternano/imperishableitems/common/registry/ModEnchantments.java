@@ -6,7 +6,7 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-public class ModEnchantments {
+public final class ModEnchantments {
 
     private ModEnchantments() {}
 

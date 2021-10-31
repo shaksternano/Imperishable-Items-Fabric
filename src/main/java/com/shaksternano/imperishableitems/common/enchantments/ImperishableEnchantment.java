@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 
-public class ImperishableEnchantment extends Enchantment {
+public final class ImperishableEnchantment extends Enchantment {
 
     public static final String ENCHANTMENT_ID = "imperishable";
 
