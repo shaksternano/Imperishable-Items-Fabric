@@ -7,7 +7,7 @@ import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
 
 @Config(name = ImperishableItems.MOD_ID)
 @Config.Gui.Background(Config.Gui.Background.TRANSPARENT)
-public class ModConfig implements ConfigData {
+public final class ModConfig implements ConfigData {
 
     @Comment("Should Imperishable be a treasure enchant? Default value is false.")
     public boolean imperishableIsTreasure = false;

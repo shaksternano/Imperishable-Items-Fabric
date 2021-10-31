@@ -15,6 +15,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(ItemDispenserBehavior.class)
 public abstract class ItemDispenserBehaviorMixin implements DispenserBehavior {
+
     private ItemDispenserBehaviorMixin() {}
 
     @Shadow protected abstract ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack);

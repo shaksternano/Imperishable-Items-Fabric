@@ -6,7 +6,7 @@ import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 
-public class ImperishableItems implements ModInitializer {
+public final class ImperishableItems implements ModInitializer {
 
     public static final String MOD_ID = "imperishableitems";
     private static ModConfig config;
