@@ -43,15 +43,15 @@ public abstract class ItemStackMixin {
 
     private ItemStackMixin() {}
 
-    @Shadow public abstract void setDamage(int damage);
-
-    @Shadow public abstract int getMaxDamage();
-
     @Shadow public abstract Item getItem();
+
+    @Shadow public abstract boolean isDamageable();
 
     @Shadow public abstract int getDamage();
 
-    @Shadow public abstract boolean isDamageable();
+    @Shadow public abstract void setDamage(int damage);
+
+    @Shadow public abstract int getMaxDamage();
 
     // Items don't break when they reach 0 durability.
     @Inject(method = "damage(ILjava/util/Random;Lnet/minecraft/server/network/ServerPlayerEntity;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;setDamage(I)V"), locals = LocalCapture.CAPTURE_FAILSOFT, cancellable = true)

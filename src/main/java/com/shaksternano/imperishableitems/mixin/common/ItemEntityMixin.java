@@ -18,9 +18,9 @@ public abstract class ItemEntityMixin extends EntityMixin {
 
     private ItemEntityMixin() {}
 
-    @Shadow public abstract ItemStack getStack();
-
     @Shadow private int itemAge;
+
+    @Shadow public abstract ItemStack getStack();
 
     // Items with Imperishable are invulnerable to all damage sources.
     @Override
@@ -51,11 +51,11 @@ public abstract class ItemEntityMixin extends EntityMixin {
 
             // Items with Imperishable stop falling when they reach the world's minimum Y, and float up to the world's minimum Y if their Y coordinate is below the world's minimum Y.
             if (ImperishableItems.getConfig().imperishableProtectsFromVoid) {
-                if (getPos().y == world.getBottomY()) {
+                if (getY() == world.getBottomY()) {
                     setVelocity(Vec3d.ZERO);
                     setPosition(getX(), world.getBottomY(), getZ());
                     onGround = true;
-                } else if (getPos().y < world.getBottomY()) {
+                } else if (getY() < world.getBottomY()) {
 
                     Vec3d velocity = getVelocity();
                     this.setVelocity(velocity.x * 0.97D, velocity.y + velocity.y < 0.06D ? 0.5D : 0.0D, velocity.z * 0.97D);
@@ -74,7 +74,7 @@ public abstract class ItemEntityMixin extends EntityMixin {
                 }
 
                 // Set the Item Entity's Y position to 64 blocks below the world's minimum Y position when below 64 blocks below the world's minimum Y position.
-                if (getPos().y < world.getBottomY() - 64.0D) {
+                if (getY() < world.getBottomY() - 64.0D) {
                     setPosition(getX(), world.getBottomY() - 64.0D, getZ());
                 }
             }
