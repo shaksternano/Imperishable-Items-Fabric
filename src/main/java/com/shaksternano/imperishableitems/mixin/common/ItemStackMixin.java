@@ -114,21 +114,6 @@ public abstract class ItemStackMixin {
         }
     }
 
-    // Item specific right click actions are cancelled if the item has Imperishable and is at 0 durability.
-    @Inject(method = "use", at = @At("HEAD"), cancellable = true)
-    private void imperishableUse(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
-        if (ImperishableItems.getConfig().imperishablePreventsBreaking) {
-            if (!user.isCreative()) {
-                // Still allow a wearable item to be equipped even if the item is broken.
-                if (!(getItem() instanceof Wearable)) {
-                    if (ImperishableEnchantment.isBrokenImperishable((ItemStack) (Object) this)) {
-                        cir.setReturnValue(TypedActionResult.pass(user.getStackInHand(hand)));
-                    }
-                }
-            }
-        }
-    }
-
     // Item specific right click block actions are cancelled if the item has Imperishable and is at 0 durability.
     @Inject(method = "useOnBlock", at = @At("HEAD"), cancellable = true)
     private void imperishableUseOnBlock(ItemUsageContext context, CallbackInfoReturnable<ActionResult> cir) {
@@ -171,42 +156,6 @@ public abstract class ItemStackMixin {
 
                 Text brokenName = ((MutableText) cir.getReturnValue()).append(broken);
                 cir.setReturnValue(brokenName);
-            }
-        }
-    }
-
-    // Adds a message to the tooltip of an item with Imperishable at 0 durability.
-    @Inject(method = "getTooltip",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/client/item/TooltipContext;isAdvanced()Z"
-            ),
-            slice = @Slice(
-                    from = @At(
-                            value = "INVOKE",
-                            target = "Ljava/util/List;addAll(Ljava/util/Collection;)Z"
-                    ),
-                    to = @At(
-                            value = "INVOKE",
-                            target = "Lnet/minecraft/item/ItemStack;isDamaged()Z"
-                    )
-            ),
-            locals = LocalCapture.CAPTURE_FAILSOFT
-    )
-    private void imperishableBrokenTooltip(@Nullable PlayerEntity player, TooltipContext context, CallbackInfoReturnable<List<Text>> cir, List<Text> list) {
-        if (ImperishableItems.getConfig().imperishablePreventsBreaking) {
-            boolean userIsCreative = false;
-            if (player != null) {
-                if (player.isCreative()) {
-                    userIsCreative = true;
-                }
-            }
-
-            if (!userIsCreative) {
-                if (ImperishableEnchantment.isBrokenImperishable((ItemStack) (Object) this)) {
-                    list.add(LiteralText.EMPTY);
-                    list.add(new TranslatableText("item.tooltip." + ImperishableEnchantment.TRANSLATION_KEY + ".broken").formatted(Formatting.RED));
-                }
             }
         }
     }
