@@ -1,6 +1,7 @@
 package com.shaksternano.imperishableitems.common;
 
 import com.shaksternano.imperishableitems.common.config.ModConfig;
+import com.shaksternano.imperishableitems.common.event.ModEvents;
 import com.shaksternano.imperishableitems.common.registry.ModEnchantments;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
@@ -17,6 +18,7 @@ public final class ImperishableItems implements ModInitializer {
         config = AutoConfig.getConfigHolder(ModConfig.class).getConfig();
 
         ModEnchantments.registerEnchantments();
+        ModEvents.registerEvents();
     }
 
     public static ModConfig getConfig() {
