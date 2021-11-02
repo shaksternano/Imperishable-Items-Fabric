@@ -60,7 +60,7 @@ public final class ModEvents {
         UseItemCallback.EVENT.register((player, world, hand) -> {
             ItemStack stack = player.getStackInHand(hand);
             if (ImperishableItems.getConfig().imperishablePreventsBreaking) {
-                if (!player.isCreative()) {
+                if (!player.isCreative() && !player.isSpectator()) {
                     // Still allow a wearable item to be equipped even if the item is broken.
                     if (!(stack.getItem() instanceof Wearable)) {
                         if (ImperishableEnchantment.isBrokenImperishable(stack)) {
