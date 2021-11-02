@@ -1,6 +1,6 @@
 package com.shaksternano.imperishableitems.mixin.common;
 
-import com.shaksternano.imperishableitems.common.api.BlockEntityEnchantments;
+import com.shaksternano.imperishableitems.common.api.BlockEntityHelper;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
@@ -30,7 +30,7 @@ public abstract class AbstractBlockMixin {
                 // Checks if the dropped item is the same as the broken block entity, for example an Ender Chest doesn't drop an Ender Chest when broken without silk touch.
                 if (stack.isOf(state.getBlock().asItem())) {
                     BlockEntity blockEntity = builder.get(LootContextParameters.BLOCK_ENTITY);
-                    BlockEntityEnchantments.setDroppedItemStackEnchantments(blockEntity, stack);
+                    BlockEntityHelper.setDroppedItemStackEnchantments(blockEntity, stack);
                 }
             }
         }

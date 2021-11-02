@@ -10,9 +10,9 @@ import net.minecraft.nbt.NbtList;
 
 import java.util.Map;
 
-public final class BlockEntityEnchantments {
+public final class BlockEntityHelper {
 
-    private BlockEntityEnchantments() {}
+    private BlockEntityHelper() {}
 
     /**
      * Copies the enchantments and repair cost of an {@link ItemStack} to a {@link BlockEntity}.
