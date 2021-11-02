@@ -25,49 +25,52 @@ public final class ModNetworkHandler {
     public static void registerClientGlobalReceivers() {
         // Plays item break effects.
         ClientPlayNetworking.registerGlobalReceiver(EQUIPMENT_BREAK_EFFECTS, (client, handler, buf, responseSender) -> {
-            if (client.player != null) {
-                int itemId = buf.readInt();
-                ItemStack stack = new ItemStack(Item.byRawId(itemId));
+            int itemId = buf.readInt();
 
-                client.execute(() -> client.player.playEquipmentBreakEffects(stack));
-            }
+            client.execute(() -> {
+                if (client.player != null) {
+                    ItemStack stack = new ItemStack(Item.byRawId(itemId));
+                    client.player.playEquipmentBreakEffects(stack);
+                }
+            });
         });
     }
 
     public static void registerGlobalReceivers() {
         // If debug mode is on and the drop key is pressed, the item in the main hand will be enchanted with Imperishable instead of it being dropped. If the item already has Imperishable, the Imperishable enchantment will be removed from the item.
         ServerPlayNetworking.registerGlobalReceiver(DEBUG_DROP_SET_IMPERISHABLE, (server, player, handler, buf, responseSender) -> {
-            if (ImperishableItems.getConfig().debugMode) {
-                ItemStack stack = player.getMainHandStack();
-                if (!ImperishableEnchantment.hasImperishable(stack)) {
-                    server.execute(() -> stack.addEnchantment(ModEnchantments.IMPERISHABLE, ModEnchantments.IMPERISHABLE.getMaxLevel()));
-                } else {
-                    NbtList enchantmentNbtList = stack.getEnchantments();
-
-                    if (enchantmentNbtList.size() == 1) {
-                        stack.removeSubNbt("Enchantments");
-                        stack.removeSubNbt("RepairCost");
+            server.execute(() -> {
+                if (ImperishableItems.getConfig().debugMode) {
+                    ItemStack stack = player.getMainHandStack();
+                    if (!ImperishableEnchantment.hasImperishable(stack)) {
+                        stack.addEnchantment(ModEnchantments.IMPERISHABLE, ModEnchantments.IMPERISHABLE.getMaxLevel());
                     } else {
-                        Identifier imperishableId = EnchantmentHelper.getEnchantmentId(ModEnchantments.IMPERISHABLE);
+                        NbtList enchantmentNbtList = stack.getEnchantments();
 
-                        boolean removed = false;
-                        int index = 0;
-                        while (index < enchantmentNbtList.size() && !removed) {
-                            NbtCompound enchantmentNbt = enchantmentNbtList.getCompound(index);
-                            Identifier enchantmentId = EnchantmentHelper.getIdFromNbt(enchantmentNbt);
-                            if (enchantmentId != null) {
-                                if (enchantmentId.equals(imperishableId)) {
-                                    final int finalIndex = index;
-                                    server.execute(() -> enchantmentNbtList.remove(finalIndex));
-                                    removed = true;
+                        if (enchantmentNbtList.size() == 1) {
+                            stack.removeSubNbt("Enchantments");
+                            stack.removeSubNbt("RepairCost");
+                        } else {
+                            Identifier imperishableId = EnchantmentHelper.getEnchantmentId(ModEnchantments.IMPERISHABLE);
+
+                            boolean removed = false;
+                            int index = 0;
+                            while (index < enchantmentNbtList.size() && !removed) {
+                                NbtCompound enchantmentNbt = enchantmentNbtList.getCompound(index);
+                                Identifier enchantmentId = EnchantmentHelper.getIdFromNbt(enchantmentNbt);
+                                if (enchantmentId != null) {
+                                    if (enchantmentId.equals(imperishableId)) {
+                                        enchantmentNbtList.remove(index);
+                                        removed = true;
+                                    }
                                 }
-                            }
 
-                            index++;
+                                index++;
+                            }
                         }
                     }
                 }
-            }
+            });
         });
     }
 }
