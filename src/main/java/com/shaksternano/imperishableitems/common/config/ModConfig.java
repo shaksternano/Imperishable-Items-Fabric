@@ -3,6 +3,7 @@ package com.shaksternano.imperishableitems.common.config;
 import com.shaksternano.imperishableitems.common.ImperishableItems;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
+import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
 import net.minecraft.enchantment.Enchantment;
 
@@ -10,34 +11,44 @@ import net.minecraft.enchantment.Enchantment;
 @Config.Gui.Background(Config.Gui.Background.TRANSPARENT)
 public final class ModConfig implements ConfigData {
 
-    @Comment("Rarity of the Imperishable enchantment. Minecraft must be restarted for a change of this to take effect. Default value is \"RARE\".")
+    @ConfigEntry.Category("obtainingImperishable")
+    @Comment("Rarity of the Imperishable enchantment.\nMinecraft must be restarted for a\nchange of this option to take effect.\n\nOptions:\n  \"COMMON\"\n  \"UNCOMMON\"\n  \"RARE\"\n  \"VERY_RARE\"\n\nDefault value is \"RARE\".")
     public Enchantment.Rarity imperishableRarity = Enchantment.Rarity.RARE;
 
-    @Comment("Should Imperishable be a treasure enchant? Default value is false.")
+    @ConfigEntry.Category("obtainingImperishable")
+    @Comment("Should Imperishable be a treasure enchant?\n\nDefault value is false.")
     public boolean imperishableIsTreasure = false;
 
-    @Comment("Should villagers sell Imperishable enchanted books? Default value is true.")
+    @ConfigEntry.Category("obtainingImperishable")
+    @Comment("Should villagers sell Imperishable enchanted books?\n\nDefault value is true.")
     public boolean imperishableSoldByVillagers = true;
 
-    @Comment("Minimum experience level required to get imperishable in an enchanting table. Maximum level is the mini. Default value is 15.")
+    @ConfigEntry.Category("obtainingImperishable")
+    @Comment("Minimum experience level required to get\nImperishable in an enchanting table.\n\nDefault value is 15.")
     public int imperishableMinLevel = 15;
 
-    @Comment("Maximum number of levels above the minimum level to get imperishable in an enchanting table. Default value is 50.")
+    @ConfigEntry.Category("obtainingImperishable")
+    @Comment("Maximum number of levels above the minimum level\nto get Imperishable in an enchanting table.\n\nDefault value is 50.")
     public int imperishableMaxLevelsAboveMin = 50;
 
-    @Comment("Should Imperishable prevent items from despawning? Default value is true.")
+    @ConfigEntry.Category("imperishableProtection")
+    @Comment("Should Imperishable prevent items from despawning?\n\nDefault value is true.")
     public boolean imperishablePreventsDespawn = true;
 
-    @Comment("Should Imperishable prevent items from being destroyed? Default value is true.")
+    @ConfigEntry.Category("imperishableProtection")
+    @Comment("Should Imperishable prevent items from being destroyed?\n\nDefault value is true.")
     public boolean imperishableProtectsFromDamage = true;
 
-    @Comment("Should Imperishable prevent items from being destroyed in the void? Default value is true.")
+    @ConfigEntry.Category("imperishableProtection")
+    @Comment("Should Imperishable prevent items from\nbeing destroyed in the void?\n\nDefault value is true.")
     public boolean imperishableProtectsFromVoid = true;
 
-    @Comment("Should Imperishable prevent items from breaking? If true, items don't break when they reach 0 durability but rather lose any special properties, such as increased mining speed on a pickaxe, until they are repaired. Default value is true.")
+    @ConfigEntry.Category("imperishableProtection")
+    @Comment("Should Imperishable prevent items from breaking?\nIf true, items don't break when they reach\n0 durability, but rather lose any special\nproperties, such as increased mining speed\non a pickaxe, until they are repaired.\n\nDefault value is true.")
     public boolean imperishablePreventsBreaking = true;
 
-    // Allows swapping between 0 and 1 durability on an item by crouching, and adding or removing the Imperishable enchantment by pressing the drop item key.
-    @Comment("Don't change this unless you know what you're doing. Default value is false.")
+    @ConfigEntry.Gui.Excluded
+    @ConfigEntry.Category("obtainingImperishable")
+    @Comment("Debug mode.\nAllows swapping between 0 and 1 durability on an\nitem by crouching, and adding or removing\nthe Imperishable enchantment by pressing the drop item key.\nDon't change this unless you're testing this mod.\n\nDefault value is false.")
     public boolean debugMode = false;
 }
