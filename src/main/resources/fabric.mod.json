@@ -34,12 +34,13 @@
   "accessWidener": "imperishableitems.accesswidener",
 
   "depends": {
-    "fabricloader": ">=0.7.4",
-    "fabric": "*",
+    "fabricloader": ">=0.11.3",
+    "fabric": ">=0.30.0",
     "minecraft": "1.17.x",
-    "java": ">=16"
+    "java": ">=16",
+    "cloth-config2": ">=5.0.38"
   },
   "suggests": {
-    "modmenu:": "*"
+    "modmenu:": ">=2.0.14"
   }
 }
