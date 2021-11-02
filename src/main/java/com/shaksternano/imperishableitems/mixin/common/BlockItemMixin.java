@@ -1,6 +1,6 @@
 package com.shaksternano.imperishableitems.mixin.common;
 
-import com.shaksternano.imperishableitems.common.blockentity.BlockEntityHelper;
+import com.shaksternano.imperishableitems.common.api.BlockEntityHelper;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;

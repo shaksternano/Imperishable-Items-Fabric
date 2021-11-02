@@ -1,4 +1,4 @@
-package com.shaksternano.imperishableitems.common.blockentity;
+package com.shaksternano.imperishableitems.common.api;
 
 import com.shaksternano.imperishableitems.common.access.BlockEntityAccess;
 import net.minecraft.block.entity.BlockEntity;

@@ -1,7 +1,7 @@
 package com.shaksternano.imperishableitems.mixin.common;
 
 import com.shaksternano.imperishableitems.common.ImperishableItems;
-import com.shaksternano.imperishableitems.common.enchantments.ImperishableEnchantment;
+import com.shaksternano.imperishableitems.common.enchantment.ImperishableEnchantment;
 import net.minecraft.block.dispenser.DispenserBehavior;
 import net.minecraft.block.dispenser.FallibleItemDispenserBehavior;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;

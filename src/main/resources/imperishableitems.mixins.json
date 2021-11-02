@@ -13,14 +13,17 @@
     "common.ItemDispenserBehaviorMixin",
     "common.ItemEntityMixin",
     "common.ItemStackMixin",
+    "common.LivingEntityMixin",
     "common.MobEntityMixin",
     "common.PersistentProjectileEntityMixin",
+    "common.PlayerEntityMixin",
     "common.ShulkerBoxBlockMixin",
     "common.TridentEntityMixin",
     "common.TripwireBlockMixin"
   ],
   "client": [
-    "client.AnvilScreenMixin"
+    "client.AnvilScreenMixin",
+    "client.ClientPlayerEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

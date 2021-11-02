@@ -4,7 +4,11 @@
 
   "text.autoconfig.imperishableitems.title": "Imperishable Enchantment Options",
 
-  "text.autoconfig.imperishableitems.option.imperishableIsTreasure": "Is a treasure enchantment",
+  "text.autoconfig.imperishableitems.category.obtainingImperishable": "Obtaining the Imperishable enchantment",
+  "text.autoconfig.imperishableitems.category.imperishableProtection": "Imperishable enchantment protection",
+
+  "text.autoconfig.imperishableitems.option.imperishableRarity": "Rarity of the Imperishable enchantment",
+  "text.autoconfig.imperishableitems.option.imperishableIsTreasure": "Is Imperishable a treasure enchantment",
   "text.autoconfig.imperishableitems.option.imperishableSoldByVillagers": "Villagers sell Imperishable enchanted books",
   "text.autoconfig.imperishableitems.option.imperishableMinLevel": "Minimum XP level required for enchanting table",
   "text.autoconfig.imperishableitems.option.imperishableMaxLevelsAboveMin": "Maximum number of XP levels above minimum",
