@@ -1,7 +1,7 @@
 package com.shaksternano.imperishableitems.common.registry;
 
 import com.shaksternano.imperishableitems.common.ImperishableItems;
-import com.shaksternano.imperishableitems.common.enchantments.*;
+import com.shaksternano.imperishableitems.common.enchantment.*;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;

@@ -1,6 +1,6 @@
 package com.shaksternano.imperishableitems.mixin.common;
 
-import com.shaksternano.imperishableitems.common.blockentity.BlockEntityHelper;
+import com.shaksternano.imperishableitems.common.api.BlockEntityEnchantments;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.ShulkerBoxBlock;
@@ -26,6 +26,6 @@ public abstract class ShulkerBoxBlockMixin extends BlockWithEntity {
     // Sets the enchantments and repair cost of the shulker box item dropped when a shulker box with enchantments and repair cost is broken by a player in creative mode.
     @Inject(method = "onBreak", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/ItemEntity;<init>(Lnet/minecraft/world/World;DDDLnet/minecraft/item/ItemStack;)V"), locals = LocalCapture.CAPTURE_FAILSOFT)
     private void setDroppedShulkerStackEnchantments(World world, BlockPos pos, BlockState state, PlayerEntity player, CallbackInfo ci, BlockEntity blockEntity, ShulkerBoxBlockEntity shulkerBoxBlockEntity, ItemStack itemStack) {
-        BlockEntityHelper.setDroppedItemStackEnchantments(blockEntity, itemStack);
+        BlockEntityEnchantments.setDroppedItemStackEnchantments(blockEntity, itemStack);
     }
 }

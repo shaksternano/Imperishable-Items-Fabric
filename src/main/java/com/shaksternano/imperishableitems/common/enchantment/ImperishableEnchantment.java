@@ -1,4 +1,4 @@
-package com.shaksternano.imperishableitems.common.enchantments;
+package com.shaksternano.imperishableitems.common.enchantment;
 
 import com.shaksternano.imperishableitems.common.ImperishableItems;
 import com.shaksternano.imperishableitems.common.registry.ModEnchantments;
@@ -16,7 +16,7 @@ public final class ImperishableEnchantment extends Enchantment {
     public static final String TRANSLATION_KEY = ImperishableItems.MOD_ID + '.' + ENCHANTMENT_ID;
 
     public ImperishableEnchantment() {
-        super(Rarity.RARE, EnchantmentTarget.VANISHABLE, EquipmentSlot.values());
+        super(ImperishableItems.getConfig().imperishableRarity, EnchantmentTarget.VANISHABLE, EquipmentSlot.values());
     }
 
     @Override
@@ -51,7 +51,7 @@ public final class ImperishableEnchantment extends Enchantment {
 
     // Returns true if an ItemStack has the Imperishable enchantment. Returns false otherwise.
     public static boolean hasImperishable(ItemStack stack) {
-        return EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, stack) > 0;
+        return EnchantmentHelper.getLevel(ModEnchantments.IMPERISHABLE, stack) != 0;
     }
 
     // Returns true if an ItemStack is damageable, has the Imperishable enchantment, and the damage on it is more than the item's maximum damage. Returns false otherwise.

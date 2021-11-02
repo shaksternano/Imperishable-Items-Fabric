@@ -1,7 +1,7 @@
 package com.shaksternano.imperishableitems.mixin.client;
 
 import com.shaksternano.imperishableitems.common.ImperishableItems;
-import com.shaksternano.imperishableitems.common.enchantments.ImperishableEnchantment;
+import com.shaksternano.imperishableitems.common.enchantment.ImperishableEnchantment;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.screen.ingame.AnvilScreen;

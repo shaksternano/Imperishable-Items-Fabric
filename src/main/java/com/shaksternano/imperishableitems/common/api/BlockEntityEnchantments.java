@@ -1,4 +1,4 @@
-package com.shaksternano.imperishableitems.common.blockentity;
+package com.shaksternano.imperishableitems.common.api;
 
 import com.shaksternano.imperishableitems.common.access.BlockEntityAccess;
 import net.minecraft.block.entity.BlockEntity;
@@ -10,9 +10,9 @@ import net.minecraft.nbt.NbtList;
 
 import java.util.Map;
 
-public final class BlockEntityHelper {
+public final class BlockEntityEnchantments {
 
-    private BlockEntityHelper() {}
+    private BlockEntityEnchantments() {}
 
     /**
      * Copies the enchantments and repair cost of an {@link ItemStack} to a {@link BlockEntity}.

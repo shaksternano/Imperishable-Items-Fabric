@@ -1,6 +1,6 @@
 package com.shaksternano.imperishableitems.mixin.common;
 
-import com.shaksternano.imperishableitems.common.blockentity.BlockEntityHelper;
+import com.shaksternano.imperishableitems.common.api.BlockEntityEnchantments;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
@@ -28,7 +28,7 @@ public abstract class BlockItemMixin extends Item {
             if (!world.isClient && blockEntity.copyItemDataRequiresOperator() && (player == null || !player.isCreativeLevelTwoOp())) {
                 cir.setReturnValue(false);
             } else {
-                BlockEntityHelper.setBlockEntityEnchantments(blockEntity, stack);
+                BlockEntityEnchantments.setBlockEntityEnchantments(blockEntity, stack);
             }
         }
     }

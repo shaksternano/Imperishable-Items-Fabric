@@ -3,7 +3,7 @@ package com.shaksternano.imperishableitems.mixin.common;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import com.shaksternano.imperishableitems.common.ImperishableItems;
-import com.shaksternano.imperishableitems.common.enchantments.ImperishableEnchantment;
+import com.shaksternano.imperishableitems.common.enchantment.ImperishableEnchantment;
 import com.shaksternano.imperishableitems.common.network.ModNetworkHandler;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;

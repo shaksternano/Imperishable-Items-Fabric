@@ -38,4 +38,7 @@ public abstract class EntityMixin {
 
     @Inject(method = "tickInVoid", at = @At("HEAD"), cancellable = true)
     protected void imperishableInVoid(CallbackInfo ci) {}
+
+    @Inject(method = "setSneaking", at = @At("TAIL"))
+    protected void debugSneakSetDamaged(boolean sneaking, CallbackInfo ci) {}
 }
