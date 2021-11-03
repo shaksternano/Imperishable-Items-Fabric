@@ -2,7 +2,7 @@ package com.shaksternano.imperishableitems.mixin.client;
 
 import com.mojang.authlib.GameProfile;
 import com.shaksternano.imperishableitems.common.ImperishableItems;
-import com.shaksternano.imperishableitems.common.network.ModNetworkHandler;
+import com.shaksternano.imperishableitems.common.network.ModNetworking;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -29,7 +29,7 @@ public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
     private void debugDropSetImperishable(boolean entireStack, CallbackInfoReturnable<Boolean> cir) {
         if (ImperishableItems.getConfig().debugMode) {
             PacketByteBuf buf = PacketByteBufs.create();
-            ClientPlayNetworking.send(ModNetworkHandler.DEBUG_DROP_SET_IMPERISHABLE, buf);
+            ClientPlayNetworking.send(ModNetworking.DEBUG_DROP_SET_IMPERISHABLE, buf);
             cir.setReturnValue(true);
         }
     }

@@ -14,8 +14,6 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.TypedActionResult;
 
-import java.util.ArrayList;
-
 public final class ModEvents {
 
     private ModEvents() {}
@@ -29,24 +27,22 @@ public final class ModEvents {
                     boolean inserted = false;
 
                     if (context.isAdvanced()) {
-                        if (lines instanceof ArrayList<Text> arrayLines) {
-                            int index = 0;
-                            while (index < arrayLines.size() && !inserted) {
-                                Text line = arrayLines.get(index);
-                                if (line instanceof TranslatableText) {
-                                    if (((TranslatableText) line).getKey().equals("item.durability")) {
-                                        arrayLines.add(index, new TranslatableText("item.tooltip." + ImperishableEnchantment.TRANSLATION_KEY + ".broken").formatted(Formatting.RED));
-                                        arrayLines.add(index, LiteralText.EMPTY);
-                                        inserted = true;
-                                    }
+                        int index = 0;
+                        while (index < lines.size() && !inserted) {
+                            Text line = lines.get(index);
+                            if (line instanceof TranslatableText) {
+                                if (((TranslatableText) line).getKey().equals("item.durability")) {
+                                    lines.add(index, new TranslatableText("item.tooltip." + ImperishableEnchantment.TRANSLATION_KEY + ".broken").formatted(Formatting.RED));
+                                    lines.add(index, LiteralText.EMPTY);
+                                    inserted = true;
                                 }
-
-                                index++;
                             }
+
+                            index++;
                         }
                     }
 
-                    if (!context.isAdvanced() || !inserted) {
+                    if (!inserted) {
                         lines.add(LiteralText.EMPTY);
                         lines.add(new TranslatableText("item.tooltip." + ImperishableEnchantment.TRANSLATION_KEY + ".broken").formatted(Formatting.RED));
                     }

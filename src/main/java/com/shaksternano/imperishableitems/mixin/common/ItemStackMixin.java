@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import com.shaksternano.imperishableitems.common.ImperishableItems;
 import com.shaksternano.imperishableitems.common.enchantment.ImperishableEnchantment;
-import com.shaksternano.imperishableitems.common.network.ModNetworkHandler;
+import com.shaksternano.imperishableitems.common.network.ModNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.block.BlockState;
@@ -56,9 +56,7 @@ public abstract class ItemStackMixin {
         if (ImperishableItems.getConfig().imperishablePreventsBreaking) {
             if (!(getItem() instanceof ElytraItem)) {
                 if (isDamageable()) {
-                    ItemStack stack = (ItemStack) (Object) this;
-
-                    if (ImperishableEnchantment.hasImperishable(stack)) {
+                    if (ImperishableEnchantment.hasImperishable((ItemStack) (Object) this)) {
                         if (i > getMaxDamage()) {
                             setDamage(getMaxDamage());
                         } else {
@@ -67,7 +65,7 @@ public abstract class ItemStackMixin {
                                     PacketByteBuf buf = PacketByteBufs.create();
                                     int itemId = Item.getRawId(getItem());
                                     buf.writeInt(itemId);
-                                    ServerPlayNetworking.send(player, ModNetworkHandler.EQUIPMENT_BREAK_EFFECTS, buf);
+                                    ServerPlayNetworking.send(player, ModNetworking.EQUIPMENT_BREAK_EFFECTS, buf);
                                 }
                             }
 
@@ -149,8 +147,7 @@ public abstract class ItemStackMixin {
                 TranslatableText broken = new TranslatableText("item.name." + ImperishableEnchantment.TRANSLATION_KEY + ".broken");
                 broken.formatted(Formatting.RED);
 
-                Text brokenName = ((MutableText) cir.getReturnValue()).append(broken);
-                cir.setReturnValue(brokenName);
+                cir.setReturnValue(((MutableText) cir.getReturnValue()).append(broken));
             }
         }
     }
