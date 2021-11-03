@@ -14,8 +14,6 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.TypedActionResult;
 
-import java.util.ArrayList;
-
 public final class ModEvents {
 
     private ModEvents() {}

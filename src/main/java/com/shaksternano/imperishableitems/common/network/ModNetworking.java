@@ -36,39 +36,37 @@ public final class ModNetworking {
 
     public static void registerReceivers() {
         // If debug mode is on and the drop key is pressed, the item in the main hand will be enchanted with Imperishable instead of it being dropped. If the item already has Imperishable, the Imperishable enchantment will be removed from the item.
-        ServerPlayNetworking.registerGlobalReceiver(DEBUG_DROP_SET_IMPERISHABLE, (server, player, handler, buf, responseSender) -> {
-            server.execute(() -> {
-                if (ImperishableItems.getConfig().debugMode) {
-                    ItemStack stack = player.getMainHandStack();
-                    if (!ImperishableEnchantment.hasImperishable(stack)) {
-                        stack.addEnchantment(ModEnchantments.IMPERISHABLE, ModEnchantments.IMPERISHABLE.getMaxLevel());
+        ServerPlayNetworking.registerGlobalReceiver(DEBUG_DROP_SET_IMPERISHABLE, (server, player, handler, buf, responseSender) -> server.execute(() -> {
+            if (ImperishableItems.getConfig().debugMode) {
+                ItemStack stack = player.getMainHandStack();
+                if (!ImperishableEnchantment.hasImperishable(stack)) {
+                    stack.addEnchantment(ModEnchantments.IMPERISHABLE, ModEnchantments.IMPERISHABLE.getMaxLevel());
+                } else {
+                    NbtList enchantmentNbtList = stack.getEnchantments();
+
+                    if (enchantmentNbtList.size() == 1) {
+                        stack.removeSubTag("Enchantments");
+                        stack.removeSubTag("RepairCost");
                     } else {
-                        NbtList enchantmentNbtList = stack.getEnchantments();
+                        boolean removed = false;
+                        int index = 0;
 
-                        if (enchantmentNbtList.size() == 1) {
-                            stack.removeSubTag("Enchantments");
-                            stack.removeSubTag("RepairCost");
-                        } else {
-                            boolean removed = false;
-                            int index = 0;
-
-                            while (index < enchantmentNbtList.size() && !removed) {
-                                Identifier enchantmentId = Identifier.tryParse(enchantmentNbtList.getCompound(index).getString("id"));
-                                if (enchantmentId != null) {
-                                    if (enchantmentId.getNamespace().equals(ImperishableItems.MOD_ID)) {
-                                        if (enchantmentId.getPath().equals(ImperishableEnchantment.ENCHANTMENT_ID)) {
-                                            enchantmentNbtList.remove(index);
-                                            removed = true;
-                                        }
+                        while (index < enchantmentNbtList.size() && !removed) {
+                            Identifier enchantmentId = Identifier.tryParse(enchantmentNbtList.getCompound(index).getString("id"));
+                            if (enchantmentId != null) {
+                                if (enchantmentId.getNamespace().equals(ImperishableItems.MOD_ID)) {
+                                    if (enchantmentId.getPath().equals(ImperishableEnchantment.ENCHANTMENT_ID)) {
+                                        enchantmentNbtList.remove(index);
+                                        removed = true;
                                     }
                                 }
-
-                                index++;
                             }
+
+                            index++;
                         }
                     }
                 }
-            });
-        });
+            }
+        }));
     }
 }

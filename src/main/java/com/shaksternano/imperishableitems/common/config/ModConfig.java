@@ -7,6 +7,7 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
 import net.minecraft.enchantment.Enchantment;
 
+@SuppressWarnings("CanBeFinal")
 @Config(name = ImperishableItems.MOD_ID)
 @Config.Gui.Background(Config.Gui.Background.TRANSPARENT)
 public final class ModConfig implements ConfigData {
