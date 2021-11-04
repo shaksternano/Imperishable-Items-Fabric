@@ -1,6 +1,6 @@
 package com.shaksternano.imperishableitems.mixin.common;
 
-import com.shaksternano.imperishableitems.common.ImperishableItems;
+import com.shaksternano.imperishableitems.common.api.ImperishableProtection;
 import com.shaksternano.imperishableitems.common.enchantment.ImperishableEnchantment;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BeehiveBlock;
@@ -29,10 +29,10 @@ public abstract class AbstractBlockStateMixin {
     // Shears with Imperishable at 0 durability have shear specific right click block actions cancelled.
     @Inject(method = "onUse", at = @At("HEAD"), cancellable = true)
     private void imperishableShearsUseOnBlock(World world, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
-        if (ImperishableItems.getConfig().imperishablePreventsBreaking) {
-            if (!player.isCreative()) {
-                ItemStack stack = player.getStackInHand(hand);
+        ItemStack stack = player.getStackInHand(hand);
 
+        if (ImperishableProtection.isItemProtected(stack, ImperishableProtection.ProtectionType.BREAK_PROTECTION)) {
+            if (!player.isCreative()) {
                 if (stack.getItem() instanceof ShearsItem) {
                     if (getBlock() instanceof BeehiveBlock || getBlock() instanceof PumpkinBlock) {
                         if (ImperishableEnchantment.isBrokenImperishable(stack)) {

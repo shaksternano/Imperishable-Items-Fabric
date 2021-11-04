@@ -1,7 +1,7 @@
 package com.shaksternano.imperishableitems.common.event;
 
-import com.shaksternano.imperishableitems.common.ImperishableItems;
 import com.shaksternano.imperishableitems.common.enchantment.ImperishableEnchantment;
+import com.shaksternano.imperishableitems.common.api.ImperishableProtection;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
@@ -22,7 +22,7 @@ public final class ModEvents {
     public static void registerClientEvents() {
         // Adds a message to the tooltip of an item with Imperishable at 0 durability.
         ItemTooltipCallback.EVENT.register((stack, context, lines) -> {
-            if (ImperishableItems.getConfig().imperishablePreventsBreaking) {
+            if (ImperishableProtection.isItemProtected(stack, ImperishableProtection.ProtectionType.BREAK_PROTECTION)) {
                 if (ImperishableEnchantment.isBrokenImperishable(stack)) {
                     boolean inserted = false;
 
@@ -55,7 +55,7 @@ public final class ModEvents {
         // Item specific right click actions are cancelled if the item has Imperishable and is at 0 durability.
         UseItemCallback.EVENT.register((player, world, hand) -> {
             ItemStack stack = player.getStackInHand(hand);
-            if (ImperishableItems.getConfig().imperishablePreventsBreaking) {
+            if (ImperishableProtection.isItemProtected(stack, ImperishableProtection.ProtectionType.BREAK_PROTECTION)) {
                 if (!player.isCreative() && !player.isSpectator()) {
                     // Still allow a wearable item to be equipped even if the item is broken.
                     if (!(stack.getItem() instanceof Wearable)) {

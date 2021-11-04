@@ -1,6 +1,6 @@
 package com.shaksternano.imperishableitems.mixin.common;
 
-import com.shaksternano.imperishableitems.common.ImperishableItems;
+import com.shaksternano.imperishableitems.common.api.ImperishableProtection;
 import com.shaksternano.imperishableitems.common.enchantment.ImperishableEnchantment;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
@@ -25,9 +25,9 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
     @Redirect(method = "updateResult", at = @At(value = "INVOKE", target = "Lnet/minecraft/text/Text;getString()Ljava/lang/String;"))
     private String imperishableBrokenUpdateResult(Text getName) {
         String trimmedName = getName.getString();
+        ItemStack stack = input.getStack(0);
 
-        if (ImperishableItems.getConfig().imperishablePreventsBreaking) {
-            ItemStack stack = input.getStack(0);
+        if (ImperishableProtection.isItemProtected(stack, ImperishableProtection.ProtectionType.BREAK_PROTECTION)) {
             trimmedName = ImperishableEnchantment.itemNameRemoveBroken(getName, stack);
         }
 

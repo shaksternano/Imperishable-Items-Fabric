@@ -1,6 +1,6 @@
 package com.shaksternano.imperishableitems.mixin.client;
 
-import com.shaksternano.imperishableitems.common.ImperishableItems;
+import com.shaksternano.imperishableitems.common.api.ImperishableProtection;
 import com.shaksternano.imperishableitems.common.enchantment.ImperishableEnchantment;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -30,7 +30,7 @@ public abstract class AnvilScreenMixin extends ForgingScreen<AnvilScreenHandler>
     private String imperishableBrokenOnSlotUpdate(Text getName, ScreenHandler handler, int slotId, ItemStack stack) {
         String trimmedName = getName.getString();
 
-        if (ImperishableItems.getConfig().imperishablePreventsBreaking) {
+        if (ImperishableProtection.isItemProtected(stack, ImperishableProtection.ProtectionType.BREAK_PROTECTION)) {
             trimmedName = ImperishableEnchantment.itemNameRemoveBroken(getName, stack);
         }
 
@@ -41,15 +41,15 @@ public abstract class AnvilScreenMixin extends ForgingScreen<AnvilScreenHandler>
     @Redirect(method = "onRenamed", at = @At(value = "INVOKE", target = "Lnet/minecraft/text/Text;getString()Ljava/lang/String;"))
     private String imperishableBrokenOnRenamed(Text getName) {
         String trimmedName = getName.getString();
+        Slot slot = handler.getSlot(0);
 
-        if (ImperishableItems.getConfig().imperishablePreventsBreaking) {
-            Slot slot = handler.getSlot(0);
-
-            if (slot != null && slot.hasStack()) {
+        if (slot != null) {
+            if (slot.hasStack()) {
                 ItemStack stack = slot.getStack();
-                trimmedName = ImperishableEnchantment.itemNameRemoveBroken(getName, stack);
+                if (ImperishableProtection.isItemProtected(stack, ImperishableProtection.ProtectionType.BREAK_PROTECTION)) {
+                    trimmedName = ImperishableEnchantment.itemNameRemoveBroken(getName, stack);
+                }
             }
-
         }
 
         return trimmedName;

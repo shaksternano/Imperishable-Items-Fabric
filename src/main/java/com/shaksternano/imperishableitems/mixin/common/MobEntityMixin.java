@@ -1,6 +1,6 @@
 package com.shaksternano.imperishableitems.mixin.common;
 
-import com.shaksternano.imperishableitems.common.ImperishableItems;
+import com.shaksternano.imperishableitems.common.api.ImperishableProtection;
 import com.shaksternano.imperishableitems.common.enchantment.ImperishableEnchantment;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -27,10 +27,10 @@ public abstract class MobEntityMixin extends LivingEntity {
     // Shears with Imperishable at 0 durability have shear specific right click mob actions cancelled.
     @Inject(method = "interact", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/MobEntity;interactMob(Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/util/Hand;)Lnet/minecraft/util/ActionResult;"), cancellable = true)
     private void imperishableShearMob(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
-        if (ImperishableItems.getConfig().imperishablePreventsBreaking) {
-            if (!player.isCreative()) {
-                ItemStack stack = player.getStackInHand(hand);
+        ItemStack stack = player.getStackInHand(hand);
 
+        if (ImperishableProtection.isItemProtected(stack, ImperishableProtection.ProtectionType.BREAK_PROTECTION)) {
+            if (!player.isCreative()) {
                 if (stack.getItem() instanceof ShearsItem) {
                     if (this instanceof Shearable) {
                         if (ImperishableEnchantment.isBrokenImperishable(stack)) {

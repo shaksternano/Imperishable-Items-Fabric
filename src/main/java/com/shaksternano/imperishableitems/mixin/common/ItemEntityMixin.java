@@ -1,6 +1,6 @@
 package com.shaksternano.imperishableitems.mixin.common;
 
-import com.shaksternano.imperishableitems.common.ImperishableItems;
+import com.shaksternano.imperishableitems.common.api.ImperishableProtection;
 import com.shaksternano.imperishableitems.common.enchantment.ImperishableEnchantment;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.damage.DamageSource;
@@ -25,7 +25,7 @@ public abstract class ItemEntityMixin extends EntityMixin {
     // Items with Imperishable are invulnerable to all damage sources.
     @Override
     protected void damageImperishable(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
-        if (ImperishableItems.getConfig().imperishableProtectsFromDamage) {
+        if (ImperishableProtection.isItemProtected(getStack(), ImperishableProtection.ProtectionType.DAMAGE_PROTECTION)) {
             if (ImperishableEnchantment.hasImperishable(getStack())) {
                 cir.setReturnValue(true);
             }
@@ -36,7 +36,7 @@ public abstract class ItemEntityMixin extends EntityMixin {
     private void checkImperishable(CallbackInfo ci) {
         if (ImperishableEnchantment.hasImperishable(getStack())) {
             // Items with Imperishable don't despawn.
-            if (ImperishableItems.getConfig().imperishablePreventsDespawn) {
+            if (ImperishableProtection.isItemProtected(getStack(), ImperishableProtection.ProtectionType.DESPAWN_PROTECTION)) {
                 if (!world.isClient) {
                     if (itemAge >= 1) {
                         itemAge = 0;
@@ -50,7 +50,7 @@ public abstract class ItemEntityMixin extends EntityMixin {
             }
 
             // Items with Imperishable stop falling when they reach the world's minimum Y, and float up to the world's minimum Y if their Y coordinate is below the world's minimum Y.
-            if (ImperishableItems.getConfig().imperishableProtectsFromVoid) {
+            if (ImperishableProtection.isItemProtected(getStack(), ImperishableProtection.ProtectionType.VOID_PROTECTION)) {
                 if (getY() == world.getBottomY()) {
                     setVelocity(Vec3d.ZERO);
                     setPosition(getX(), world.getBottomY(), getZ());
@@ -84,7 +84,7 @@ public abstract class ItemEntityMixin extends EntityMixin {
     // Items with Imperishable don't appear on fire when in fire or lava.
     @Inject(method = "isFireImmune", at = @At("HEAD"), cancellable = true)
     private void imperishableFireImmune(CallbackInfoReturnable<Boolean> cir) {
-        if (ImperishableItems.getConfig().imperishableProtectsFromDamage) {
+        if (ImperishableProtection.isItemProtected(getStack(), ImperishableProtection.ProtectionType.DAMAGE_PROTECTION)) {
             if (ImperishableEnchantment.hasImperishable(getStack())) {
                 cir.setReturnValue(true);
             }
@@ -94,7 +94,7 @@ public abstract class ItemEntityMixin extends EntityMixin {
     // Items with Imperishable don't get removed when 64 blocks below the world's minimum Y position.
     @Override
     protected void imperishableInVoid(CallbackInfo ci) {
-        if (ImperishableItems.getConfig().imperishableProtectsFromVoid) {
+        if (ImperishableProtection.isItemProtected(getStack(), ImperishableProtection.ProtectionType.VOID_PROTECTION)) {
             if (ImperishableEnchantment.hasImperishable(getStack())) {
                 ci.cancel();
             }

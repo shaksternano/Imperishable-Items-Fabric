@@ -1,6 +1,7 @@
 package com.shaksternano.imperishableitems.common.network;
 
 import com.shaksternano.imperishableitems.common.ImperishableItems;
+import com.shaksternano.imperishableitems.common.api.ImperishableProtection;
 import com.shaksternano.imperishableitems.common.enchantment.ImperishableEnchantment;
 import com.shaksternano.imperishableitems.common.registry.ModEnchantments;
 import net.fabricmc.api.EnvType;
@@ -28,14 +29,16 @@ public final class ModNetworking {
 
             client.execute(() -> {
                 if (client.player != null) {
-                    ItemStack stack = new ItemStack(Item.byRawId(itemId));
-                    client.player.playEquipmentBreakEffects(stack);
+                    Item item = Item.byRawId(itemId);
+                    if (ImperishableProtection.isItemProtected(item, ImperishableProtection.ProtectionType.BREAK_PROTECTION)) {
+                        client.player.playEquipmentBreakEffects(new ItemStack(item));
+                    }
                 }
             });
         });
     }
 
-    public static void registerReceivers() {
+    public static void registerServerReceivers() {
         // If debug mode is on and the drop key is pressed, the item in the main hand will be enchanted with Imperishable instead of it being dropped. If the item already has Imperishable, the Imperishable enchantment will be removed from the item.
         ServerPlayNetworking.registerGlobalReceiver(DEBUG_DROP_SET_IMPERISHABLE, (server, player, handler, buf, responseSender) -> server.execute(() -> {
             if (ImperishableItems.getConfig().debugMode) {
