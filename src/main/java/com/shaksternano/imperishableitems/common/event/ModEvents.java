@@ -5,6 +5,7 @@ import com.shaksternano.imperishableitems.common.api.ImperishableProtection;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Wearable;
@@ -17,6 +18,28 @@ import net.minecraft.util.TypedActionResult;
 public final class ModEvents {
 
     private ModEvents() {}
+
+    public static void registerEvents() {
+        // Initialises the Imperishable blacklist when the world loads.
+        ServerWorldEvents.LOAD.register((server, world) -> ImperishableProtection.initBlacklists());
+
+        // Item specific right click actions are cancelled if the item has Imperishable and is at 0 durability.
+        UseItemCallback.EVENT.register((player, world, hand) -> {
+            ItemStack stack = player.getStackInHand(hand);
+            if (ImperishableProtection.isItemProtected(stack, ImperishableProtection.ProtectionType.BREAK_PROTECTION)) {
+                if (!player.isCreative() && !player.isSpectator()) {
+                    // Still allow a wearable item to be equipped even if the item is broken.
+                    if (!(stack.getItem() instanceof Wearable)) {
+                        if (ImperishableEnchantment.isBrokenImperishable(stack)) {
+                            return TypedActionResult.fail(stack);
+                        }
+                    }
+                }
+            }
+
+            return TypedActionResult.pass(stack);
+        });
+    }
 
     @Environment(EnvType.CLIENT)
     public static void registerClientEvents() {
@@ -48,25 +71,6 @@ public final class ModEvents {
                     }
                 }
             }
-        });
-    }
-
-    public static void registerEvents() {
-        // Item specific right click actions are cancelled if the item has Imperishable and is at 0 durability.
-        UseItemCallback.EVENT.register((player, world, hand) -> {
-            ItemStack stack = player.getStackInHand(hand);
-            if (ImperishableProtection.isItemProtected(stack, ImperishableProtection.ProtectionType.BREAK_PROTECTION)) {
-                if (!player.isCreative() && !player.isSpectator()) {
-                    // Still allow a wearable item to be equipped even if the item is broken.
-                    if (!(stack.getItem() instanceof Wearable)) {
-                        if (ImperishableEnchantment.isBrokenImperishable(stack)) {
-                            return TypedActionResult.fail(stack);
-                        }
-                    }
-                }
-            }
-
-            return TypedActionResult.pass(stack);
         });
     }
 }

@@ -58,7 +58,7 @@ public abstract class ItemEntityMixin extends EntityMixin {
                 } else if (getY() < world.getBottomY()) {
 
                     Vec3d velocity = getVelocity();
-                    this.setVelocity(velocity.x * 0.97D, velocity.y + velocity.y < 0.06D ? 0.5D : 0.0D, velocity.z * 0.97D);
+                    setVelocity(velocity.x * 0.97D, velocity.y + velocity.y < 0.06D ? 0.5D : 0.0D, velocity.z * 0.97D);
 
                     double x = getX() + getVelocity().x;
                     double y = getY() + getVelocity().y;

@@ -50,6 +50,6 @@ public final class ModConfig implements ConfigData {
 
     @ConfigEntry.Gui.Excluded
     @ConfigEntry.Category("obtainingImperishable")
-    @Comment("Debug mode.\nAllows swapping between 0 and 1 durability on an\nitem by crouching, and adding or removing\nthe Imperishable enchantment by pressing the drop item key.\nDon't change this unless you're testing this mod.\n\nDefault value is false.")
+    @Comment("Debug mode.\nAllows adding and removing the Imperishable\nenchantment and changing the durability of\nthe held item via the hotbar slot keys\n\nDon't change this unless you're testing this mod.\n\nDefault value is false.")
     public boolean debugMode = false;
 }

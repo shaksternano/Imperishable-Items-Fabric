@@ -4,7 +4,6 @@ import com.shaksternano.imperishableitems.common.config.ImperishableBlacklistsCo
 import com.shaksternano.imperishableitems.common.config.ModConfig;
 import com.shaksternano.imperishableitems.common.event.ModEvents;
 import com.shaksternano.imperishableitems.common.network.ModNetworking;
-import com.shaksternano.imperishableitems.common.api.ImperishableProtection;
 import com.shaksternano.imperishableitems.common.registry.ModEnchantments;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
@@ -23,7 +22,6 @@ public final class ImperishableItems implements ModInitializer {
 
         AutoConfig.register(ImperishableBlacklistsConfig.class, JanksonConfigSerializer::new);
         blacklists = AutoConfig.getConfigHolder(ImperishableBlacklistsConfig.class).getConfig();
-        ImperishableProtection.initBlacklists();
 
         ModEnchantments.registerEnchantments();
         ModNetworking.registerServerReceivers();

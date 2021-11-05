@@ -62,8 +62,8 @@ public abstract class ItemStackMixin {
                         } else {
                             if (player != null) {
                                 if (getDamage() < getMaxDamage() && i == getMaxDamage()) {
-                                    PacketByteBuf buf = PacketByteBufs.create();
                                     int itemId = Item.getRawId(getItem());
+                                    PacketByteBuf buf = PacketByteBufs.create();
                                     buf.writeInt(itemId);
                                     ServerPlayNetworking.send(player, ModNetworking.EQUIPMENT_BREAK_EFFECTS, buf);
                                 }
