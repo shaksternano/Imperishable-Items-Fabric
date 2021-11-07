@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "com.shaksternano.imperishableitems.mixin",
+  "package": "io.github.shaksternano.imperishableitems.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "common.AbstractBlockMixin",
@@ -13,17 +13,15 @@
     "common.ItemDispenserBehaviorMixin",
     "common.ItemEntityMixin",
     "common.ItemStackMixin",
-    "common.LivingEntityMixin",
     "common.MobEntityMixin",
     "common.PersistentProjectileEntityMixin",
-    "common.PlayerEntityMixin",
     "common.ShulkerBoxBlockMixin",
     "common.TridentEntityMixin",
     "common.TripwireBlockMixin"
   ],
   "client": [
-    "client.AnvilScreenMixin",
-    "client.ClientPlayerEntityMixin"
+    "client.MinecraftClientMixin",
+    "client.AnvilScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1
