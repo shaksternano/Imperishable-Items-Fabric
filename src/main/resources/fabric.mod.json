@@ -19,13 +19,13 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "io.github.shakternano.imperishableitems.common.ImperishableItems"
+      "io.github.shaksternano.imperishableitems.common.ImperishableItems"
     ],
     "client": [
-      "io.github.shakternano.imperishableitems.client.ImperishableItemsClient"
+      "io.github.shaksternano.imperishableitems.client.ImperishableItemsClient"
     ],
     "modmenu": [
-      "io.github.shakternano.imperishableitems.client.compat.ModMenuCompat"
+      "io.github.shaksternano.imperishableitems.client.compat.ModMenuCompat"
     ]
   },
   "mixins": [
