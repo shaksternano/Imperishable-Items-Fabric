@@ -56,7 +56,7 @@ public class ImperishableProtection {
         }
     }
 
-    // Returns true if the item is on the global blacklist otherwise, returns false.
+    // Returns true if the item is on the global blacklist, otherwise, returns false.
     public static boolean isItemBlacklistedGlobally(Item item) {
         return globalBlacklist.contains(item);
     }
