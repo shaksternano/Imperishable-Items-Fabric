@@ -1,4 +1,4 @@
-package io.github.shaksternano.imperishableitems.mixin.common;
+package io.github.shaksternano.imperishableitems.mixin.common.enchantment.imperishable;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.damage.DamageSource;
@@ -12,9 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Entity.class)
-public abstract class EntityMixin {
-
-    EntityMixin() {}
+abstract class EntityMixin {
 
     @Shadow public World world;
     @Shadow protected boolean onGround;

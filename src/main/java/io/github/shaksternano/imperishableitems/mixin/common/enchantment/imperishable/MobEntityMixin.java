@@ -1,40 +1,38 @@
-package io.github.shaksternano.imperishableitems.mixin.common;
+package io.github.shaksternano.imperishableitems.mixin.common.enchantment.imperishable;
 
-import io.github.shaksternano.imperishableitems.common.api.ImperishableProtection;
+import io.github.shaksternano.imperishableitems.common.util.ImperishableProtection;
 import io.github.shaksternano.imperishableitems.common.enchantment.ImperishableEnchantment;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.BeehiveBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.PumpkinBlock;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.Shearable;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShearsItem;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(AbstractBlock.AbstractBlockState.class)
-public abstract class AbstractBlockStateMixin {
+@Mixin(MobEntity.class)
+abstract class MobEntityMixin extends LivingEntity {
 
-    private AbstractBlockStateMixin() {}
+    private MobEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
+        super(entityType, world);
+    }
 
-    @Shadow public abstract Block getBlock();
-
-    // Shears with Imperishable at 0 durability have shear specific right click block actions cancelled.
-    @Inject(method = "onUse", at = @At("HEAD"), cancellable = true)
-    private void imperishableShearsUseOnBlock(World world, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
+    // Shears with Imperishable at 0 durability have shear specific right click mob actions cancelled.
+    @Inject(method = "interact", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/MobEntity;interactMob(Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/util/Hand;)Lnet/minecraft/util/ActionResult;"), cancellable = true)
+    private void imperishableShearMob(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
         ItemStack stack = player.getStackInHand(hand);
 
         if (ImperishableProtection.isItemProtected(stack, ImperishableProtection.ProtectionType.BREAK_PROTECTION)) {
             if (!player.isCreative()) {
                 if (stack.getItem() instanceof ShearsItem) {
-                    if (getBlock() instanceof BeehiveBlock || getBlock() instanceof PumpkinBlock) {
+                    if (this instanceof Shearable) {
                         if (ImperishableEnchantment.isBrokenImperishable(stack)) {
                             cir.setReturnValue(ActionResult.PASS);
                         }

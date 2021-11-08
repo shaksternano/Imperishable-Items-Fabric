@@ -1,6 +1,6 @@
-package io.github.shaksternano.imperishableitems.mixin.client;
+package io.github.shaksternano.imperishableitems.mixin.client.enchantment.imperishable;
 
-import io.github.shaksternano.imperishableitems.common.api.ImperishableProtection;
+import io.github.shaksternano.imperishableitems.common.util.ImperishableProtection;
 import io.github.shaksternano.imperishableitems.common.enchantment.ImperishableEnchantment;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Environment(EnvType.CLIENT)
 @Mixin(AnvilScreen.class)
-public abstract class AnvilScreenMixin extends ForgingScreen<AnvilScreenHandler> {
+abstract class AnvilScreenMixin extends ForgingScreen<AnvilScreenHandler> {
 
     private AnvilScreenMixin(AnvilScreenHandler handler, PlayerInventory playerInventory, Text title, Identifier texture) {
         super(handler, playerInventory, title, texture);

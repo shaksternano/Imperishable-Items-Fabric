@@ -1,6 +1,6 @@
-package io.github.shaksternano.imperishableitems.mixin.common;
+package io.github.shaksternano.imperishableitems.mixin.common.enchantment.imperishable;
 
-import io.github.shaksternano.imperishableitems.common.api.ImperishableProtection;
+import io.github.shaksternano.imperishableitems.common.util.ImperishableProtection;
 import io.github.shaksternano.imperishableitems.common.enchantment.ImperishableEnchantment;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.damage.DamageSource;
@@ -14,9 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ItemEntity.class)
-public abstract class ItemEntityMixin extends EntityMixin {
-
-    private ItemEntityMixin() {}
+abstract class ItemEntityMixin extends EntityMixin {
 
     @Shadow private int itemAge;
 

@@ -1,8 +1,8 @@
-package io.github.shaksternano.imperishableitems.mixin.common;
+package io.github.shaksternano.imperishableitems.mixin.common.enchantment.imperishable;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
-import io.github.shaksternano.imperishableitems.common.api.ImperishableProtection;
+import io.github.shaksternano.imperishableitems.common.util.ImperishableProtection;
 import io.github.shaksternano.imperishableitems.common.enchantment.ImperishableEnchantment;
 import io.github.shaksternano.imperishableitems.common.network.ModNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
@@ -36,9 +36,7 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import java.util.Random;
 
 @Mixin(ItemStack.class)
-public abstract class ItemStackMixin {
-
-    private ItemStackMixin() {}
+abstract class ItemStackMixin {
 
     @Shadow public abstract Item getItem();
 

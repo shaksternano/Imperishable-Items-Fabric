@@ -1,6 +1,6 @@
-package io.github.shaksternano.imperishableitems.mixin.common;
+package io.github.shaksternano.imperishableitems.mixin.common.enchantment.imperishable;
 
-import io.github.shaksternano.imperishableitems.common.api.ImperishableProtection;
+import io.github.shaksternano.imperishableitems.common.util.ImperishableProtection;
 import io.github.shaksternano.imperishableitems.common.enchantment.ImperishableEnchantment;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(AnvilScreenHandler.class)
-public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
+abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
 
     private AnvilScreenHandlerMixin(@Nullable ScreenHandlerType<?> type, int syncId, PlayerInventory playerInventory, ScreenHandlerContext context) {
         super(type, syncId, playerInventory, context);

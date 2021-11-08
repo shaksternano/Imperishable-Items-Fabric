@@ -1,6 +1,6 @@
-package io.github.shaksternano.imperishableitems.mixin.common;
+package io.github.shaksternano.imperishableitems.mixin.common.util;
 
-import io.github.shaksternano.imperishableitems.common.api.BlockEntityHelper;
+import io.github.shaksternano.imperishableitems.common.util.BlockEntityHelper;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(BlockItem.class)
-public abstract class BlockItemMixin extends Item {
+abstract class BlockItemMixin extends Item {
 
     private BlockItemMixin(Settings settings) {
         super(settings);

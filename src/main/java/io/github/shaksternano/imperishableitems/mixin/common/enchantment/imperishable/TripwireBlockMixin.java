@@ -1,6 +1,6 @@
-package io.github.shaksternano.imperishableitems.mixin.common;
+package io.github.shaksternano.imperishableitems.mixin.common.enchantment.imperishable;
 
-import io.github.shaksternano.imperishableitems.common.api.ImperishableProtection;
+import io.github.shaksternano.imperishableitems.common.util.ImperishableProtection;
 import io.github.shaksternano.imperishableitems.common.enchantment.ImperishableEnchantment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(TripwireBlock.class)
-public abstract class TripwireBlockMixin extends Block {
+abstract class TripwireBlockMixin extends Block {
 
     private TripwireBlockMixin(Settings settings) {
         super(settings);

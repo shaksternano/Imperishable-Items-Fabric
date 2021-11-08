@@ -1,6 +1,6 @@
-package io.github.shaksternano.imperishableitems.mixin.common;
+package io.github.shaksternano.imperishableitems.mixin.common.util;
 
-import io.github.shaksternano.imperishableitems.common.api.BlockEntityHelper;
+import io.github.shaksternano.imperishableitems.common.util.BlockEntityHelper;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.ShulkerBoxBlock;
@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(ShulkerBoxBlock.class)
-public abstract class ShulkerBoxBlockMixin extends BlockWithEntity {
+abstract class ShulkerBoxBlockMixin extends BlockWithEntity {
 
     private ShulkerBoxBlockMixin(Settings settings) {
         super(settings);

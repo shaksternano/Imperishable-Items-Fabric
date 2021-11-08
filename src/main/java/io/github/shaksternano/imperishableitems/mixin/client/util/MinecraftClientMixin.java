@@ -1,4 +1,4 @@
-package io.github.shaksternano.imperishableitems.mixin.client;
+package io.github.shaksternano.imperishableitems.mixin.client.util;
 
 import io.github.shaksternano.imperishableitems.common.ImperishableItems;
 import io.github.shaksternano.imperishableitems.common.network.ModNetworking;
@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Environment(EnvType.CLIENT)
 @Mixin(MinecraftClient.class)
-public abstract class MinecraftClientMixin extends ReentrantThreadExecutor<Runnable> implements SnooperListener, WindowEventHandler {
+abstract class MinecraftClientMixin extends ReentrantThreadExecutor<Runnable> implements SnooperListener, WindowEventHandler {
 
     private MinecraftClientMixin(String string) {
         super(string);

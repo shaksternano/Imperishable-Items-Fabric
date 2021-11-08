@@ -1,6 +1,6 @@
-package io.github.shaksternano.imperishableitems.mixin.common;
+package io.github.shaksternano.imperishableitems.mixin.common.util;
 
-import io.github.shaksternano.imperishableitems.common.api.BlockEntityHelper;
+import io.github.shaksternano.imperishableitems.common.util.BlockEntityHelper;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
@@ -16,9 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.List;
 
 @Mixin(AbstractBlock.class)
-public abstract class AbstractBlockMixin {
-
-    private AbstractBlockMixin() {}
+abstract class AbstractBlockMixin {
 
     // Block entities that have enchantments retain those enchantments when broken.
     @Inject(method = "getDroppedStacks", at = @At("TAIL"))
