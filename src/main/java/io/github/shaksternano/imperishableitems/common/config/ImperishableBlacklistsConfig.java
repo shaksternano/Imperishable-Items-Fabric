@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Config(name = ImperishableItems.MOD_ID + "blacklists")
-public class ImperishableBlacklistsConfig implements ConfigData {
+public final class ImperishableBlacklistsConfig implements ConfigData {
 
     @Comment("An item won't be protected by Imperishable at all if that item's ID is in this list, for example \"minecraft:stone\".")
     public final List<String> globalBlacklist = new ArrayList<>();
