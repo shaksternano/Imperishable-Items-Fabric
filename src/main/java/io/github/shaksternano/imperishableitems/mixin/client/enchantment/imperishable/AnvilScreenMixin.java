@@ -19,9 +19,9 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Environment(EnvType.CLIENT)
 @Mixin(AnvilScreen.class)
-public abstract class AnvilScreenMixin extends ForgingScreen<AnvilScreenHandler> {
+abstract class AnvilScreenMixin extends ForgingScreen<AnvilScreenHandler> {
 
-    private AnvilScreenMixin(AnvilScreenHandler handler, PlayerInventory playerInventory, Text title, Identifier texture) {
+    public AnvilScreenMixin(AnvilScreenHandler handler, PlayerInventory playerInventory, Text title, Identifier texture) {
         super(handler, playerInventory, title, texture);
     }
 

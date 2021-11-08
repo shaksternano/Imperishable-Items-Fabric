@@ -17,7 +17,7 @@ import java.util.Map;
 @Mixin(BucketItem.class)
 abstract class BucketItemMixin extends Item implements FluidModificationItem {
 
-    private BucketItemMixin(Settings settings) {
+    public BucketItemMixin(Settings settings) {
         super(settings);
     }
 

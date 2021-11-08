@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(AnvilScreenHandler.class)
 abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
 
-    private AnvilScreenHandlerMixin(@Nullable ScreenHandlerType<?> type, int syncId, PlayerInventory playerInventory, ScreenHandlerContext context) {
+    public AnvilScreenHandlerMixin(@Nullable ScreenHandlerType<?> type, int syncId, PlayerInventory playerInventory, ScreenHandlerContext context) {
         super(type, syncId, playerInventory, context);
     }
 

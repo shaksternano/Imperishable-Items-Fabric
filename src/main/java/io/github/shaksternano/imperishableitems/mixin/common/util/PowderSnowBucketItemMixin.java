@@ -14,7 +14,7 @@ import java.util.Map;
 @Mixin(PowderSnowBucketItem.class)
 abstract class PowderSnowBucketItemMixin extends BlockItem implements FluidModificationItem {
 
-    private PowderSnowBucketItemMixin(Block block, Settings settings) {
+    public PowderSnowBucketItemMixin(Block block, Settings settings) {
         super(block, settings);
     }
 
