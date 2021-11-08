@@ -30,7 +30,7 @@ abstract class BucketItemMixin extends Item implements FluidModificationItem {
     }
 
     // Buckets retain their enchantments when picking up fluids.
-    @Inject(method = "use", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemUsage;exchangeStack(Lnet/minecraft/item/ItemStack;Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/item/ItemStack;)Lnet/minecraft/item/ItemStack;"), locals = LocalCapture.CAPTURE_FAILSOFT)
+    @Inject(method = "use", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isEmpty()Z", shift = At.Shift.AFTER), locals = LocalCapture.CAPTURE_FAILSOFT)
     private void pickupRetainEnchantments(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir, ItemStack itemStack, BlockHitResult blockHitResult, BlockPos blockPos, BlockPos blockPos2, BlockState blockState, FluidDrainable fluidDrainable, ItemStack itemStack2) {
         if (itemStack.hasEnchantments()) {
             Map<Enchantment, Integer> enchantments = EnchantmentHelper.get(itemStack);

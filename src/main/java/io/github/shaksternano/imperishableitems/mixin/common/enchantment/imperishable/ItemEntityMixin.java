@@ -16,8 +16,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(ItemEntity.class)
 abstract class ItemEntityMixin extends EntityMixin {
 
-    private ItemEntityMixin() {}
-
     @Shadow private int itemAge;
 
     @Shadow public abstract ItemStack getStack();

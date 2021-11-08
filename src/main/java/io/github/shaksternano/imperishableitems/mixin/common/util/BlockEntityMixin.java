@@ -13,8 +13,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(BlockEntity.class)
 abstract class BlockEntityMixin implements BlockEntityAccess {
 
-    private BlockEntityMixin() {}
-
     private NbtElement enchantments;
     private Integer repairCost;
 

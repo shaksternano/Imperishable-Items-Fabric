@@ -16,8 +16,6 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(ItemDispenserBehavior.class)
 abstract class ItemDispenserBehaviorMixin implements DispenserBehavior {
 
-    private ItemDispenserBehaviorMixin() {}
-
     @Shadow protected abstract ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack);
 
     // Dispensing an item is cancelled if that item has Imperishable and is at 0 durability.

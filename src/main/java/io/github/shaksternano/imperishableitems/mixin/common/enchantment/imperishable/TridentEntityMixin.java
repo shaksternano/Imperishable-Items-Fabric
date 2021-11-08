@@ -14,8 +14,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(TridentEntity.class)
 abstract class TridentEntityMixin extends PersistentProjectileEntityMixin {
 
-    private TridentEntityMixin() {}
-
     @Shadow private ItemStack tridentStack;
 
     // Tridents with Imperishable stop falling when they reach the world's minimum Y.

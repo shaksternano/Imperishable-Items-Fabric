@@ -22,8 +22,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(AbstractBlock.AbstractBlockState.class)
 abstract class AbstractBlockStateMixin {
 
-    private AbstractBlockStateMixin() {}
-
     @Shadow public abstract Block getBlock();
 
     // Shears with Imperishable at 0 durability have shear specific right click block actions cancelled.

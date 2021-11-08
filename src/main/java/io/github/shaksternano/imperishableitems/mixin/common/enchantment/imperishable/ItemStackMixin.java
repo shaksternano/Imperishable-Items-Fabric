@@ -38,8 +38,6 @@ import java.util.Random;
 @Mixin(ItemStack.class)
 abstract class ItemStackMixin {
 
-    private ItemStackMixin() {}
-
     @Shadow public abstract Item getItem();
 
     @Shadow public abstract boolean isDamageable();
