@@ -1,6 +1,6 @@
-package io.github.shaksternano.imperishableitems.mixin.client;
+package io.github.shaksternano.imperishableitems.mixin.client.enchantment.imperishable;
 
-import io.github.shaksternano.imperishableitems.common.api.ImperishableProtection;
+import io.github.shaksternano.imperishableitems.common.util.ImperishableProtection;
 import io.github.shaksternano.imperishableitems.common.enchantment.ImperishableEnchantment;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

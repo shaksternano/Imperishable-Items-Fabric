@@ -1,4 +1,4 @@
-package io.github.shaksternano.imperishableitems.common.api;
+package io.github.shaksternano.imperishableitems.common.util;
 
 import io.github.shaksternano.imperishableitems.common.ImperishableItems;
 import net.minecraft.item.Item;

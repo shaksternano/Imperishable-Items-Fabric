@@ -1,4 +1,4 @@
-package io.github.shaksternano.imperishableitems.mixin.client;
+package io.github.shaksternano.imperishableitems.mixin.client.util;
 
 import io.github.shaksternano.imperishableitems.common.ImperishableItems;
 import io.github.shaksternano.imperishableitems.common.network.ModNetworking;

@@ -1,8 +1,8 @@
 package io.github.shaksternano.imperishableitems.common.enchantment;
 
 import io.github.shaksternano.imperishableitems.common.ImperishableItems;
-import io.github.shaksternano.imperishableitems.common.api.ImperishableProtection;
 import io.github.shaksternano.imperishableitems.common.registry.ModEnchantments;
+import io.github.shaksternano.imperishableitems.common.util.ImperishableProtection;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentTarget;

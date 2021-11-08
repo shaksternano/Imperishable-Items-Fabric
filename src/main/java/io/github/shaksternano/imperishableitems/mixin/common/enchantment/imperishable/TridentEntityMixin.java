@@ -1,7 +1,7 @@
-package io.github.shaksternano.imperishableitems.mixin.common;
+package io.github.shaksternano.imperishableitems.mixin.common.enchantment.imperishable;
 
-import io.github.shaksternano.imperishableitems.common.api.ImperishableProtection;
 import io.github.shaksternano.imperishableitems.common.enchantment.ImperishableEnchantment;
+import io.github.shaksternano.imperishableitems.common.util.ImperishableProtection;
 import net.minecraft.entity.projectile.TridentEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.Vec3d;
@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(TridentEntity.class)
-public abstract class TridentEntityMixin extends PersistentProjectileEntityMixin {
+abstract class TridentEntityMixin extends PersistentProjectileEntityMixin {
 
     private TridentEntityMixin() {}
 

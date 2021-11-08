@@ -1,4 +1,4 @@
-package io.github.shaksternano.imperishableitems.mixin.common;
+package io.github.shaksternano.imperishableitems.mixin.common.util;
 
 import io.github.shaksternano.imperishableitems.common.api.BlockEntityHelper;
 import net.minecraft.block.AbstractBlock;
@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.List;
 
 @Mixin(AbstractBlock.class)
-public abstract class AbstractBlockMixin {
+abstract class AbstractBlockMixin {
 
     private AbstractBlockMixin() {}
 

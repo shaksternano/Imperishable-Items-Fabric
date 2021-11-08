@@ -1,7 +1,7 @@
 package io.github.shaksternano.imperishableitems.common.event;
 
 import io.github.shaksternano.imperishableitems.common.enchantment.ImperishableEnchantment;
-import io.github.shaksternano.imperishableitems.common.api.ImperishableProtection;
+import io.github.shaksternano.imperishableitems.common.util.ImperishableProtection;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;

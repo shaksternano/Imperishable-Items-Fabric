@@ -1,7 +1,7 @@
-package io.github.shaksternano.imperishableitems.mixin.common;
+package io.github.shaksternano.imperishableitems.mixin.common.enchantment.imperishable;
 
-import io.github.shaksternano.imperishableitems.common.api.ImperishableProtection;
 import io.github.shaksternano.imperishableitems.common.enchantment.ImperishableEnchantment;
+import io.github.shaksternano.imperishableitems.common.util.ImperishableProtection;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.Shearable;
@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(MobEntity.class)
-public abstract class MobEntityMixin extends LivingEntity {
+abstract class MobEntityMixin extends LivingEntity {
 
     private MobEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);

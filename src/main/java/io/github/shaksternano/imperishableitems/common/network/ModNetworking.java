@@ -1,9 +1,9 @@
 package io.github.shaksternano.imperishableitems.common.network;
 
 import io.github.shaksternano.imperishableitems.common.ImperishableItems;
-import io.github.shaksternano.imperishableitems.common.api.ImperishableProtection;
 import io.github.shaksternano.imperishableitems.common.enchantment.ImperishableEnchantment;
 import io.github.shaksternano.imperishableitems.common.registry.ModEnchantments;
+import io.github.shaksternano.imperishableitems.common.util.ImperishableProtection;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;

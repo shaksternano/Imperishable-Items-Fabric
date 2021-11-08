@@ -1,7 +1,7 @@
-package io.github.shaksternano.imperishableitems.mixin.common;
+package io.github.shaksternano.imperishableitems.mixin.common.enchantment.imperishable;
 
-import io.github.shaksternano.imperishableitems.common.api.ImperishableProtection;
 import io.github.shaksternano.imperishableitems.common.enchantment.ImperishableEnchantment;
+import io.github.shaksternano.imperishableitems.common.util.ImperishableProtection;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BeehiveBlock;
 import net.minecraft.block.Block;
@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(AbstractBlock.AbstractBlockState.class)
-public abstract class AbstractBlockStateMixin {
+abstract class AbstractBlockStateMixin {
 
     private AbstractBlockStateMixin() {}
 

@@ -1,11 +1,11 @@
-package io.github.shaksternano.imperishableitems.mixin.common;
+package io.github.shaksternano.imperishableitems.mixin.common.enchantment.imperishable;
 
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(PersistentProjectileEntity.class)
-public abstract class PersistentProjectileEntityMixin extends EntityMixin {
+abstract class PersistentProjectileEntityMixin extends EntityMixin {
 
     PersistentProjectileEntityMixin() {}
 

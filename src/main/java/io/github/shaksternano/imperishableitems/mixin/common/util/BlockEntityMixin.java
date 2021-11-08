@@ -1,4 +1,4 @@
-package io.github.shaksternano.imperishableitems.mixin.common;
+package io.github.shaksternano.imperishableitems.mixin.common.util;
 
 import io.github.shaksternano.imperishableitems.common.access.BlockEntityAccess;
 import net.minecraft.block.entity.BlockEntity;
@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(BlockEntity.class)
-public abstract class BlockEntityMixin implements BlockEntityAccess {
+abstract class BlockEntityMixin implements BlockEntityAccess {
 
     private BlockEntityMixin() {}
 

@@ -1,7 +1,7 @@
-package io.github.shaksternano.imperishableitems.mixin.common;
+package io.github.shaksternano.imperishableitems.mixin.common.enchantment.imperishable;
 
-import io.github.shaksternano.imperishableitems.common.api.ImperishableProtection;
 import io.github.shaksternano.imperishableitems.common.enchantment.ImperishableEnchantment;
+import io.github.shaksternano.imperishableitems.common.util.ImperishableProtection;
 import net.minecraft.block.dispenser.DispenserBehavior;
 import net.minecraft.block.dispenser.FallibleItemDispenserBehavior;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(ItemDispenserBehavior.class)
-public abstract class ItemDispenserBehaviorMixin implements DispenserBehavior {
+abstract class ItemDispenserBehaviorMixin implements DispenserBehavior {
 
     private ItemDispenserBehaviorMixin() {}
 
