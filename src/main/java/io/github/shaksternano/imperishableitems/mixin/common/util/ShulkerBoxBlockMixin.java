@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 @Mixin(ShulkerBoxBlock.class)
 abstract class ShulkerBoxBlockMixin extends BlockWithEntity {
 
-    private ShulkerBoxBlockMixin(Settings settings) {
+    protected ShulkerBoxBlockMixin(Settings settings) {
         super(settings);
     }
 

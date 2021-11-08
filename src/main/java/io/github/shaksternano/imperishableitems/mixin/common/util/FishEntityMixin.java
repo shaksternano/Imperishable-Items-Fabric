@@ -21,7 +21,7 @@ import java.util.Map;
 @Mixin(FishEntity.class)
 abstract class FishEntityMixin extends WaterCreatureEntity {
 
-    private FishEntityMixin(EntityType<? extends WaterCreatureEntity> entityType, World world) {
+    protected FishEntityMixin(EntityType<? extends WaterCreatureEntity> entityType, World world) {
         super(entityType, world);
     }
 

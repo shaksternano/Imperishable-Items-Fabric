@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(TripwireBlock.class)
 abstract class TripwireBlockMixin extends Block {
 
-    private TripwireBlockMixin(Settings settings) {
+    public TripwireBlockMixin(Settings settings) {
         super(settings);
     }
 

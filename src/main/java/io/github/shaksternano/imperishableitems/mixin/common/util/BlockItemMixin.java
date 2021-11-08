@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(BlockItem.class)
 abstract class BlockItemMixin extends Item {
 
-    private BlockItemMixin(Settings settings) {
+    public BlockItemMixin(Settings settings) {
         super(settings);
     }
 

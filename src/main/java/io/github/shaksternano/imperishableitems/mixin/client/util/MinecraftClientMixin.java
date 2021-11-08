@@ -24,7 +24,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(MinecraftClient.class)
 abstract class MinecraftClientMixin extends ReentrantThreadExecutor<Runnable> implements SnooperListener, WindowEventHandler {
 
-    private MinecraftClientMixin(String string) {
+    public MinecraftClientMixin(String string) {
         super(string);
     }
 
