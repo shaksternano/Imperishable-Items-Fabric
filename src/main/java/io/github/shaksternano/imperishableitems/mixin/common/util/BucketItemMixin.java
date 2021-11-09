@@ -22,7 +22,7 @@ abstract class BucketItemMixin extends Item {
 
     // Buckets retain their enchantments when placing fluids.
     @Inject(method = "getEmptiedStack", at = @At("RETURN"), cancellable = true)
-    private void placeRetainEnchantments(ItemStack stack, PlayerEntity player, CallbackInfoReturnable<ItemStack> cir) {
+    private void placeTransferEnchantments(ItemStack stack, PlayerEntity player, CallbackInfoReturnable<ItemStack> cir) {
         if (!player.abilities.creativeMode) {
             if (stack.hasEnchantments()) {
                 Map<Enchantment, Integer> enchantments = EnchantmentHelper.get(stack);

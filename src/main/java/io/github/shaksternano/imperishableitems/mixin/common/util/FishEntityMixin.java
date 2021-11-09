@@ -27,7 +27,7 @@ abstract class FishEntityMixin extends WaterCreatureEntity {
 
     // Buckets retain their enchantments when picking up fish.
     @Inject(method = "interactMob", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/passive/FishEntity;copyDataToStack(Lnet/minecraft/item/ItemStack;)V"), locals = LocalCapture.CAPTURE_FAILSOFT)
-    private void bucketRetainEnchantments(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResult> cir, ItemStack itemStack, ItemStack itemStack2) {
+    private void bucketTransferEnchantments(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResult> cir, ItemStack itemStack, ItemStack itemStack2) {
         if (itemStack.hasEnchantments()) {
             Map<Enchantment, Integer> enchantments = EnchantmentHelper.get(itemStack);
             EnchantmentHelper.set(enchantments, itemStack2);

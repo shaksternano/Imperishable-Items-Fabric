@@ -17,7 +17,7 @@ abstract class ItemUsageMixin {
 
     // The enchantments of the input ItemStack are copied to the output ItemStack.
     @Inject(method = "method_30270", at = @At("HEAD"))
-    private static void retainEnchantments(ItemStack itemStack, PlayerEntity playerEntity, ItemStack itemStack2, boolean bl, CallbackInfoReturnable<ItemStack> cir) {
+    private static void transferEnchantments(ItemStack itemStack, PlayerEntity playerEntity, ItemStack itemStack2, boolean bl, CallbackInfoReturnable<ItemStack> cir) {
         if (!itemStack.isEmpty()) {
             if (!itemStack2.isEmpty()) {
                 if (itemStack.hasEnchantments()) {

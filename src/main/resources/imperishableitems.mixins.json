@@ -18,6 +18,7 @@
     "common.util.BlockEntityMixin",
     "common.util.BlockItemMixin",
     "common.util.BucketItemMixin",
+    "common.util.CauldronBlockMixin",
     "common.util.FishEntityMixin",
     "common.util.ItemUsageMixin",
     "common.util.ShulkerBoxBlockMixin"
