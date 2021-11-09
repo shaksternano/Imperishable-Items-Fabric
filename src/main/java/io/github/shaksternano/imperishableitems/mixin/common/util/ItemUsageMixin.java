@@ -1,5 +1,6 @@
 package io.github.shaksternano.imperishableitems.mixin.common.util;
 
+import io.github.shaksternano.imperishableitems.common.ImperishableItems;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
@@ -18,11 +19,13 @@ abstract class ItemUsageMixin {
     // The enchantments of the input ItemStack are copied to the output ItemStack.
     @Inject(method = "method_30270", at = @At("HEAD"))
     private static void transferEnchantments(ItemStack itemStack, PlayerEntity playerEntity, ItemStack itemStack2, boolean bl, CallbackInfoReturnable<ItemStack> cir) {
-        if (!itemStack.isEmpty()) {
-            if (!itemStack2.isEmpty()) {
-                if (itemStack.hasEnchantments()) {
-                    Map<Enchantment, Integer> enchantments = EnchantmentHelper.get(itemStack);
-                    EnchantmentHelper.set(enchantments, itemStack2);
+        if (ImperishableItems.getConfig().retainEnchantmentsMoreOften) {
+            if (!itemStack.isEmpty()) {
+                if (!itemStack2.isEmpty()) {
+                    if (itemStack.hasEnchantments()) {
+                        Map<Enchantment, Integer> enchantments = EnchantmentHelper.get(itemStack);
+                        EnchantmentHelper.set(enchantments, itemStack2);
+                    }
                 }
             }
         }

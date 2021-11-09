@@ -1,5 +1,6 @@
 package io.github.shaksternano.imperishableitems.mixin.common.util;
 
+import io.github.shaksternano.imperishableitems.common.ImperishableItems;
 import io.github.shaksternano.imperishableitems.common.access.BlockEntityAccess;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -20,25 +21,29 @@ abstract class BlockEntityMixin implements BlockEntityAccess {
     // Adds enchantments and repair cost to NBT, for example this will allow the enchantments and repair cost to be shown when the /data command is used.
     @Inject(method = "writeNbt", at = @At("TAIL"))
     private void getEnchantmentsForNbt(NbtCompound nbt, CallbackInfoReturnable<NbtCompound> cir) {
-        if (enchantments != null) {
-            nbt.put("Enchantments", enchantments);
-        }
+        if (ImperishableItems.getConfig().blockEntitiesStoreEnchantments) {
+            if (enchantments != null) {
+                nbt.put("Enchantments", enchantments);
+            }
 
-        if (repairCost != null) {
-            nbt.putInt("RepairCost", repairCost);
+            if (repairCost != null) {
+                nbt.putInt("RepairCost", repairCost);
+            }
         }
     }
 
     // Sets the enchantments and repair cost from NBT, for example when the enchantments and repair cost are specified when using the /setblock command.
     @Inject(method = "fromTag", at = @At("TAIL"))
     private void setEnchantmentsFromNbt(BlockState state, NbtCompound tag, CallbackInfo ci) {
-        NbtElement enchantments = tag.get("Enchantments");
-        if (enchantments != null) {
-            this.enchantments = enchantments.copy();
-        }
+        if (ImperishableItems.getConfig().blockEntitiesStoreEnchantments) {
+            NbtElement enchantments = tag.get("Enchantments");
+            if (enchantments != null) {
+                this.enchantments = enchantments.copy();
+            }
 
-        if (tag.contains("RepairCost", 3)) {
-            repairCost = tag.getInt("RepairCost");
+            if (tag.contains("RepairCost", 3)) {
+                repairCost = tag.getInt("RepairCost");
+            }
         }
     }
 
