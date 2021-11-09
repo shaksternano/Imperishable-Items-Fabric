@@ -28,6 +28,7 @@ public abstract class CauldronBlockMixin extends Block {
         super(settings);
     }
 
+    // Fluid containers retain their enchantments when placing or picking up fluids from a cauldron.
     @ModifyArgs(method = "onUse", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;setStackInHand(Lnet/minecraft/util/Hand;Lnet/minecraft/item/ItemStack;)V"))
     private void setStackTransferEnchantments(Args args, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         ItemStack inputStack = player.getStackInHand(hand);
@@ -36,6 +37,7 @@ public abstract class CauldronBlockMixin extends Block {
         transferEnchantments(inputStack, outputStack);
     }
 
+    // Checks if the new ItemStack that has enchantments can be inserted into the player's inventory.
     @ModifyArgs(method = "onUse", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerInventory;insertStack(Lnet/minecraft/item/ItemStack;)Z"))
     private void insertStackTransferEnchantments(Args args, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         ItemStack inputStack = player.getStackInHand(hand);
@@ -44,6 +46,7 @@ public abstract class CauldronBlockMixin extends Block {
         transferEnchantments(inputStack, outputStack);
     }
 
+    // Dropped fluid containers retain their enchantments when placing or picking up fluids from a cauldron.
     @ModifyArgs(method = "onUse", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;dropItem(Lnet/minecraft/item/ItemStack;Z)Lnet/minecraft/entity/ItemEntity;"))
     private void dropItemTransferEnchantments(Args args, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         ItemStack inputStack = player.getStackInHand(hand);
@@ -52,6 +55,7 @@ public abstract class CauldronBlockMixin extends Block {
         transferEnchantments(inputStack, outputStack);
     }
 
+    // Transfers the enchantments from one item to another if the receiving item is a bucket, potion, or a bottle.
     private static void transferEnchantments(ItemStack inputStack, ItemStack outputStack) {
         if (inputStack.hasEnchantments()) {
             if (outputStack.getItem() instanceof BucketItem ||  outputStack.getItem() instanceof PotionItem || outputStack.getItem() instanceof GlassBottleItem) {
