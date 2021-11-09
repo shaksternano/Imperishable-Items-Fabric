@@ -48,16 +48,16 @@ public final class ModConfig implements ConfigData {
     @Comment("Should Imperishable prevent items from breaking?\nIf true, items don't break when they reach\n0 durability, but rather lose any special\nproperties, such as increased mining speed\non a pickaxe, until they are repaired.\n\nDefault value is true.")
     public boolean imperishablePreventsBreaking = true;
 
-    @ConfigEntry.Category("misc")
+    @ConfigEntry.Category("miscellaneous")
     @Comment("Block entities keep enchantments when\nplaced and picked back up.\n\nDefault value is true.")
     public boolean blockEntitiesStoreEnchantments = true;
 
-    @ConfigEntry.Category("misc")
+    @ConfigEntry.Category("miscellaneous")
     @Comment("Enchantments are retained in more situations.\n\nDefault value is true.")
-    public boolean moreRetainEnchantments = true;
+    public boolean retainEnchantmentsMoreOften = true;
 
     @ConfigEntry.Gui.Excluded
-    @ConfigEntry.Category("misc")
+    @ConfigEntry.Category("miscellaneous")
     @Comment("Debug mode.\nAllows adding and removing the Imperishable\nenchantment and changing the durability of\nthe held item via the hotbar slot keys\n\nDon't change this unless you're testing this mod.\n\nDefault value is false.")
     public boolean debugMode = false;
 }

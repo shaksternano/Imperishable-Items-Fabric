@@ -23,7 +23,7 @@ abstract class PowderSnowBucketItemMixin extends BlockItem implements FluidModif
     @SuppressWarnings("ConstantConditions")
     @ModifyArgs(method = "useOnBlock", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;setStackInHand(Lnet/minecraft/util/Hand;Lnet/minecraft/item/ItemStack;)V"))
     private void placeTransferEnchantments(Args args, ItemUsageContext context) {
-        if (ImperishableItems.getConfig().moreRetainEnchantments) {
+        if (ImperishableItems.getConfig().retainEnchantmentsMoreOften) {
             ItemStack stack = context.getPlayer().getStackInHand(context.getHand());
             if (stack.hasEnchantments()) {
                 ItemStack getDefaultStack = args.get(1);
