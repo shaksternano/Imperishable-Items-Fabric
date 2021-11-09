@@ -6,6 +6,7 @@
 
   "text.autoconfig.imperishableitems.category.obtainingImperishable": "Obtaining the Imperishable enchantment",
   "text.autoconfig.imperishableitems.category.imperishableProtection": "Imperishable enchantment protection",
+  "text.autoconfig.imperishableitems.category.misc": "Miscellaneous",
 
   "text.autoconfig.imperishableitems.option.imperishableRarity": "Rarity of the Imperishable enchantment",
   "text.autoconfig.imperishableitems.option.imperishableIsTreasure": "Is Imperishable a treasure enchantment",
@@ -17,6 +18,9 @@
   "text.autoconfig.imperishableitems.option.imperishableProtectsFromDamage": "Prevents items from being destroyed",
   "text.autoconfig.imperishableitems.option.imperishableProtectsFromVoid": "Protects items from the void",
   "text.autoconfig.imperishableitems.option.imperishablePreventsBreaking": "Prevents tools from breaking",
+
+  "text.autoconfig.imperishableitems.option.blockEntitiesStoreEnchantments": "Block entities keep enchantments",
+  "text.autoconfig.imperishableitems.option.moreRetainEnchantments": "Enchantments are kept more often",
 
   "item.name.imperishableitems.imperishable.broken": " (Broken)",
   "item.tooltip.imperishableitems.imperishable.broken": "Item is broken, repair to use again!"

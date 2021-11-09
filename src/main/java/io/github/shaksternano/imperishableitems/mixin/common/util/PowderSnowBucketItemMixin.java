@@ -1,5 +1,6 @@
 package io.github.shaksternano.imperishableitems.mixin.common.util;
 
+import io.github.shaksternano.imperishableitems.common.ImperishableItems;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -22,11 +23,13 @@ abstract class PowderSnowBucketItemMixin extends BlockItem implements FluidModif
     @SuppressWarnings("ConstantConditions")
     @ModifyArgs(method = "useOnBlock", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;setStackInHand(Lnet/minecraft/util/Hand;Lnet/minecraft/item/ItemStack;)V"))
     private void placeTransferEnchantments(Args args, ItemUsageContext context) {
-        ItemStack stack = context.getPlayer().getStackInHand(context.getHand());
-        if (stack.hasEnchantments()) {
-            ItemStack getDefaultStack = args.get(1);
-            Map<Enchantment, Integer> enchantments = EnchantmentHelper.get(stack);
-            EnchantmentHelper.set(enchantments, getDefaultStack);
+        if (ImperishableItems.getConfig().moreRetainEnchantments) {
+            ItemStack stack = context.getPlayer().getStackInHand(context.getHand());
+            if (stack.hasEnchantments()) {
+                ItemStack getDefaultStack = args.get(1);
+                Map<Enchantment, Integer> enchantments = EnchantmentHelper.get(stack);
+                EnchantmentHelper.set(enchantments, getDefaultStack);
+            }
         }
     }
 }

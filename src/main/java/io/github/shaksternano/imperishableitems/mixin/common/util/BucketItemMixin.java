@@ -1,5 +1,6 @@
 package io.github.shaksternano.imperishableitems.mixin.common.util;
 
+import io.github.shaksternano.imperishableitems.common.ImperishableItems;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
@@ -24,12 +25,14 @@ abstract class BucketItemMixin extends Item implements FluidModificationItem {
     // Buckets retain their enchantments when placing fluids.
     @Inject(method = "getEmptiedStack", at = @At("RETURN"), cancellable = true)
     private static void placeTransferEnchantments(ItemStack stack, PlayerEntity player, CallbackInfoReturnable<ItemStack> cir) {
-        if (!player.getAbilities().creativeMode) {
-            if (stack.hasEnchantments()) {
-                Map<Enchantment, Integer> enchantments = EnchantmentHelper.get(stack);
-                ItemStack emptiedStack = cir.getReturnValue();
-                EnchantmentHelper.set(enchantments, emptiedStack);
-                cir.setReturnValue(emptiedStack);
+        if (ImperishableItems.getConfig().moreRetainEnchantments) {
+            if (!player.getAbilities().creativeMode) {
+                if (stack.hasEnchantments()) {
+                    Map<Enchantment, Integer> enchantments = EnchantmentHelper.get(stack);
+                    ItemStack emptiedStack = cir.getReturnValue();
+                    EnchantmentHelper.set(enchantments, emptiedStack);
+                    cir.setReturnValue(emptiedStack);
+                }
             }
         }
     }

@@ -1,5 +1,6 @@
 package io.github.shaksternano.imperishableitems.mixin.common.util;
 
+import io.github.shaksternano.imperishableitems.common.ImperishableItems;
 import io.github.shaksternano.imperishableitems.common.util.BlockEntityHelper;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -23,12 +24,14 @@ abstract class BlockItemMixin extends Item {
     // Sets a block entity's enchantments and repair cost when it's placed.
     @Inject(method = "writeTagToBlockEntity", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;getSubNbt(Ljava/lang/String;)Lnet/minecraft/nbt/NbtCompound;"), cancellable = true)
     private static void setBlockEntityEnchantments(World world, PlayerEntity player, BlockPos pos, ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
-        BlockEntity blockEntity = world.getBlockEntity(pos);
-        if (blockEntity != null) {
-            if (!world.isClient && blockEntity.copyItemDataRequiresOperator() && (player == null || !player.isCreativeLevelTwoOp())) {
-                cir.setReturnValue(false);
-            } else {
-                BlockEntityHelper.setBlockEntityEnchantments(blockEntity, stack);
+        if (ImperishableItems.getConfig().blockEntitiesStoreEnchantments) {
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+            if (blockEntity != null) {
+                if (!world.isClient && blockEntity.copyItemDataRequiresOperator() && (player == null || !player.isCreativeLevelTwoOp())) {
+                    cir.setReturnValue(false);
+                } else {
+                    BlockEntityHelper.setBlockEntityEnchantments(blockEntity, stack);
+                }
             }
         }
     }
