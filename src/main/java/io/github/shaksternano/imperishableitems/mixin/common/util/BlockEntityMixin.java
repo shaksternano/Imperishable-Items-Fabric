@@ -15,19 +15,19 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(BlockEntity.class)
 abstract class BlockEntityMixin implements BlockEntityAccess {
 
-    private NbtElement enchantments;
-    private Integer repairCost;
+    private NbtElement imperishableItemsEnchantments;
+    private Integer imperishableItemsRepairCost;
 
     // Adds enchantments and repair cost to NBT, for example this will allow the enchantments and repair cost to be shown when the /data command is used.
     @Inject(method = "writeNbt", at = @At("TAIL"))
     private void getEnchantmentsForNbt(NbtCompound nbt, CallbackInfoReturnable<NbtCompound> cir) {
         if (ImperishableItems.getConfig().blockEntitiesStoreEnchantments) {
-            if (enchantments != null) {
-                nbt.put("Enchantments", enchantments);
+            if (imperishableItemsEnchantments != null) {
+                nbt.put("Enchantments", imperishableItemsEnchantments);
             }
 
-            if (repairCost != null) {
-                nbt.putInt("RepairCost", repairCost);
+            if (imperishableItemsRepairCost != null) {
+                nbt.putInt("RepairCost", imperishableItemsRepairCost);
             }
         }
     }
@@ -38,32 +38,32 @@ abstract class BlockEntityMixin implements BlockEntityAccess {
         if (ImperishableItems.getConfig().blockEntitiesStoreEnchantments) {
             NbtElement enchantments = tag.get("Enchantments");
             if (enchantments != null) {
-                this.enchantments = enchantments.copy();
+                this.imperishableItemsEnchantments = enchantments.copy();
             }
 
             if (tag.contains("RepairCost", 3)) {
-                repairCost = tag.getInt("RepairCost");
+                imperishableItemsRepairCost = tag.getInt("RepairCost");
             }
         }
     }
 
     @Override
-    public NbtElement getEnchantments() {
-        return enchantments;
+    public NbtElement getImperishableItemsEnchantments() {
+        return imperishableItemsEnchantments;
     }
 
     @Override
-    public void setEnchantments(NbtElement enchantments) {
-        this.enchantments = enchantments.copy();
+    public void setImperishableItemsEnchantmentsEnchantments(NbtElement enchantments) {
+        this.imperishableItemsEnchantments = enchantments.copy();
     }
 
     @Override
-    public Integer getRepairCost() {
-        return repairCost;
+    public Integer getImperishableItemsEnchantmentsRepairCost() {
+        return imperishableItemsRepairCost;
     }
 
     @Override
-    public void setRepairCost(Integer repairCost) {
-        this.repairCost = repairCost;
+    public void setImperishableItemsEnchantmentsRepairCost(Integer repairCost) {
+        this.imperishableItemsRepairCost = repairCost;
     }
 }

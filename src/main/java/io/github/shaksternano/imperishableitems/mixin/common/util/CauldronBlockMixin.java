@@ -36,7 +36,7 @@ public abstract class CauldronBlockMixin extends Block {
             ItemStack inputStack = player.getStackInHand(hand);
             ItemStack outputStack = args.get(1);
 
-            transferEnchantments(inputStack, outputStack);
+            imperishableItemsEnchantmentsTransferEnchantments(inputStack, outputStack);
         }
     }
 
@@ -47,7 +47,7 @@ public abstract class CauldronBlockMixin extends Block {
             ItemStack inputStack = player.getStackInHand(hand);
             ItemStack outputStack = args.get(0);
 
-            transferEnchantments(inputStack, outputStack);
+            imperishableItemsEnchantmentsTransferEnchantments(inputStack, outputStack);
         }
     }
 
@@ -58,12 +58,12 @@ public abstract class CauldronBlockMixin extends Block {
             ItemStack inputStack = player.getStackInHand(hand);
             ItemStack outputStack = args.get(0);
 
-            transferEnchantments(inputStack, outputStack);
+            imperishableItemsEnchantmentsTransferEnchantments(inputStack, outputStack);
         }
     }
 
     // Transfers the enchantments from one item to another if the receiving item is a bucket, potion, or a bottle.
-    private static void transferEnchantments(ItemStack inputStack, ItemStack outputStack) {
+    private static void imperishableItemsEnchantmentsTransferEnchantments(ItemStack inputStack, ItemStack outputStack) {
         if (ImperishableItems.getConfig().retainEnchantmentsMoreOften) {
             if (inputStack.hasEnchantments()) {
                 if (outputStack.getItem() instanceof BucketItem || outputStack.getItem() instanceof PotionItem || outputStack.getItem() instanceof GlassBottleItem) {
