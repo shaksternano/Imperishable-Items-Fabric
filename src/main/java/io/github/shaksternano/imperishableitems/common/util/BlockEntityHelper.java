@@ -18,25 +18,25 @@ public final class BlockEntityHelper {
     @SuppressWarnings("ConstantConditions")
     public static void setBlockEntityEnchantments(BlockEntity blockEntity, ItemStack stack) {
         if (stack.hasEnchantments()) {
-            ((BlockEntityAccess) blockEntity).setEnchantments(stack.getEnchantments());
+            ((BlockEntityAccess) blockEntity).setImperishableItemsEnchantments(stack.getEnchantments());
         }
 
         if (stack.hasNbt()) {
             if (stack.getNbt().contains("RepairCost", 3)) {
-                ((BlockEntityAccess) blockEntity).setRepairCost(stack.getRepairCost());
+                ((BlockEntityAccess) blockEntity).setImperishableItemsRepairCost(stack.getRepairCost());
             }
         }
     }
 
     // Copies the enchantments and repair cost of a BlockEntity to an ItemStack.
     public static void setDroppedItemStackEnchantments(BlockEntity blockEntity, ItemStack stack) {
-        NbtElement enchantmentsNbt = ((BlockEntityAccess) blockEntity).getEnchantments();
+        NbtElement enchantmentsNbt = ((BlockEntityAccess) blockEntity).getImperishableItemsEnchantments();
         if (enchantmentsNbt != null) {
             Map<Enchantment, Integer> enchantmentsMap = EnchantmentHelper.fromNbt((NbtList) enchantmentsNbt);
             EnchantmentHelper.set(enchantmentsMap, stack);
         }
 
-        Integer repairCost = ((BlockEntityAccess) blockEntity).getRepairCost();
+        Integer repairCost = ((BlockEntityAccess) blockEntity).getImperishableItemsRepairCost();
         if (repairCost != null) {
             stack.setRepairCost(repairCost);
         }
