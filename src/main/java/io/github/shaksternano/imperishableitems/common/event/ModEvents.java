@@ -1,7 +1,7 @@
 package io.github.shaksternano.imperishableitems.common.event;
 
 import io.github.shaksternano.imperishableitems.common.enchantment.ImperishableEnchantment;
-import io.github.shaksternano.imperishableitems.common.util.ImperishableProtection;
+import io.github.shaksternano.imperishableitems.common.util.ImperishableBlacklistsHandler;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
@@ -21,12 +21,12 @@ public final class ModEvents {
 
     public static void registerEvents() {
         // Initialises the Imperishable blacklist when the world loads.
-        ServerWorldEvents.LOAD.register((server, world) -> ImperishableProtection.initBlacklists());
+        ServerWorldEvents.LOAD.register((server, world) -> ImperishableBlacklistsHandler.initBlacklists());
 
         // Item specific right click actions are cancelled if the item has Imperishable and is at 0 durability.
         UseItemCallback.EVENT.register((player, world, hand) -> {
             ItemStack stack = player.getStackInHand(hand);
-            if (ImperishableProtection.isItemProtected(stack, ImperishableProtection.ProtectionType.BREAK_PROTECTION)) {
+            if (ImperishableBlacklistsHandler.isItemProtected(stack, ImperishableBlacklistsHandler.ProtectionType.BREAK_PROTECTION)) {
                 if (!player.isCreative() && !player.isSpectator()) {
                     // Still allow a wearable item to be equipped even if the item is broken.
                     if (!(stack.getItem() instanceof Wearable)) {
@@ -45,7 +45,7 @@ public final class ModEvents {
     public static void registerClientEvents() {
         // Adds a message to the tooltip of an item with Imperishable at 0 durability.
         ItemTooltipCallback.EVENT.register((stack, context, lines) -> {
-            if (ImperishableProtection.isItemProtected(stack, ImperishableProtection.ProtectionType.BREAK_PROTECTION)) {
+            if (ImperishableBlacklistsHandler.isItemProtected(stack, ImperishableBlacklistsHandler.ProtectionType.BREAK_PROTECTION)) {
                 if (ImperishableEnchantment.isBrokenImperishable(stack)) {
                     boolean inserted = false;
 

@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import io.github.shaksternano.imperishableitems.common.enchantment.ImperishableEnchantment;
 import io.github.shaksternano.imperishableitems.common.network.ModNetworking;
-import io.github.shaksternano.imperishableitems.common.util.ImperishableProtection;
+import io.github.shaksternano.imperishableitems.common.util.ImperishableBlacklistsHandler;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.block.BlockState;
@@ -51,7 +51,7 @@ abstract class ItemStackMixin {
     // Items don't break when they reach 0 durability.
     @Inject(method = "damage(ILjava/util/Random;Lnet/minecraft/server/network/ServerPlayerEntity;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;setDamage(I)V"), locals = LocalCapture.CAPTURE_FAILSOFT, cancellable = true)
     private void imperishableDurability(int amount, Random random, @Nullable ServerPlayerEntity player, CallbackInfoReturnable<Boolean> cir, int i) {
-        if (ImperishableProtection.isItemProtected((ItemStack) (Object) this, ImperishableProtection.ProtectionType.BREAK_PROTECTION)) {
+        if (ImperishableBlacklistsHandler.isItemProtected((ItemStack) (Object) this, ImperishableBlacklistsHandler.ProtectionType.BREAK_PROTECTION)) {
             if (!(getItem() instanceof ElytraItem)) {
                 if (isDamageable()) {
                     if (ImperishableEnchantment.hasImperishable((ItemStack) (Object) this)) {
@@ -80,7 +80,7 @@ abstract class ItemStackMixin {
     // Tool specific drops such cobblestone do not drop when mined by a tool with Imperishable at 0 durability.
     @Inject(method = "isSuitableFor", at = @At("HEAD"), cancellable = true)
     private void imperishableSuitableFor(BlockState state, CallbackInfoReturnable<Boolean> cir) {
-        if (ImperishableProtection.isItemProtected((ItemStack) (Object) this, ImperishableProtection.ProtectionType.BREAK_PROTECTION)) {
+        if (ImperishableBlacklistsHandler.isItemProtected((ItemStack) (Object) this, ImperishableBlacklistsHandler.ProtectionType.BREAK_PROTECTION)) {
             if (ImperishableEnchantment.isBrokenImperishable((ItemStack) (Object) this)) {
                 cir.setReturnValue(false);
             }
@@ -90,7 +90,7 @@ abstract class ItemStackMixin {
     // Tools with Imperishable do not have increased mining speed when at 0 durability.
     @Inject(method = "getMiningSpeedMultiplier", at = @At("HEAD"), cancellable = true)
     private void imperishableNoDurabilitySpeed(BlockState state, CallbackInfoReturnable<Float> cir) {
-        if (ImperishableProtection.isItemProtected((ItemStack) (Object) this, ImperishableProtection.ProtectionType.BREAK_PROTECTION)) {
+        if (ImperishableBlacklistsHandler.isItemProtected((ItemStack) (Object) this, ImperishableBlacklistsHandler.ProtectionType.BREAK_PROTECTION)) {
             if (ImperishableEnchantment.isBrokenImperishable((ItemStack) (Object) this)) {
                 cir.setReturnValue(1.0F);
             }
@@ -100,7 +100,7 @@ abstract class ItemStackMixin {
     // Items with Imperishable do not give bonus attributes such as attack damage on a sword when at 0 durability.
     @Inject(method = "getAttributeModifiers", at = @At("HEAD"), cancellable = true)
     private void imperishableAttributeModifiers(EquipmentSlot equipmentSlot, CallbackInfoReturnable<Multimap<EntityAttribute, EntityAttributeModifier>> cir) {
-        if (ImperishableProtection.isItemProtected((ItemStack) (Object) this, ImperishableProtection.ProtectionType.BREAK_PROTECTION)) {
+        if (ImperishableBlacklistsHandler.isItemProtected((ItemStack) (Object) this, ImperishableBlacklistsHandler.ProtectionType.BREAK_PROTECTION)) {
             if (ImperishableEnchantment.isBrokenImperishable((ItemStack) (Object) this)) {
                 cir.setReturnValue(ImmutableMultimap.of());
             }
@@ -110,7 +110,7 @@ abstract class ItemStackMixin {
     // Item specific right click block actions are cancelled if the item has Imperishable and is at 0 durability.
     @Inject(method = "useOnBlock", at = @At("HEAD"), cancellable = true)
     private void imperishableUseOnBlock(ItemUsageContext context, CallbackInfoReturnable<ActionResult> cir) {
-        if (ImperishableProtection.isItemProtected((ItemStack) (Object) this, ImperishableProtection.ProtectionType.BREAK_PROTECTION)) {
+        if (ImperishableBlacklistsHandler.isItemProtected((ItemStack) (Object) this, ImperishableBlacklistsHandler.ProtectionType.BREAK_PROTECTION)) {
             PlayerEntity player = context.getPlayer();
             boolean userIsCreative = false;
             if (player != null) {
@@ -128,7 +128,7 @@ abstract class ItemStackMixin {
     // Item specific right click entity are cancelled if the item has Imperishable and is at 0 durability.
     @Inject(method = "useOnEntity", at = @At("HEAD"), cancellable = true)
     private void imperishableUseOnEntity(PlayerEntity user, LivingEntity entity, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
-        if (ImperishableProtection.isItemProtected((ItemStack) (Object) this, ImperishableProtection.ProtectionType.BREAK_PROTECTION)) {
+        if (ImperishableBlacklistsHandler.isItemProtected((ItemStack) (Object) this, ImperishableBlacklistsHandler.ProtectionType.BREAK_PROTECTION)) {
             if (!user.isCreative()) {
                 if (ImperishableEnchantment.isBrokenImperishable((ItemStack) (Object) this)) {
                     cir.setReturnValue(ActionResult.PASS);
@@ -140,7 +140,7 @@ abstract class ItemStackMixin {
     // Adds "(Broken)" to the name of an item with Imperishable at 0 durability.
     @Inject(method = "getName", at = @At("RETURN"), cancellable = true)
     private void imperishableBrokenName(CallbackInfoReturnable<Text> cir) {
-        if (ImperishableProtection.isItemProtected((ItemStack) (Object) this, ImperishableProtection.ProtectionType.BREAK_PROTECTION)) {
+        if (ImperishableBlacklistsHandler.isItemProtected((ItemStack) (Object) this, ImperishableBlacklistsHandler.ProtectionType.BREAK_PROTECTION)) {
             if (ImperishableEnchantment.isBrokenImperishable((ItemStack) (Object) this)) {
                 TranslatableText broken = new TranslatableText("item.name." + ImperishableEnchantment.TRANSLATION_KEY + ".broken");
                 broken.formatted(Formatting.RED);

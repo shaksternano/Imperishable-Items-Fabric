@@ -1,7 +1,7 @@
 package io.github.shaksternano.imperishableitems.mixin.common.enchantment.imperishable;
 
 import io.github.shaksternano.imperishableitems.common.enchantment.ImperishableEnchantment;
-import io.github.shaksternano.imperishableitems.common.util.ImperishableProtection;
+import io.github.shaksternano.imperishableitems.common.util.ImperishableBlacklistsHandler;
 import net.minecraft.block.dispenser.DispenserBehavior;
 import net.minecraft.block.dispenser.FallibleItemDispenserBehavior;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
@@ -21,7 +21,7 @@ abstract class ItemDispenserBehaviorMixin implements DispenserBehavior {
     // Dispensing an item is cancelled if that item has Imperishable and is at 0 durability.
     @Redirect(method = "dispense", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/dispenser/ItemDispenserBehavior;dispenseSilently(Lnet/minecraft/util/math/BlockPointer;Lnet/minecraft/item/ItemStack;)Lnet/minecraft/item/ItemStack;"))
     private ItemStack dispenseBrokenImperishable(ItemDispenserBehavior thisBehavior, BlockPointer pointer, ItemStack stack) {
-        if (ImperishableProtection.isItemProtected(stack, ImperishableProtection.ProtectionType.BREAK_PROTECTION)) {
+        if (ImperishableBlacklistsHandler.isItemProtected(stack, ImperishableBlacklistsHandler.ProtectionType.BREAK_PROTECTION)) {
             // Still allow a wearable item to be dispensed even if the item is broken.
             if (!(stack.getItem() instanceof Wearable)) {
                 if (ImperishableEnchantment.isBrokenImperishable(stack)) {

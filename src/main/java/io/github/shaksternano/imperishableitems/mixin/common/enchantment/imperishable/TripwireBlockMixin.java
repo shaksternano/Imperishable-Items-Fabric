@@ -1,7 +1,7 @@
 package io.github.shaksternano.imperishableitems.mixin.common.enchantment.imperishable;
 
 import io.github.shaksternano.imperishableitems.common.enchantment.ImperishableEnchantment;
-import io.github.shaksternano.imperishableitems.common.util.ImperishableProtection;
+import io.github.shaksternano.imperishableitems.common.util.ImperishableBlacklistsHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.TripwireBlock;
@@ -24,7 +24,7 @@ abstract class TripwireBlockMixin extends Block {
     // Shears with Imperishable at 0 durability can't disarm tripwires.
     @Redirect(method = "onBreak", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isOf(Lnet/minecraft/item/Item;)Z"))
     private boolean imperishableDisarmTripwire(ItemStack getMainHandStack, Item item, World world, BlockPos pos, BlockState state, PlayerEntity player) {
-        if (ImperishableProtection.isItemProtected(getMainHandStack, ImperishableProtection.ProtectionType.BREAK_PROTECTION)) {
+        if (ImperishableBlacklistsHandler.isItemProtected(getMainHandStack, ImperishableBlacklistsHandler.ProtectionType.BREAK_PROTECTION)) {
             if (!player.isCreative()) {
                 if (ImperishableEnchantment.isBrokenImperishable(getMainHandStack)) {
                     return false;

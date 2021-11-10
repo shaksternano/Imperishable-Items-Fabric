@@ -9,9 +9,9 @@ import net.minecraft.util.registry.Registry;
 
 import java.util.*;
 
-public final class ImperishableProtection {
+public final class ImperishableBlacklistsHandler {
 
-    private ImperishableProtection() {}
+    private ImperishableBlacklistsHandler() {}
 
     private static final Set<Item> globalBlacklist = new HashSet<>();
     private static final Map<ProtectionType, Set<Item>> blacklists = initBlacklistsMap();

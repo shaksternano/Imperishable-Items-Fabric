@@ -1,7 +1,7 @@
 package io.github.shaksternano.imperishableitems.mixin.common.enchantment.imperishable;
 
 import io.github.shaksternano.imperishableitems.common.enchantment.ImperishableEnchantment;
-import io.github.shaksternano.imperishableitems.common.util.ImperishableProtection;
+import io.github.shaksternano.imperishableitems.common.util.ImperishableBlacklistsHandler;
 import net.minecraft.entity.projectile.TridentEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.Vec3d;
@@ -19,7 +19,7 @@ abstract class TridentEntityMixin extends PersistentProjectileEntityMixin {
     // Tridents with Imperishable stop falling when they reach the world's minimum Y.
     @Inject(method = "tick", at = @At("TAIL"))
     private void checkTridentImperishable(CallbackInfo ci) {
-        if (ImperishableProtection.isItemProtected(tridentStack, ImperishableProtection.ProtectionType.VOID_PROTECTION)) {
+        if (ImperishableBlacklistsHandler.isItemProtected(tridentStack, ImperishableBlacklistsHandler.ProtectionType.VOID_PROTECTION)) {
             if (ImperishableEnchantment.hasImperishable(tridentStack)) {
                 if (!isNoClip()) {
                     if (getY() < world.getBottomY()) {
@@ -36,7 +36,7 @@ abstract class TridentEntityMixin extends PersistentProjectileEntityMixin {
     // Tridents with Imperishable don't despawn.
     @Inject(method = "age", at = @At("HEAD"), cancellable = true)
     private void imperishableAge(CallbackInfo ci) {
-        if (ImperishableProtection.isItemProtected(tridentStack, ImperishableProtection.ProtectionType.DESPAWN_PROTECTION)) {
+        if (ImperishableBlacklistsHandler.isItemProtected(tridentStack, ImperishableBlacklistsHandler.ProtectionType.DESPAWN_PROTECTION)) {
             if (ImperishableEnchantment.hasImperishable(tridentStack)) {
                 ci.cancel();
             }
@@ -46,7 +46,7 @@ abstract class TridentEntityMixin extends PersistentProjectileEntityMixin {
     // Tridents with Imperishable don't get removed when 64 blocks below the world's minimum Y position.
     @Override
     protected void imperishableInVoid(CallbackInfo ci) {
-        if (ImperishableProtection.isItemProtected(tridentStack, ImperishableProtection.ProtectionType.VOID_PROTECTION)) {
+        if (ImperishableBlacklistsHandler.isItemProtected(tridentStack, ImperishableBlacklistsHandler.ProtectionType.VOID_PROTECTION)) {
             if (ImperishableEnchantment.hasImperishable(tridentStack)) {
                 ci.cancel();
             }
