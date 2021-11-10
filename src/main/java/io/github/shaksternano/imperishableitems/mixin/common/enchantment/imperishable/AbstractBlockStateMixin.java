@@ -1,6 +1,6 @@
 package io.github.shaksternano.imperishableitems.mixin.common.enchantment.imperishable;
 
-import io.github.shaksternano.imperishableitems.common.util.ImperishableProtection;
+import io.github.shaksternano.imperishableitems.common.util.ImperishableBlacklistsHandler;
 import io.github.shaksternano.imperishableitems.common.enchantment.ImperishableEnchantment;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BeehiveBlock;
@@ -29,7 +29,7 @@ abstract class AbstractBlockStateMixin {
     private void imperishableShearsUseOnBlock(World world, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
         ItemStack stack = player.getStackInHand(hand);
 
-        if (ImperishableProtection.isItemProtected(stack, ImperishableProtection.ProtectionType.BREAK_PROTECTION)) {
+        if (ImperishableBlacklistsHandler.isItemProtected(stack, ImperishableBlacklistsHandler.ProtectionType.BREAK_PROTECTION)) {
             if (!player.isCreative()) {
                 if (stack.getItem() instanceof ShearsItem) {
                     if (getBlock() instanceof BeehiveBlock || getBlock() instanceof PumpkinBlock) {

@@ -1,6 +1,6 @@
 package io.github.shaksternano.imperishableitems.mixin.client.enchantment.imperishable;
 
-import io.github.shaksternano.imperishableitems.common.util.ImperishableProtection;
+import io.github.shaksternano.imperishableitems.common.util.ImperishableBlacklistsHandler;
 import io.github.shaksternano.imperishableitems.common.enchantment.ImperishableEnchantment;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -30,7 +30,7 @@ abstract class AnvilScreenMixin extends ForgingScreen<AnvilScreenHandler> {
     private String imperishableBrokenOnSlotUpdate(Text getName, ScreenHandler handler, int slotId, ItemStack stack) {
         String trimmedName = getName.getString();
 
-        if (ImperishableProtection.isItemProtected(stack, ImperishableProtection.ProtectionType.BREAK_PROTECTION)) {
+        if (ImperishableBlacklistsHandler.isItemProtected(stack, ImperishableBlacklistsHandler.ProtectionType.BREAK_PROTECTION)) {
             trimmedName = ImperishableEnchantment.itemNameRemoveBroken(getName, stack);
         }
 
@@ -46,7 +46,7 @@ abstract class AnvilScreenMixin extends ForgingScreen<AnvilScreenHandler> {
         if (slot != null) {
             if (slot.hasStack()) {
                 ItemStack stack = slot.getStack();
-                if (ImperishableProtection.isItemProtected(stack, ImperishableProtection.ProtectionType.BREAK_PROTECTION)) {
+                if (ImperishableBlacklistsHandler.isItemProtected(stack, ImperishableBlacklistsHandler.ProtectionType.BREAK_PROTECTION)) {
                     trimmedName = ImperishableEnchantment.itemNameRemoveBroken(getName, stack);
                 }
             }

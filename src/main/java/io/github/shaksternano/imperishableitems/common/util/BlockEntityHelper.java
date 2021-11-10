@@ -18,12 +18,12 @@ public final class BlockEntityHelper {
     @SuppressWarnings("ConstantConditions")
     public static void setBlockEntityEnchantments(BlockEntity blockEntity, ItemStack stack) {
         if (stack.hasEnchantments()) {
-            ((BlockEntityAccess) blockEntity).setImperishableItemsEnchantmentsEnchantments(stack.getEnchantments());
+            ((BlockEntityAccess) blockEntity).setImperishableItemsEnchantments(stack.getEnchantments());
         }
 
         if (stack.hasTag()) {
             if (stack.getTag().contains("RepairCost", 3)) {
-                ((BlockEntityAccess) blockEntity).setImperishableItemsEnchantmentsRepairCost(stack.getRepairCost());
+                ((BlockEntityAccess) blockEntity).setImperishableItemsRepairCost(stack.getRepairCost());
             }
         }
     }
@@ -36,7 +36,7 @@ public final class BlockEntityHelper {
             EnchantmentHelper.set(enchantmentsMap, stack);
         }
 
-        Integer repairCost = ((BlockEntityAccess) blockEntity).getImperishableItemsEnchantmentsRepairCost();
+        Integer repairCost = ((BlockEntityAccess) blockEntity).getImperishableItemsRepairCost();
         if (repairCost != null) {
             stack.setRepairCost(repairCost);
         }

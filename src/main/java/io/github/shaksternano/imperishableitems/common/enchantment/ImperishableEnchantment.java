@@ -1,7 +1,7 @@
 package io.github.shaksternano.imperishableitems.common.enchantment;
 
 import io.github.shaksternano.imperishableitems.common.ImperishableItems;
-import io.github.shaksternano.imperishableitems.common.util.ImperishableProtection;
+import io.github.shaksternano.imperishableitems.common.util.ImperishableBlacklistsHandler;
 import io.github.shaksternano.imperishableitems.common.registry.ModEnchantments;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -22,7 +22,7 @@ public final class ImperishableEnchantment extends Enchantment {
 
     @Override
     public boolean isAcceptableItem(ItemStack stack) {
-        return !ImperishableProtection.isItemBlacklistedGlobally(stack);
+        return !ImperishableBlacklistsHandler.isItemBlacklistedGlobally(stack);
     }
 
     @Override

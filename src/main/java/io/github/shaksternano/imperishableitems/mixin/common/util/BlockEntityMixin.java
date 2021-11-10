@@ -53,17 +53,17 @@ abstract class BlockEntityMixin implements BlockEntityAccess {
     }
 
     @Override
-    public void setImperishableItemsEnchantmentsEnchantments(NbtElement enchantments) {
+    public void setImperishableItemsEnchantments(NbtElement enchantments) {
         this.imperishableItemsEnchantments = enchantments.copy();
     }
 
     @Override
-    public Integer getImperishableItemsEnchantmentsRepairCost() {
+    public Integer getImperishableItemsRepairCost() {
         return imperishableItemsRepairCost;
     }
 
     @Override
-    public void setImperishableItemsEnchantmentsRepairCost(Integer repairCost) {
+    public void setImperishableItemsRepairCost(Integer repairCost) {
         this.imperishableItemsRepairCost = repairCost;
     }
 }

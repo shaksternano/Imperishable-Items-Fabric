@@ -1,6 +1,6 @@
 package io.github.shaksternano.imperishableitems.mixin.common.enchantment.imperishable;
 
-import io.github.shaksternano.imperishableitems.common.util.ImperishableProtection;
+import io.github.shaksternano.imperishableitems.common.util.ImperishableBlacklistsHandler;
 import io.github.shaksternano.imperishableitems.common.enchantment.ImperishableEnchantment;
 import net.minecraft.entity.projectile.TridentEntity;
 import net.minecraft.item.ItemStack;
@@ -19,7 +19,7 @@ abstract class TridentEntityMixin extends PersistentProjectileEntityMixin {
     // Tridents with Imperishable stop falling when they reach Y=0.
     @Inject(method = "tick", at = @At("TAIL"))
     private void checkTridentImperishable(CallbackInfo ci) {
-        if (ImperishableProtection.isItemProtected(tridentStack, ImperishableProtection.ProtectionType.VOID_PROTECTION)) {
+        if (ImperishableBlacklistsHandler.isItemProtected(tridentStack, ImperishableBlacklistsHandler.ProtectionType.VOID_PROTECTION)) {
             if (ImperishableEnchantment.hasImperishable(tridentStack)) {
                 if (!isNoClip()) {
                     if (getY() < 0.0D) {
@@ -36,7 +36,7 @@ abstract class TridentEntityMixin extends PersistentProjectileEntityMixin {
     // Tridents with Imperishable don't despawn.
     @Inject(method = "age", at = @At("HEAD"), cancellable = true)
     private void imperishableAge(CallbackInfo ci) {
-        if (ImperishableProtection.isItemProtected(tridentStack, ImperishableProtection.ProtectionType.DESPAWN_PROTECTION)) {
+        if (ImperishableBlacklistsHandler.isItemProtected(tridentStack, ImperishableBlacklistsHandler.ProtectionType.DESPAWN_PROTECTION)) {
             if (ImperishableEnchantment.hasImperishable(tridentStack)) {
                 ci.cancel();
             }
@@ -46,7 +46,7 @@ abstract class TridentEntityMixin extends PersistentProjectileEntityMixin {
     // Tridents with Imperishable don't get removed when below Y=-64.
     @Override
     protected void imperishableInVoid(CallbackInfo ci) {
-        if (ImperishableProtection.isItemProtected(tridentStack, ImperishableProtection.ProtectionType.VOID_PROTECTION)) {
+        if (ImperishableBlacklistsHandler.isItemProtected(tridentStack, ImperishableBlacklistsHandler.ProtectionType.VOID_PROTECTION)) {
             if (ImperishableEnchantment.hasImperishable(tridentStack)) {
                 ci.cancel();
             }

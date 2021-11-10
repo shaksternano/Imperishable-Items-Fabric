@@ -6,9 +6,9 @@ public interface BlockEntityAccess {
 
     NbtElement getImperishableItemsEnchantments();
 
-    void setImperishableItemsEnchantmentsEnchantments(NbtElement enchantments);
+    void setImperishableItemsEnchantments(NbtElement enchantments);
 
-    Integer getImperishableItemsEnchantmentsRepairCost();
+    Integer getImperishableItemsRepairCost();
 
-    void setImperishableItemsEnchantmentsRepairCost(Integer repairCost);
+    void setImperishableItemsRepairCost(Integer repairCost);
 }
