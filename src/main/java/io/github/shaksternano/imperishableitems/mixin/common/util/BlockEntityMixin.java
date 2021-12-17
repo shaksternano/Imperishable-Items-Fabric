@@ -19,7 +19,7 @@ abstract class BlockEntityMixin implements BlockEntityAccess {
 
     // Adds enchantments and repair cost to NBT, for example this will allow the enchantments and repair cost to be shown when the /data command is used.
     @Inject(method = "writeNbt", at = @At("TAIL"))
-    private void getEnchantmentsForNbt(NbtCompound nbt, CallbackInfoReturnable<NbtCompound> cir) {
+    private void getEnchantmentsForNbt(NbtCompound nbt, CallbackInfo ci) {
         if (ImperishableItems.getConfig().blockEntitiesStoreEnchantments) {
             if (imperishableItemsEnchantments != null) {
                 nbt.put("Enchantments", imperishableItemsEnchantments);

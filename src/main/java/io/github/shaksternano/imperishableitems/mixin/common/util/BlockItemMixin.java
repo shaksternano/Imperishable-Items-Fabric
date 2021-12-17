@@ -22,7 +22,7 @@ abstract class BlockItemMixin extends Item {
     }
 
     // Sets a block entity's enchantments and repair cost when it's placed.
-    @Inject(method = "writeTagToBlockEntity", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;getSubNbt(Ljava/lang/String;)Lnet/minecraft/nbt/NbtCompound;"), cancellable = true)
+    @Inject(method = "writeTagToBlockEntity", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/BlockItem;getBlockEntityNbt(Lnet/minecraft/item/ItemStack;)Lnet/minecraft/nbt/NbtCompound;"), cancellable = true)
     private static void setBlockEntityEnchantments(World world, PlayerEntity player, BlockPos pos, ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
         if (ImperishableItems.getConfig().blockEntitiesStoreEnchantments) {
             BlockEntity blockEntity = world.getBlockEntity(pos);

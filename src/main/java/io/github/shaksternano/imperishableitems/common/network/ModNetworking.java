@@ -4,6 +4,7 @@ import io.github.shaksternano.imperishableitems.common.ImperishableItems;
 import io.github.shaksternano.imperishableitems.common.enchantment.ImperishableEnchantment;
 import io.github.shaksternano.imperishableitems.common.registry.ModEnchantments;
 import io.github.shaksternano.imperishableitems.common.util.ImperishableBlacklistsHandler;
+import io.github.shaksternano.imperishableitems.mixin.common.invoker.LivingEntityInvoker;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -123,7 +124,7 @@ public final class ModNetworking {
                 if (client.player != null) {
                     Item item = Item.byRawId(itemId);
                     if (ImperishableBlacklistsHandler.isItemProtected(item, ImperishableBlacklistsHandler.ProtectionType.BREAK_PROTECTION)) {
-                        client.player.playEquipmentBreakEffects(new ItemStack(item));
+                        ((LivingEntityInvoker) client.player).invokePlayEquipmentBreakEffects(new ItemStack(item));
                     }
                 }
             });
