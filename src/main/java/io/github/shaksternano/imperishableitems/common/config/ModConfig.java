@@ -48,6 +48,10 @@ public final class ModConfig implements ConfigData {
     @Comment("Should Imperishable prevent items from breaking?\nIf true, items don't break when they reach\n0 durability, but rather lose any special\nproperties, such as increased mining speed\non a pickaxe, until they are repaired.\n\nDefault value is true.")
     public boolean imperishablePreventsBreaking = true;
 
+    @ConfigEntry.Category("imperishableProtection")
+    @Comment("Is the Imperishable enchantment needed\nto prevent tools from breaking?\n\nDefault value is true.")
+    public boolean enchantmentNeededToPreventBreaking = true;
+
     @ConfigEntry.Category("miscellaneous")
     @Comment("Block entities keep enchantments when\nplaced and picked back up.\n\nDefault value is true.")
     public boolean blockEntitiesStoreEnchantments = true;

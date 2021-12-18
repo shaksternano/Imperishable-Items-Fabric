@@ -57,7 +57,7 @@ public final class ImperishableEnchantment extends Enchantment {
 
     // Returns true if an ItemStack is damageable, has the Imperishable enchantment, and the damage on it is more than the item's maximum damage. Returns false otherwise.
     public static boolean isBrokenImperishable(ItemStack stack) {
-        return stack.isDamageable() && hasImperishable(stack) && stack.getDamage() >= stack.getMaxDamage();
+        return stack.isDamageable() && stack.getDamage() >= stack.getMaxDamage() && (hasImperishable(stack) || !ImperishableItems.getConfig().enchantmentNeededToPreventBreaking);
     }
 
     // Removes the "(Broken)" string from the name of tools with Imperishable at 0 durability, so it doesn't mess with anvil renaming.

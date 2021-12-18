@@ -2,6 +2,7 @@ package io.github.shaksternano.imperishableitems.mixin.common.enchantment.imperi
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import io.github.shaksternano.imperishableitems.common.ImperishableItems;
 import io.github.shaksternano.imperishableitems.common.enchantment.ImperishableEnchantment;
 import io.github.shaksternano.imperishableitems.common.network.ModNetworking;
 import io.github.shaksternano.imperishableitems.common.util.ImperishableBlacklistsHandler;
@@ -54,7 +55,7 @@ abstract class ItemStackMixin {
         if (ImperishableBlacklistsHandler.isItemProtected((ItemStack) (Object) this, ImperishableBlacklistsHandler.ProtectionType.BREAK_PROTECTION)) {
             if (!(getItem() instanceof ElytraItem)) {
                 if (isDamageable()) {
-                    if (ImperishableEnchantment.hasImperishable((ItemStack) (Object) this)) {
+                    if (ImperishableEnchantment.hasImperishable((ItemStack) (Object) this) || !ImperishableItems.getConfig().enchantmentNeededToPreventBreaking) {
                         if (i > getMaxDamage()) {
                             setDamage(getMaxDamage());
                         } else {

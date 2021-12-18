@@ -18,6 +18,7 @@
   "text.autoconfig.imperishableitems.option.imperishableProtectsFromDamage": "Prevents items from being destroyed",
   "text.autoconfig.imperishableitems.option.imperishableProtectsFromVoid": "Protects items from the void",
   "text.autoconfig.imperishableitems.option.imperishablePreventsBreaking": "Prevents tools from breaking",
+  "text.autoconfig.imperishableitems.option.enchantmentNeededToPreventBreaking": "Enchantment needed to prevent breaking",
 
   "text.autoconfig.imperishableitems.option.blockEntitiesStoreEnchantments": "Block entities keep enchantments",
   "text.autoconfig.imperishableitems.option.retainEnchantmentsMoreOften": "Enchantments are kept more often",
