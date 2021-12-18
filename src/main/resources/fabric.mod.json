@@ -33,6 +33,11 @@
     "imperishableitems.mixins.json"
   ],
 
+  "custom": {
+    "notify_gradle_properties_url": "https://raw.githubusercontent.com/ShakterNano/Imperishable-Items-Fabric/1.18/gradle.properties",
+    "notify_gradle_properties_key": "mod_version"
+  },
+
   "depends": {
     "fabricloader": ">=0.11.3",
     "fabric": ">=0.40.0",
