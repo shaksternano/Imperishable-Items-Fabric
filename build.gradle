@@ -1,6 +1,6 @@
 plugins {
-	id 'fabric-loom' version '0.10-SNAPSHOT'
-	id 'maven-publish'
+	id "fabric-loom" version "0.10-SNAPSHOT"
+	id "maven-publish"
 }
 
 sourceCompatibility = JavaVersion.VERSION_17
@@ -67,6 +67,10 @@ jar {
 publishing {
 	publications {
 		mavenJava(MavenPublication) {
+			from components.java
+		}
+
+		maven(MavenPublication) {
 			from components.java
 		}
 	}
