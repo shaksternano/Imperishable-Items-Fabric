@@ -68,7 +68,7 @@ publishing {
 	publications {
 		mavenJava(MavenPublication) {
 			groupId = project.group
-			artifactId = "ImperishableItemsFabric"
+			artifactId = "imperishable-items-fabric"
 			version = project.version
 			from(components.java)
 		}
