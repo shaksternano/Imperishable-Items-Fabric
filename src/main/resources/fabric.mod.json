@@ -9,9 +9,9 @@
     "ShaksterNano"
   ],
   "contact": {
-    "homepage": "https://github.com/ShakterNano/Imperishable-Items-Fabric",
-    "sources": "https://github.com/ShakterNano/Imperishable-Items-Fabric",
-    "issues": "https://github.com/ShakterNano/Imperishable-Items-Fabric/issues"
+    "homepage": "https://github.com/ShaksterNano/Imperishable-Items-Fabric",
+    "sources": "https://github.com/ShaksterNano/Imperishable-Items-Fabric",
+    "issues": "https://github.com/ShaksterNano/Imperishable-Items-Fabric/issues"
   },
 
   "license": "MIT",
@@ -34,7 +34,7 @@
   ],
 
   "custom": {
-    "notify_gradle_properties_url": "https://raw.githubusercontent.com/ShakterNano/Imperishable-Items-Fabric/1.18/gradle.properties",
+    "notify_gradle_properties_url": "https://raw.githubusercontent.com/ShaksterNano/Imperishable-Items-Fabric/1.18/gradle.properties",
     "notify_gradle_properties_key": "mod_version"
   },
 
