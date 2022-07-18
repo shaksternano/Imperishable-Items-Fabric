@@ -14,34 +14,41 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(BlockEntity.class)
 abstract class BlockEntityMixin implements BlockEntityAccess {
 
+    @Unique
+    private static final String IMPERISHABLE_ITEMS$ENCHANTMENTS_NBT_KEY = "Enchantments";
+    @Unique
+    private static final String IMPERISHABLE_ITEMS$REPAIR_COST_NBT_KEY = "RepairCost";
+
     private NbtElement imperishableItemsEnchantments;
     private Integer imperishableItemsRepairCost;
 
     // Adds enchantments and repair cost to NBT, for example this will allow the enchantments and repair cost to be shown when the /data command is used.
-    @Inject(method = "writeNbt", at = @At("TAIL"))
+    @Inject(method = "writeNbt", at = @At("HEAD"))
     private void imperishableItems$getEnchantmentsForNbt(NbtCompound nbt, CallbackInfo ci) {
         if (ImperishableItems.getConfig().blockEntitiesStoreEnchantments) {
             if (imperishableItemsEnchantments != null) {
-                nbt.put("Enchantments", imperishableItemsEnchantments);
+                nbt.put(IMPERISHABLE_ITEMS$ENCHANTMENTS_NBT_KEY, imperishableItemsEnchantments);
             }
 
             if (imperishableItemsRepairCost != null) {
-                nbt.putInt("RepairCost", imperishableItemsRepairCost);
+                nbt.putInt(IMPERISHABLE_ITEMS$REPAIR_COST_NBT_KEY, imperishableItemsRepairCost);
             }
         }
     }
 
     // Sets the enchantments and repair cost from NBT, for example when the enchantments and repair cost are specified when using the /setblock command.
-    @Inject(method = "readNbt", at = @At("TAIL"))
+    @Inject(method = "readNbt", at = @At("HEAD"))
     private void imperishableItems$setEnchantmentsFromNbt(NbtCompound nbt, CallbackInfo ci) {
         if (ImperishableItems.getConfig().blockEntitiesStoreEnchantments) {
-            NbtElement enchantments = nbt.get("Enchantments");
-            if (enchantments != null) {
-                this.imperishableItemsEnchantments = enchantments.copy();
+            if (nbt.contains(IMPERISHABLE_ITEMS$ENCHANTMENTS_NBT_KEY)) {
+                NbtElement enchantments = nbt.get(IMPERISHABLE_ITEMS$ENCHANTMENTS_NBT_KEY);
+                if (enchantments != null) {
+                    imperishableItemsEnchantments = enchantments.copy();
+                }
             }
 
-            if (nbt.contains("RepairCost", 3)) {
-                imperishableItemsRepairCost = nbt.getInt("RepairCost");
+            if (nbt.contains(IMPERISHABLE_ITEMS$REPAIR_COST_NBT_KEY, NbtElement.INT_TYPE)) {
+                imperishableItemsRepairCost = nbt.getInt(IMPERISHABLE_ITEMS$REPAIR_COST_NBT_KEY);
             }
         }
     }

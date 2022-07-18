@@ -33,7 +33,7 @@ abstract class ItemEntityMixin extends EntityMixin {
         }
     }
 
-    @Inject(method = "tick", at = @At("TAIL"))
+    @Inject(method = "tick", at = @At("RETURN"))
     private void imperishableItems$checkImperishable(CallbackInfo ci) {
         if (ImperishableEnchantment.hasImperishable(getStack())) {
             // Items with Imperishable don't despawn.

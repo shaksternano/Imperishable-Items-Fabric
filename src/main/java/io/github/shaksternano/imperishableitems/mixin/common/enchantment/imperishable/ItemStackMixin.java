@@ -2,6 +2,7 @@ package io.github.shaksternano.imperishableitems.mixin.common.enchantment.imperi
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import io.github.shaksternano.imperishableitems.common.ImperishableItems;
 import io.github.shaksternano.imperishableitems.common.enchantment.ImperishableEnchantment;
 import io.github.shaksternano.imperishableitems.common.network.ModNetworking;
@@ -141,15 +142,22 @@ abstract class ItemStackMixin {
     }
 
     // Adds "(Broken)" to the name of an item with Imperishable at 0 durability.
-    @Inject(method = "getName", at = @At("RETURN"), cancellable = true)
-    private void imperishableItems$imperishableBrokenName(CallbackInfoReturnable<Text> cir) {
+    @SuppressWarnings("unused")
+    @ModifyReturnValue(method = "getName", at = @At("RETURN"))
+    private Text imperishableItems$imperishableBrokenName(Text name) {
         if (ImperishableBlacklistsHandler.isItemProtected((ItemStack) (Object) this, ImperishableBlacklistsHandler.ProtectionType.BREAK_PROTECTION)) {
             if (ImperishableEnchantment.isBrokenImperishable((ItemStack) (Object) this)) {
+                MutableText newText;
+                if (name instanceof MutableText mutableName) {
+                    newText = mutableName;
+                } else {
+                    newText = name.copy();
+                }
                 MutableText broken = Text.translatable("item.name." + ImperishableEnchantment.TRANSLATION_KEY + ".broken");
                 broken.formatted(Formatting.RED);
-
-                cir.setReturnValue(((MutableText) cir.getReturnValue()).append(broken));
+                return newText.append(broken);
             }
         }
+        return name;
     }
 }

@@ -25,7 +25,6 @@ abstract class AbstractBlockMixin {
         if (ImperishableItems.getConfig().blockEntitiesStoreEnchantments) {
             if (state.getBlock() instanceof BlockWithEntity) {
                 List<ItemStack> stacks = cir.getReturnValue();
-
                 for (ItemStack stack : stacks) {
                     // Checks if the dropped item is the same as the broken block entity, for example an Ender Chest doesn't drop an Ender Chest when broken without silk touch.
                     if (stack.isOf(state.getBlock().asItem())) {
