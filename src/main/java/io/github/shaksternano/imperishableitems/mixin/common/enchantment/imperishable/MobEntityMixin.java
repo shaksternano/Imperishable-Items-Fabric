@@ -2,8 +2,6 @@ package io.github.shaksternano.imperishableitems.mixin.common.enchantment.imperi
 
 import io.github.shaksternano.imperishableitems.common.enchantment.ImperishableEnchantment;
 import io.github.shaksternano.imperishableitems.common.util.ImperishableBlacklistsHandler;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.Shearable;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,7 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShearsItem;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

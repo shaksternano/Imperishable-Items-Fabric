@@ -18,7 +18,8 @@ import java.util.Map;
 @Mixin(BucketItem.class)
 abstract class BucketItemMixin extends Item implements FluidModificationItem {
 
-    public BucketItemMixin(Settings settings) {
+    @SuppressWarnings("unused")
+    protected BucketItemMixin(Settings settings) {
         super(settings);
     }
 

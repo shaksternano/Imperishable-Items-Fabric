@@ -17,12 +17,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(BlockItem.class)
 abstract class BlockItemMixin extends Item {
 
-    public BlockItemMixin(Settings settings) {
+    @SuppressWarnings("unused")
+    protected BlockItemMixin(Settings settings) {
         super(settings);
     }
 
     // Sets a block entity's enchantments and repair cost when it's placed.
-    @Inject(method = "writeTagToBlockEntity", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/BlockItem;getBlockEntityNbt(Lnet/minecraft/item/ItemStack;)Lnet/minecraft/nbt/NbtCompound;"), cancellable = true)
+    @Inject(method = "writeNbtToBlockEntity", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/BlockItem;getBlockEntityNbt(Lnet/minecraft/item/ItemStack;)Lnet/minecraft/nbt/NbtCompound;"), cancellable = true)
     private static void setBlockEntityEnchantments(World world, PlayerEntity player, BlockPos pos, ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
         if (ImperishableItems.getConfig().blockEntitiesStoreEnchantments) {
             BlockEntity blockEntity = world.getBlockEntity(pos);

@@ -34,18 +34,18 @@
   ],
 
   "custom": {
-    "notify_gradle_properties_url": "https://raw.githubusercontent.com/ShaksterNano/Imperishable-Items-Fabric/1.18/gradle.properties",
+    "notify_gradle_properties_url": "https://raw.githubusercontent.com/ShaksterNano/Imperishable-Items-Fabric/1.19/gradle.properties",
     "notify_gradle_properties_key": "mod_version"
   },
 
   "depends": {
-    "fabricloader": ">=0.11.3",
-    "fabric": ">=0.40.0",
-    "minecraft": "1.18.x",
+    "fabricloader": ">=0.14.0",
+    "fabric": ">=0.55.0",
+    "minecraft": "1.19.x",
     "java": ">=17",
-    "cloth-config2": ">=6.0.0"
+    "cloth-config2": ">=7.0.0"
   },
   "suggests": {
-    "modmenu:": ">=3.0.0"
+    "modmenu:": ">=4.0.0"
   }
 }

@@ -1,14 +1,15 @@
 package io.github.shaksternano.imperishableitems.common.registry;
 
 import io.github.shaksternano.imperishableitems.common.ImperishableItems;
-import io.github.shaksternano.imperishableitems.common.enchantment.*;
+import io.github.shaksternano.imperishableitems.common.enchantment.ImperishableEnchantment;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public final class ModEnchantments {
 
-    private ModEnchantments() {}
+    private ModEnchantments() {
+    }
 
     public static final Enchantment IMPERISHABLE = new ImperishableEnchantment();
 

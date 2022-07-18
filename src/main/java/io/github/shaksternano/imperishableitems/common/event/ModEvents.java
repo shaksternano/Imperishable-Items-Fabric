@@ -9,15 +9,16 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Wearable;
-import net.minecraft.text.LiteralText;
+import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.TranslatableTextContent;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.TypedActionResult;
 
 public final class ModEvents {
 
-    private ModEvents() {}
+    private ModEvents() {
+    }
 
     public static void registerEvents() {
         // Initialises the Imperishable blacklist when the world loads.
@@ -53,10 +54,11 @@ public final class ModEvents {
                         int index = 0;
                         while (index < lines.size() && !inserted) {
                             Text line = lines.get(index);
-                            if (line instanceof TranslatableText) {
-                                if (((TranslatableText) line).getKey().equals("item.durability")) {
-                                    lines.add(index, new TranslatableText("item.tooltip." + ImperishableEnchantment.TRANSLATION_KEY + ".broken").formatted(Formatting.RED));
-                                    lines.add(index, LiteralText.EMPTY);
+                            if (line.getContent() instanceof TranslatableTextContent translatableContent) {
+
+                                if (translatableContent.getKey().equals("item.durability")) {
+                                    lines.add(index, Text.translatable("item.tooltip." + ImperishableEnchantment.TRANSLATION_KEY + ".broken").formatted(Formatting.RED));
+                                    lines.add(index, ScreenTexts.EMPTY);
                                     inserted = true;
                                 }
                             }
@@ -66,8 +68,8 @@ public final class ModEvents {
                     }
 
                     if (!inserted) {
-                        lines.add(LiteralText.EMPTY);
-                        lines.add(new TranslatableText("item.tooltip." + ImperishableEnchantment.TRANSLATION_KEY + ".broken").formatted(Formatting.RED));
+                        lines.add(ScreenTexts.EMPTY);
+                        lines.add(Text.translatable("item.tooltip." + ImperishableEnchantment.TRANSLATION_KEY + ".broken").formatted(Formatting.RED));
                     }
                 }
             }

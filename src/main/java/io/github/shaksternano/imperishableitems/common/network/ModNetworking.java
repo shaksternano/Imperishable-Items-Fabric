@@ -17,7 +17,8 @@ import net.minecraft.util.Identifier;
 
 public final class ModNetworking {
 
-    private ModNetworking() {}
+    private ModNetworking() {
+    }
 
     public static final Identifier EQUIPMENT_BREAK_EFFECTS = new Identifier(ImperishableItems.MOD_ID, "equipment_break_effects");
     public static final Identifier DEBUG_SET_IMPERISHABLE = new Identifier(ImperishableItems.MOD_ID, "debug_set_imperishable");

@@ -22,45 +22,47 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.util.math.random.Random;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
-
-import java.util.Random;
 
 @Mixin(ItemStack.class)
 abstract class ItemStackMixin {
 
-    @Shadow public abstract Item getItem();
+    @Shadow
+    public abstract Item getItem();
 
-    @Shadow public abstract boolean isDamageable();
+    @Shadow
+    public abstract boolean isDamageable();
 
-    @Shadow public abstract int getDamage();
+    @Shadow
+    public abstract int getDamage();
 
-    @Shadow public abstract void setDamage(int damage);
+    @Shadow
+    public abstract void setDamage(int damage);
 
-    @Shadow public abstract int getMaxDamage();
+    @Shadow
+    public abstract int getMaxDamage();
 
     // Items don't break when they reach 0 durability.
-    @Inject(method = "damage(ILjava/util/Random;Lnet/minecraft/server/network/ServerPlayerEntity;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;setDamage(I)V"), locals = LocalCapture.CAPTURE_FAILSOFT, cancellable = true)
-    private void imperishableDurability(int amount, Random random, @Nullable ServerPlayerEntity player, CallbackInfoReturnable<Boolean> cir, int i) {
+    @Inject(method = "damage(ILnet/minecraft/util/math/random/Random;Lnet/minecraft/server/network/ServerPlayerEntity;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;setDamage(I)V"), cancellable = true)
+    private void imperishableDurability(int amount, Random random, ServerPlayerEntity player, CallbackInfoReturnable<Boolean> cir) {
         if (ImperishableBlacklistsHandler.isItemProtected((ItemStack) (Object) this, ImperishableBlacklistsHandler.ProtectionType.BREAK_PROTECTION)) {
             if (!(getItem() instanceof ElytraItem)) {
                 if (isDamageable()) {
                     if (ImperishableEnchantment.hasImperishable((ItemStack) (Object) this) || !ImperishableItems.getConfig().enchantmentNeededToPreventBreaking) {
-                        if (i > getMaxDamage()) {
+                        int newDamage = getDamage() + amount;
+                        if (newDamage > getMaxDamage()) {
                             setDamage(getMaxDamage());
                         } else {
                             if (player != null) {
-                                if (getDamage() < getMaxDamage() && i == getMaxDamage()) {
+                                if (getDamage() < getMaxDamage() && newDamage == getMaxDamage()) {
                                     int itemId = Item.getRawId(getItem());
                                     PacketByteBuf buf = PacketByteBufs.create();
                                     buf.writeInt(itemId);
@@ -68,7 +70,7 @@ abstract class ItemStackMixin {
                                 }
                             }
 
-                            setDamage(i);
+                            setDamage(newDamage);
                         }
 
                         cir.setReturnValue(false);
@@ -143,7 +145,7 @@ abstract class ItemStackMixin {
     private void imperishableBrokenName(CallbackInfoReturnable<Text> cir) {
         if (ImperishableBlacklistsHandler.isItemProtected((ItemStack) (Object) this, ImperishableBlacklistsHandler.ProtectionType.BREAK_PROTECTION)) {
             if (ImperishableEnchantment.isBrokenImperishable((ItemStack) (Object) this)) {
-                TranslatableText broken = new TranslatableText("item.name." + ImperishableEnchantment.TRANSLATION_KEY + ".broken");
+                MutableText broken = Text.translatable("item.name." + ImperishableEnchantment.TRANSLATION_KEY + ".broken");
                 broken.formatted(Formatting.RED);
 
                 cir.setReturnValue(((MutableText) cir.getReturnValue()).append(broken));

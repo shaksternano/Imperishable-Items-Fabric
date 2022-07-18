@@ -16,11 +16,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(ItemEntity.class)
 abstract class ItemEntityMixin extends EntityMixin {
 
-    @Shadow private int itemAge;
+    @Shadow
+    private int itemAge;
 
-    @Shadow public abstract ItemStack getStack();
+    @Shadow
+    public abstract ItemStack getStack();
 
     // Items with Imperishable are invulnerable to all damage sources.
+    @SuppressWarnings("unused")
     @Override
     protected void damageImperishable(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
         if (ImperishableBlacklistsHandler.isItemProtected(getStack(), ImperishableBlacklistsHandler.ProtectionType.DAMAGE_PROTECTION)) {
@@ -90,6 +93,7 @@ abstract class ItemEntityMixin extends EntityMixin {
     }
 
     // Items with Imperishable don't get removed when 64 blocks below the world's minimum Y position.
+    @SuppressWarnings("unused")
     @Override
     protected void imperishableInVoid(CallbackInfo ci) {
         if (ImperishableBlacklistsHandler.isItemProtected(getStack(), ImperishableBlacklistsHandler.ProtectionType.VOID_PROTECTION)) {

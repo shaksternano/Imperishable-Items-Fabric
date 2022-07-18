@@ -2,7 +2,6 @@ package io.github.shaksternano.imperishableitems.mixin.common.enchantment.imperi
 
 import io.github.shaksternano.imperishableitems.common.enchantment.ImperishableEnchantment;
 import io.github.shaksternano.imperishableitems.common.util.ImperishableBlacklistsHandler;
-import net.minecraft.block.dispenser.DispenserBehavior;
 import net.minecraft.block.dispenser.FallibleItemDispenserBehavior;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
 import net.minecraft.item.ItemStack;
@@ -16,7 +15,8 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(ItemDispenserBehavior.class)
 abstract class ItemDispenserBehaviorMixin {
 
-    @Shadow protected abstract ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack);
+    @Shadow
+    protected abstract ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack);
 
     // Dispensing an item is cancelled if that item has Imperishable and is at 0 durability.
     @Redirect(method = "dispense", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/dispenser/ItemDispenserBehavior;dispenseSilently(Lnet/minecraft/util/math/BlockPointer;Lnet/minecraft/item/ItemStack;)Lnet/minecraft/item/ItemStack;"))

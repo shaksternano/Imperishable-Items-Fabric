@@ -14,7 +14,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(TridentEntity.class)
 abstract class TridentEntityMixin extends PersistentProjectileEntityMixin {
 
-    @Shadow private ItemStack tridentStack;
+    @Shadow
+    private ItemStack tridentStack;
 
     // Tridents with Imperishable stop falling when they reach the world's minimum Y.
     @Inject(method = "tick", at = @At("TAIL"))
@@ -44,6 +45,7 @@ abstract class TridentEntityMixin extends PersistentProjectileEntityMixin {
     }
 
     // Tridents with Imperishable don't get removed when 64 blocks below the world's minimum Y position.
+    @SuppressWarnings("unused")
     @Override
     protected void imperishableInVoid(CallbackInfo ci) {
         if (ImperishableBlacklistsHandler.isItemProtected(tridentStack, ImperishableBlacklistsHandler.ProtectionType.VOID_PROTECTION)) {

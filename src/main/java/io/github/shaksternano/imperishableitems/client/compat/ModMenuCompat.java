@@ -1,8 +1,8 @@
 package io.github.shaksternano.imperishableitems.client.compat;
 
-import io.github.shaksternano.imperishableitems.common.config.ModConfig;
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
+import io.github.shaksternano.imperishableitems.common.config.ModConfig;
 import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

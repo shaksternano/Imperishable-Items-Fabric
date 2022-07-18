@@ -9,7 +9,6 @@ import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 
 public final class ImperishableEnchantment extends Enchantment {
 
@@ -65,7 +64,7 @@ public final class ImperishableEnchantment extends Enchantment {
         String trimmedName = textName.getString();
 
         if (isBrokenImperishable(stack)) {
-            TranslatableText broken = new TranslatableText("item.name." + TRANSLATION_KEY + ".broken");
+            Text broken = Text.translatable("item.name." + TRANSLATION_KEY + ".broken");
             int brokenLength = broken.getString().length();
             trimmedName = trimmedName.substring(0, trimmedName.length() - brokenLength);
         }

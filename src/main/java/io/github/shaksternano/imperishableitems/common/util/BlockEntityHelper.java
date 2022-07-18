@@ -12,7 +12,8 @@ import java.util.Map;
 
 public final class BlockEntityHelper {
 
-    private BlockEntityHelper() {}
+    private BlockEntityHelper() {
+    }
 
     // Copies the enchantments and repair cost of an ItemStack to a BlockEntity.
     @SuppressWarnings("ConstantConditions")

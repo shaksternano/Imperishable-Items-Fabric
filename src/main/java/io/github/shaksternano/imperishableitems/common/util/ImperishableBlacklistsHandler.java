@@ -11,7 +11,8 @@ import java.util.*;
 
 public final class ImperishableBlacklistsHandler {
 
-    private ImperishableBlacklistsHandler() {}
+    private ImperishableBlacklistsHandler() {
+    }
 
     private static final Set<Item> globalBlacklist = new HashSet<>();
     private static final Map<ProtectionType, Set<Item>> blacklists = initBlacklistsMap();

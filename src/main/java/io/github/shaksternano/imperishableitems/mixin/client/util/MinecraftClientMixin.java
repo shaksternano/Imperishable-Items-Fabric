@@ -21,7 +21,9 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(MinecraftClient.class)
 abstract class MinecraftClientMixin {
 
-    @Shadow @Nullable public ClientPlayerEntity player;
+    @Shadow
+    @Nullable
+    public ClientPlayerEntity player;
 
     @SuppressWarnings("ConstantConditions")
     @Redirect(method = "handleInputEvents", at = @At(value = "FIELD", target = "Lnet/minecraft/entity/player/PlayerInventory;selectedSlot:I", opcode = Opcodes.PUTFIELD))
@@ -39,19 +41,22 @@ abstract class MinecraftClientMixin {
                         PacketByteBuf buf = PacketByteBufs.create();
                         ClientPlayNetworking.send(ModNetworking.DEBUG_SET_ONE_DURABILITY, buf);
                     }
-                } case 2 -> {
+                }
+                case 2 -> {
                     // If debug mode is on and the hotbar slot 3 key is pressed, the durability of the item in the main hand will be set to 0. If the durability is already 0, it will set it to full.
                     if (player.getMainHandStack().isDamageable()) {
                         PacketByteBuf buf = PacketByteBufs.create();
                         ClientPlayNetworking.send(ModNetworking.DEBUG_SET_ZERO_DURABILITY, buf);
                     }
-                } case 3 -> {
+                }
+                case 3 -> {
                     // If debug mode is on and the hotbar slot 4 key is pressed, the durability of the item in the main hand will be decreased by 1 if the durability is not already 0.
                     if (player.getMainHandStack().isDamageable()) {
                         PacketByteBuf buf = PacketByteBufs.create();
                         ClientPlayNetworking.send(ModNetworking.DEBUG_DECREMENT_DURABILITY, buf);
                     }
-                } case 4 -> {
+                }
+                case 4 -> {
                     // If debug mode is on and the hotbar slot 5 key is pressed, the durability of the item in the main hand will be increased by 1 if the durability is not already full.
                     if (player.getMainHandStack().isDamageable()) {
                         PacketByteBuf buf = PacketByteBufs.create();

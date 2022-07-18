@@ -1,7 +1,7 @@
 package io.github.shaksternano.imperishableitems.mixin.client.enchantment.imperishable;
 
-import io.github.shaksternano.imperishableitems.common.util.ImperishableBlacklistsHandler;
 import io.github.shaksternano.imperishableitems.common.enchantment.ImperishableEnchantment;
+import io.github.shaksternano.imperishableitems.common.util.ImperishableBlacklistsHandler;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.screen.ingame.AnvilScreen;
@@ -21,7 +21,8 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(AnvilScreen.class)
 abstract class AnvilScreenMixin extends ForgingScreen<AnvilScreenHandler> {
 
-    public AnvilScreenMixin(AnvilScreenHandler handler, PlayerInventory playerInventory, Text title, Identifier texture) {
+    @SuppressWarnings("unused")
+    protected AnvilScreenMixin(AnvilScreenHandler handler, PlayerInventory playerInventory, Text title, Identifier texture) {
         super(handler, playerInventory, title, texture);
     }
 
