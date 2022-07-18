@@ -25,7 +25,7 @@ abstract class ItemEntityMixin extends EntityMixin {
     // Items with Imperishable are invulnerable to all damage sources.
     @SuppressWarnings("unused")
     @Override
-    protected void damageImperishable(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
+    protected void imperishableItems$damageImperishable(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
         if (ImperishableBlacklistsHandler.isItemProtected(getStack(), ImperishableBlacklistsHandler.ProtectionType.DAMAGE_PROTECTION)) {
             if (ImperishableEnchantment.hasImperishable(getStack())) {
                 cir.setReturnValue(true);
@@ -34,7 +34,7 @@ abstract class ItemEntityMixin extends EntityMixin {
     }
 
     @Inject(method = "tick", at = @At("TAIL"))
-    private void checkImperishable(CallbackInfo ci) {
+    private void imperishableItems$checkImperishable(CallbackInfo ci) {
         if (ImperishableEnchantment.hasImperishable(getStack())) {
             // Items with Imperishable don't despawn.
             if (ImperishableBlacklistsHandler.isItemProtected(getStack(), ImperishableBlacklistsHandler.ProtectionType.DESPAWN_PROTECTION)) {
@@ -84,7 +84,7 @@ abstract class ItemEntityMixin extends EntityMixin {
 
     // Items with Imperishable don't appear on fire when in fire or lava.
     @Inject(method = "isFireImmune", at = @At("HEAD"), cancellable = true)
-    private void imperishableFireImmune(CallbackInfoReturnable<Boolean> cir) {
+    private void imperishableItems$imperishableFireImmune(CallbackInfoReturnable<Boolean> cir) {
         if (ImperishableBlacklistsHandler.isItemProtected(getStack(), ImperishableBlacklistsHandler.ProtectionType.DAMAGE_PROTECTION)) {
             if (ImperishableEnchantment.hasImperishable(getStack())) {
                 cir.setReturnValue(true);
@@ -95,7 +95,7 @@ abstract class ItemEntityMixin extends EntityMixin {
     // Items with Imperishable don't get removed when 64 blocks below the world's minimum Y position.
     @SuppressWarnings("unused")
     @Override
-    protected void imperishableInVoid(CallbackInfo ci) {
+    protected void imperishableItems$imperishableInVoid(CallbackInfo ci) {
         if (ImperishableBlacklistsHandler.isItemProtected(getStack(), ImperishableBlacklistsHandler.ProtectionType.VOID_PROTECTION)) {
             if (ImperishableEnchantment.hasImperishable(getStack())) {
                 ci.cancel();

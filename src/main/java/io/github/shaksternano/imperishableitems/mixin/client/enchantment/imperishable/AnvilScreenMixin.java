@@ -28,7 +28,7 @@ abstract class AnvilScreenMixin extends ForgingScreen<AnvilScreenHandler> {
 
     // An item with imperishable at 0 durability in an anvil will not have "(Broken)" at the end if its name.
     @ModifyExpressionValue(method = "onSlotUpdate", at = @At(value = "INVOKE", target = "Lnet/minecraft/text/Text;getString()Ljava/lang/String;"))
-    private String imperishableBrokenOnSlotUpdate(String name, ScreenHandler handler, int slotId, ItemStack stack) {
+    private String imperishableItems$imperishableBrokenOnSlotUpdate(String name, ScreenHandler handler, int slotId, ItemStack stack) {
         if (ImperishableBlacklistsHandler.isItemProtected(stack, ImperishableBlacklistsHandler.ProtectionType.BREAK_PROTECTION)) {
             return ImperishableEnchantment.itemNameRemoveBroken(name, stack);
         } else {
@@ -38,7 +38,7 @@ abstract class AnvilScreenMixin extends ForgingScreen<AnvilScreenHandler> {
 
     // Putting "(Broken)" at the end of the name of an item with Imperishable at 0 durability will register as a new name.
     @ModifyExpressionValue(method = "onRenamed", at = @At(value = "INVOKE", target = "Lnet/minecraft/text/Text;getString()Ljava/lang/String;"))
-    private String imperishableBrokenOnRenamed(String name) {
+    private String imperishableItems$imperishableBrokenOnRenamed(String name) {
         Slot slot = handler.getSlot(0);
         if (slot != null) {
             if (slot.hasStack()) {

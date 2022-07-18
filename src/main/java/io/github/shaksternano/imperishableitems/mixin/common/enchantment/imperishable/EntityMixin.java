@@ -43,11 +43,11 @@ abstract class EntityMixin {
 
     @SuppressWarnings("CancellableInjectionUsage")
     @Inject(method = "isInvulnerableTo", at = @At("HEAD"), cancellable = true)
-    protected void damageImperishable(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
+    protected void imperishableItems$damageImperishable(DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
     }
 
     @SuppressWarnings("CancellableInjectionUsage")
     @Inject(method = "tickInVoid", at = @At("HEAD"), cancellable = true)
-    protected void imperishableInVoid(CallbackInfo ci) {
+    protected void imperishableItems$imperishableInVoid(CallbackInfo ci) {
     }
 }

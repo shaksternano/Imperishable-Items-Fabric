@@ -23,7 +23,7 @@ abstract class AnvilScreenHandlerMixin extends ForgingScreenHandler {
 
     // Removing "(Broken)" at the end of the name of an item with Imperishable at 0 durability in an anvil will not register as renamed.
     @ModifyExpressionValue(method = "updateResult", at = @At(value = "INVOKE", target = "Lnet/minecraft/text/Text;getString()Ljava/lang/String;"))
-    private String imperishableBrokenUpdateResult(String name) {
+    private String imperishableItems$imperishableBrokenUpdateResult(String name) {
         ItemStack stack = input.getStack(0);
         if (ImperishableBlacklistsHandler.isItemProtected(stack, ImperishableBlacklistsHandler.ProtectionType.BREAK_PROTECTION)) {
             return ImperishableEnchantment.itemNameRemoveBroken(name, stack);

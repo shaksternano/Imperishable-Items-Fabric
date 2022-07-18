@@ -18,7 +18,7 @@ abstract class ItemUsageMixin {
 
     // The enchantments of the input ItemStack are copied to the output ItemStack.
     @Inject(method = "exchangeStack(Lnet/minecraft/item/ItemStack;Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/item/ItemStack;Z)Lnet/minecraft/item/ItemStack;", at = @At("HEAD"))
-    private static void transferEnchantments(ItemStack inputStack, PlayerEntity player, ItemStack outputStack, boolean creativeOverride, CallbackInfoReturnable<ItemStack> cir) {
+    private static void imperishableItems$transferEnchantments(ItemStack inputStack, PlayerEntity player, ItemStack outputStack, boolean creativeOverride, CallbackInfoReturnable<ItemStack> cir) {
         if (ImperishableItems.getConfig().retainEnchantmentsMoreOften) {
             if (!inputStack.isEmpty()) {
                 if (!outputStack.isEmpty()) {

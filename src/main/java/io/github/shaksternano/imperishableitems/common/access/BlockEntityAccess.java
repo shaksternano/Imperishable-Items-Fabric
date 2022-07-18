@@ -4,11 +4,11 @@ import net.minecraft.nbt.NbtElement;
 
 public interface BlockEntityAccess {
 
-    NbtElement getImperishableItemsEnchantments();
+    NbtElement imperishableItems$getImperishableItemsEnchantments();
 
-    void setImperishableItemsEnchantments(NbtElement enchantments);
+    void imperishableItems$setImperishableItemsEnchantments(NbtElement enchantments);
 
-    Integer getImperishableItemsRepairCost();
+    Integer imperishableItems$getImperishableItemsRepairCost();
 
-    void setImperishableItemsRepairCost(Integer repairCost);
+    void imperishableItems$setImperishableItemsRepairCost(Integer repairCost);
 }

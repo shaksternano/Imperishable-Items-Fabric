@@ -18,7 +18,7 @@ abstract class TripwireBlockMixin {
 
     // Shears with Imperishable at 0 durability can't disarm tripwires.
     @ModifyExpressionValue(method = "onBreak", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isOf(Lnet/minecraft/item/Item;)Z"))
-    private boolean imperishableDisarmTripwire(boolean isShears, World world, BlockPos pos, BlockState state, PlayerEntity player) {
+    private boolean imperishableItems$imperishableDisarmTripwire(boolean isShears, World world, BlockPos pos, BlockState state, PlayerEntity player) {
         if (!player.isCreative()) {
             ItemStack mainHandStack = player.getMainHandStack();
             if (ImperishableBlacklistsHandler.isItemProtected(mainHandStack, ImperishableBlacklistsHandler.ProtectionType.BREAK_PROTECTION)) {

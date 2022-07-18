@@ -27,7 +27,7 @@ abstract class MinecraftClientMixin {
 
     @SuppressWarnings("ConstantConditions")
     @Redirect(method = "handleInputEvents", at = @At(value = "FIELD", target = "Lnet/minecraft/entity/player/PlayerInventory;selectedSlot:I", opcode = Opcodes.PUTFIELD), require = 0)
-    private void debugModeKeypress(PlayerInventory getInventory, int i) {
+    private void imperishableItems$debugModeKeypress(PlayerInventory getInventory, int i) {
         if (ImperishableItems.getConfig().debugMode) {
             switch (i) {
                 case 0 -> {

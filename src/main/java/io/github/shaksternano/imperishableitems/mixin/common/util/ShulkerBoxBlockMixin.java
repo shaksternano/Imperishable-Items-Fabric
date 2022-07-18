@@ -37,7 +37,7 @@ abstract class ShulkerBoxBlockMixin extends BlockWithEntity {
 
     // Sets the enchantments and repair cost of the shulker box item dropped when a shulker box with enchantments and repair cost is broken by a player in creative mode.
     @Inject(method = "onBreak", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/ItemEntity;<init>(Lnet/minecraft/world/World;DDDLnet/minecraft/item/ItemStack;)V"))
-    private void setDroppedShulkerStackEnchantments(World world, BlockPos pos, BlockState state, PlayerEntity player, CallbackInfo ci) {
+    private void imperishableItems$setDroppedShulkerStackEnchantments(World world, BlockPos pos, BlockState state, PlayerEntity player, CallbackInfo ci) {
         if (ImperishableItems.getConfig().blockEntitiesStoreEnchantments) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             ItemStack stack = getItemStack(getColor());

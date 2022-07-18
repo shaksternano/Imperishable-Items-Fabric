@@ -27,7 +27,7 @@ abstract class AbstractBlockStateMixin {
 
     // Shears with Imperishable at 0 durability have shear specific right click block actions cancelled.
     @Inject(method = "onUse", at = @At("HEAD"), cancellable = true)
-    private void imperishableShearsUseOnBlock(World world, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
+    private void imperishableItems$imperishableShearsUseOnBlock(World world, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
         ItemStack stack = player.getStackInHand(hand);
 
         if (ImperishableBlacklistsHandler.isItemProtected(stack, ImperishableBlacklistsHandler.ProtectionType.BREAK_PROTECTION)) {

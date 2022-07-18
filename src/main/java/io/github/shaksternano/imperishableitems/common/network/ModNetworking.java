@@ -125,7 +125,7 @@ public final class ModNetworking {
                 if (client.player != null) {
                     Item item = Item.byRawId(itemId);
                     if (ImperishableBlacklistsHandler.isItemProtected(item, ImperishableBlacklistsHandler.ProtectionType.BREAK_PROTECTION)) {
-                        ((LivingEntityInvoker) client.player).invokePlayEquipmentBreakEffects(new ItemStack(item));
+                        ((LivingEntityInvoker) client.player).imperishableItems$invokePlayEquipmentBreakEffects(new ItemStack(item));
                     }
                 }
             });
