@@ -25,15 +25,13 @@ abstract class ItemDispenserBehaviorMixin {
             // Still allow a wearable item to be dispensed even if the item is broken.
             if (!(stack.getItem() instanceof Wearable)) {
                 if (ImperishableEnchantment.isBrokenImperishable(stack)) {
-                    if (thisBehavior instanceof FallibleItemDispenserBehavior) {
-                        ((FallibleItemDispenserBehavior) thisBehavior).setSuccess(false);
+                    if (thisBehavior instanceof FallibleItemDispenserBehavior thisFallibleBehavior) {
+                        thisFallibleBehavior.setSuccess(false);
                     }
-
                     return stack;
                 }
             }
         }
-
         return dispenseSilently(pointer, stack);
     }
 }

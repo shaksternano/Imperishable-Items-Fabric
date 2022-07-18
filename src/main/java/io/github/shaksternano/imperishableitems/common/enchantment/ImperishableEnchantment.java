@@ -60,8 +60,8 @@ public final class ImperishableEnchantment extends Enchantment {
     }
 
     // Removes the "(Broken)" string from the name of tools with Imperishable at 0 durability, so it doesn't mess with anvil renaming.
-    public static String itemNameRemoveBroken(Text textName, ItemStack stack) {
-        String trimmedName = textName.getString();
+    public static String itemNameRemoveBroken(String name, ItemStack stack) {
+        String trimmedName = name;
 
         if (isBrokenImperishable(stack)) {
             Text broken = Text.translatable("item.name." + TRANSLATION_KEY + ".broken");

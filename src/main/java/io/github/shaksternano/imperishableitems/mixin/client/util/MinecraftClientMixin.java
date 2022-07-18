@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Environment(EnvType.CLIENT)
-@Mixin(MinecraftClient.class)
+@Mixin(value = MinecraftClient.class, priority = 0)
 abstract class MinecraftClientMixin {
 
     @Shadow
@@ -26,7 +26,7 @@ abstract class MinecraftClientMixin {
     public ClientPlayerEntity player;
 
     @SuppressWarnings("ConstantConditions")
-    @Redirect(method = "handleInputEvents", at = @At(value = "FIELD", target = "Lnet/minecraft/entity/player/PlayerInventory;selectedSlot:I", opcode = Opcodes.PUTFIELD))
+    @Redirect(method = "handleInputEvents", at = @At(value = "FIELD", target = "Lnet/minecraft/entity/player/PlayerInventory;selectedSlot:I", opcode = Opcodes.PUTFIELD), require = 0)
     private void debugModeKeypress(PlayerInventory getInventory, int i) {
         if (ImperishableItems.getConfig().debugMode) {
             switch (i) {

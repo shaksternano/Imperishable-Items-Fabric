@@ -25,6 +25,9 @@
     "client": [
       "io.github.shaksternano.imperishableitems.client.ImperishableItemsClient"
     ],
+    "preLaunch": [
+      "com.llamalad7.mixinextras.MixinExtrasBootstrap::init"
+    ],
     "modmenu": [
       "io.github.shaksternano.imperishableitems.client.compat.ModMenuCompat"
     ]
